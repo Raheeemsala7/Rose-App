@@ -1,16 +1,16 @@
 import { Toaster } from "sonner"
 import ReactQueryProvider from "./_components/react-query-provider"
-import NextAuthProvider from "./_components/next-auth-provider"
+import { NextIntlClientProvider } from 'next-intl';
 
 
 
-export const Providers = ({ children }: { children: React.ReactNode }) => {
+export const Providers = ({ children, locale }: { children: React.ReactNode, locale: string }) => {
     return (
-        <ReactQueryProvider>
-            <NextAuthProvider>
+        // <ReactQueryProvider>
+            <NextIntlClientProvider locale={locale}>
                 <Toaster richColors position="top-right" />
                 {children}
-            </NextAuthProvider>
-        </ReactQueryProvider>
+            </NextIntlClientProvider>
+        // </ReactQueryProvider>
     )
 }
