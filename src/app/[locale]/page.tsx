@@ -12,7 +12,7 @@ export default function Page({ params }: Props) {
   setRequestLocale(locale); // ✅ ضروري في كل page
   const t =  useTranslations("HomePage");
   return (
-    <div>
+    <div >
       <h1>{t('title')}</h1>
     </div>
   )
