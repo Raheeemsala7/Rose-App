@@ -38,6 +38,7 @@
     "login": {
     "email": "Email",
     "emailRequired": "Email is required",
+    "emailInvalid": "Email is invalid",
     "password": "Password",
     "passwordRequired": "Your password is required",
     "rememberMe": "Remember me",

@@ -31,14 +31,14 @@ const LoginForm = () => {
             name="email"
             control={control}
             render={({ field, fieldState }) => (
-              <>
+              <div>
                 <InputField
                   {...field}
                   type="text"
                   label={t('email')}
                   placeholder={t('email')}
                   isError={fieldState.invalid}
-                  required
+                  
                   id="input-field-email"
                 />
                 {fieldState.invalid && (
@@ -47,7 +47,7 @@ const LoginForm = () => {
                     errors={[fieldState.error]}
                   />
                 )}
-              </>
+              </div>
             )}
           />
           <div>
@@ -55,20 +55,20 @@ const LoginForm = () => {
               name="password"
               control={control}
               render={({ field, fieldState }) => (
-                <>
+                <div>
                   <InputField
                     {...field}
                     type="password"
                     label={t('password')}
                     placeholder="********"
                     isError={fieldState.invalid}
-                    required
+                    
                     id="input-field-password"
                   />
                   {fieldState.invalid && (
-                    <FieldError errors={[fieldState.error]} />
+                    <FieldError className="text-red-500" errors={[fieldState.error]} />
                   )}
-                </>
+                </div>
               )}
             />
 

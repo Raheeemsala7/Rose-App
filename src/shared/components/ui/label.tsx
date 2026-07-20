@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Field } from '@base-ui/react/field';
 
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 
 function Label({
   className,

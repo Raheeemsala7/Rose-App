@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Checkbox as CheckboxPrimitive } from '@base-ui/react/checkbox';
 import { CheckIcon, MinusIcon } from 'lucide-react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 
 type CheckboxProps = CheckboxPrimitive.Root.Props & {
   indeterminate?: boolean;

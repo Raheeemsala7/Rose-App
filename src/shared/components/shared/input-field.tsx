@@ -58,7 +58,7 @@ export default function InputField({
           className={cn(hasSearch && 'pl-8', isPassword && 'pr-10', className)}
           id={inputId}
           placeholder={placeholder}
-          required={required}
+          // required={required}
           disabled={disabled}
           aria-invalid={isError}
           type={inputType}

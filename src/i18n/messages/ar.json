@@ -38,6 +38,7 @@
     "login": {
     "email": "البريد الالكتروني",
     "emailRequired": "البريد الالكتروني مطلوب",
+    "emailInvalid": "البريد الالكتروني غير صالح",
     "password": "كلمة المرور",
     "passwordRequired": "كلمة المرور مطلوبة",
     "rememberMe": "تذكرني",
