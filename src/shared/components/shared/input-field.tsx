@@ -40,9 +40,11 @@ export default function InputField({
     ? 'Hide password'
     : 'Show password';
 
+    console.log(type , isError)
+
   return (
     <div className="flex flex-col justify-start gap-y-1.5">
-      <Label htmlFor={inputId} className={cn(isError && 'text-ds-danger')}>
+      <Label htmlFor={inputId} className={cn(`${isError && '!text-red-600 dark:!text-red-500' }` , "text-zinc-800 dark:text-zinc-50")}>
         {label}
       </Label>
       <div className="relative">
@@ -55,7 +57,7 @@ export default function InputField({
         )}
 
         <Input
-          className={cn(hasSearch && 'pl-8', isPassword && 'pr-10', className)}
+          className={cn(hasSearch && 'pl-8', isPassword && 'ltr:pr-10 rtl:pl-10', className)}
           id={inputId}
           placeholder={placeholder}
           // required={required}
@@ -69,7 +71,7 @@ export default function InputField({
         {isPassword && (
           <button
             type="button"
-            className="absolute right-1 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+            className="absolute right-1 rtl:left-1 rtl:right-auto top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
             onClick={() => setIsPasswordVisible((isVisible) => !isVisible)}
             aria-label={passwordToggleLabel}
             aria-pressed={isPasswordVisible}

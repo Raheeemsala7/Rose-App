@@ -36,15 +36,15 @@
     "currency": "$"
   },
     "login": {
-    "email": "Email",
-    "emailRequired": "Email is required",
-    "emailInvalid": "Email is invalid",
+    "username": "Username",
+    "usernameRequired": "Username is required",
+  "usernameMin": "Username must be at least 3 characters",
     "password": "Password",
     "passwordRequired": "Your password is required",
     "rememberMe": "Remember me",
     "forgotPassword": "Forgot your password?",
     "login": "Login",
-    "noAccount": "Don't have an account?",
+    "noAccount": "Don't have an account yet?",
     "createAccount": "Create one now!",
     "unknownError": "Unknown error",
     "somethingWentWwrong": "Something went wrong"

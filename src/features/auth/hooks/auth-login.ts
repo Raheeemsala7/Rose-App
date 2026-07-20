@@ -19,7 +19,7 @@ export function useLogin() {
     } = useForm<LoginFormType>({
         resolver: zodResolver(loginSchema(t)),
         defaultValues: {
-            email: '',
+            username: '',
             password: '',
             rememberMe: false,
         },
@@ -27,7 +27,7 @@ export function useLogin() {
     async function onSubmit(data: LoginFormType) {
         try {
             const loginResponse = await signIn('credentials', {
-                email: data.email,
+                username: data.username,
                 password: data.password,
                 redirect: false,
             });

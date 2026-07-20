@@ -35,10 +35,10 @@
     "cancel": "إلغاء",
     "currency": "$"
   },
-    "login": {
-    "email": "البريد الالكتروني",
-    "emailRequired": "البريد الالكتروني مطلوب",
-    "emailInvalid": "البريد الالكتروني غير صالح",
+  "login": {
+    "username": "اسم المستخدم",
+    "usernameRequired": "اسم المستخدم مطلوب",
+    "usernameMin": "يجب ألا يقل اسم المستخدم عن 3 أحرف",
     "password": "كلمة المرور",
     "passwordRequired": "كلمة المرور مطلوبة",
     "rememberMe": "تذكرني",

@@ -20,6 +20,7 @@ export default function ThemeToggle() {
   return (
     <button
       type="button"
+      className='text-red-500'
       onClick={toggleTheme}
       aria-label={t('toggle')}
       disabled={!mounted}

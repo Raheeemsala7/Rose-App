@@ -134,7 +134,7 @@ const Header = () => {
           <div className="flex flex-shrink-0 items-center gap-4">
             {status === 'unauthenticated' ? (
               <Link
-                href={'/auth/login'}
+                href={'/login'}
                 className="flex items-center gap-1.5 px-4 py-1.5 text-base text-zinc-700 dark:text-zinc-50 border-e border-zinc-200 dark:border-zinc-700"
               >
                 <User size={20} />
