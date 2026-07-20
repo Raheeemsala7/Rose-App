@@ -3,11 +3,11 @@ import { Button as BaseButton } from '@base-ui/react/button';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { useTranslations } from 'next-intl';
 
+import { cn } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
-import { cn } from '../../lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-ds-base font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center rounded-ds-base font-medium transition-colors focus-visible:outline-none cursor-pointer disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
