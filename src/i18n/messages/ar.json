@@ -1,5 +1,38 @@
 {
-  "HomePage": {
-    "title": "مرحبا بالعالم!"
+  "app-title": "تطبيق روز",
+  "title": "مرحبا بالعالم!",
+  "theme": {
+    "toggle": "تبديل المظهر",
+    "light": "فاتح",
+    "dark": "داكن"
+  },
+  "button": {
+    "loading": "جار التحميل...",
+    "submit": "إرسال",
+    "cancel": "الغاء",
+    "save": "حفظ",
+    "delete": "حذف",
+    "confirm": "تأكيد"
+  },
+  "header": {
+    "searchPlaceholder": "ابحث عن منتجات...",
+    "login": "تسجيل الدخول",
+    "searchDefault": "منتجات قد تعجبك",
+    "nav": {
+      "Home": "الرئيسية",
+      "Products": "المنتجات",
+      "Categories": "الفئات",
+      "Occasions": "المناسبات",
+      "Contact": "تواصل معنا",
+      "About": "عن الموقع"
+    },
+    "langToggle": "English",
+    "searchEmpty": "لا توجد منتجات",
+    "searchError": "فشل البحث. حاول مجددًا.",
+    "loginPromptTitle": "تسجيل الدخول مطلوب",
+    "loginPromptBody": "يرجى تسجيل الدخول لاستخدام هذه الميزة.",
+    "loginPromptCta": "الانتقال إلى تسجيل الدخول",
+    "cancel": "إلغاء",
+    "currency": "$"
   }
 }

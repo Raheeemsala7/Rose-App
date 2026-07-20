@@ -9,7 +9,6 @@ type Props = {
 
 export default function Page({ params }: Props) {
   const { locale } = use(params);
-  setRequestLocale(locale); // ✅ ضروري في كل page
   const t =  useTranslations("HomePage");
   return (
     <div >

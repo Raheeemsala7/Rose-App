@@ -17,13 +17,14 @@ import {
   X,
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import React, { useEffect, useRef, useState } from 'react';
-import RoseIcon from '../../../public/icons/rose-icon';
+import  { useState } from 'react';
 import LanguageSwitcher from './language-switcher';
-import { getSession, useSession } from 'next-auth/react';
-import { Link, usePathname } from '@/i18n/navigation';
-import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import RoseIcon from '@/src/public/icons/rose-icon';
+import { cn } from '../lib/utils';
+import { Link, usePathname } from '@/src/i18n/navigation';
+import {  useSession } from 'next-auth/react';
+
 
 const navItems = [
   { key: 'Home', href: '/', icon: HomeIcon },
@@ -37,9 +38,7 @@ const navItems = [
 const Header = () => {
   const { status } = useSession();
   const t = useTranslations('header');
-  const [lang, setLang] = useState('en');
   const pathname = usePathname();
-  console.log(pathname);
 
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState('');

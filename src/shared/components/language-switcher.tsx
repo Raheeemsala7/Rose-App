@@ -1,9 +1,10 @@
 'use client';
 
+import { usePathname, useRouter } from '@/src/i18n/navigation';
 import { useLocale } from 'next-intl';
-import { usePathname, useRouter } from '@/i18n/navigation';
-import { Button } from '@/shared/components/ui/button';
+
 import { ReactNode } from 'react';
+import { Button } from './ui/button';
 
 export default function LanguageSwitcher({
   children,

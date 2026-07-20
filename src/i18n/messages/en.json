@@ -1,5 +1,38 @@
 {
-  "HomePage": {
-    "title": "Hello world!"
+  "app-title": "Rose App",
+  "title": "Hello world!",
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "button": {
+    "loading": "Loading...",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "confirm": "Confirm"
+  },
+  "header": {
+    "searchPlaceholder": "Search for products...",
+    "login": "Login",
+    "searchDefault": "Products you may like",
+    "nav": {
+      "Home": "Home",
+      "Products": "Products",
+      "Categories": "Categories",
+      "Occasions": "Occasions",
+      "Contact": "Contact",
+      "About": "About"
+    },
+    "langToggle": "العربية",
+    "searchEmpty": "No products found",
+    "searchError": "Search failed. Try again.",
+    "loginPromptTitle": "Login required",
+    "loginPromptBody": "Please log in to use this feature.",
+    "loginPromptCta": "Go to login",
+    "cancel": "Cancel",
+    "currency": "$"
   }
 }
