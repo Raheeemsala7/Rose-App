@@ -1,10 +1,11 @@
 'use client';
 
 import { useId, useState, type ComponentProps } from 'react';
-import { cn } from '@/lib/utils';
-import { Input } from '@/shared/components/ui/input';
-import { Label } from '@/shared/components/ui/label';
+
 import { Eye, EyeOff, Search } from 'lucide-react';
+import { Label } from '../ui/label';
+import { Input } from '../ui/input';
+import { cn } from '../../lib/utils';
 
 interface InputFieldProps extends Omit<
   ComponentProps<'input'>,
