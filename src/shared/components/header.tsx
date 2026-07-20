@@ -20,10 +20,10 @@ import { useTranslations } from 'next-intl';
 import  { useState } from 'react';
 import LanguageSwitcher from './language-switcher';
 import Image from 'next/image';
-import RoseIcon from '@/src/public/icons/rose-icon';
 import { cn } from '../lib/utils';
 import { Link, usePathname } from '@/src/i18n/navigation';
 import {  useSession } from 'next-auth/react';
+import RoseIcon from '@/public/icons/rose-icon';
 
 
 const navItems = [
