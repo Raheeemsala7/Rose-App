@@ -1,10 +1,10 @@
 import { JWT } from 'next-auth/jwt';
-import Credentials from 'next-auth/providers/credentials';
-import { Session, User } from 'next-auth';
-import { AuthResponse } from './features/auth/types/auth';
 import { sessionMaxAge } from './shared/constant/auth.constant';
+import Credentials from 'next-auth/providers/credentials';
+import { NextAuthOptions, Session, User } from 'next-auth';
+import { loginApi } from './features/auth/apis/auth.api';
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     Credentials({
       name: 'Credentials',
@@ -13,22 +13,13 @@ export const authOptions = {
         password: {},
       },
       authorize: async (credentials) => {
-        const res = await fetch(`${process.env.API_URL}/auth/login`, {
-          method: 'POST',
-          body: JSON.stringify({
-            username: credentials?.username,
-            password: credentials?.password,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-
-        const data: IApiResponse<AuthResponse> = await res.json();
-        if (!data.status) {
-          throw new Error(data.message);
+        if (!credentials) {
+          return null;
         }
-        const loginData = data.payload;
+        const loginData = await loginApi({
+          username: credentials.username,
+          password: credentials.password,
+        });
         return {
           id: loginData.user.id,
           token: loginData.token,
@@ -56,5 +47,9 @@ export const authOptions = {
   },
   jwt: {
     maxAge: sessionMaxAge,
+  },
+  pages: {
+    signIn: '/login',
+    error: '/login',
   },
 };

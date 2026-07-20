@@ -2,7 +2,7 @@ export interface User {
   id: string;
   username: string;
   email: string;
-  phone: null;
+  phone: string | null;
   firstName: string;
   lastName: string;
   gender: 'MALE' | 'FEMALE';
@@ -14,4 +14,9 @@ export interface User {
 interface AuthResponse {
   user: User;
   token: string;
+}
+
+interface LoginRequest {
+  username: string;
+  password: string;
 }

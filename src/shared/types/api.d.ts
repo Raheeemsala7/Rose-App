@@ -14,4 +14,4 @@ declare type IErrorResponse = {
   }>;
 };
 
-declare type IApiResponse<T> = SuccessResponse<T> | IErrorResponse;
+declare type ApiResponse<T> = SuccessResponse<T> | IErrorResponse;
