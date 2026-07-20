@@ -24,6 +24,7 @@ import { cn } from '../lib/utils';
 import { Link, usePathname } from '@/src/i18n/navigation';
 import {  useSession } from 'next-auth/react';
 import RoseIcon from '@/public/icons/rose-icon';
+import UserDropMenu from './user-dropmenu';
 
 
 const navItems = [
@@ -36,7 +37,7 @@ const navItems = [
 ];
 
 const Header = () => {
-  const { status } = useSession();
+  const { status , data } = useSession();
   const t = useTranslations('header');
   const pathname = usePathname();
 
@@ -141,7 +142,7 @@ const Header = () => {
                 {t('login')}
               </Link>
             ) : (
-              <p>user</p>
+              <UserDropMenu name={`${data?.user.firstName} ${data?.user.lastName}`} firstName={data?.user.firstName} />
             )}
 
             <div className="flex items-center gap-2.5 text-zinc-700 dark:text-zinc-50">

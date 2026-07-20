@@ -1,4 +1,4 @@
-import { User as AppUser } from '@/features/auth/types/auth';
+import { UserData } from "@/src/features/auth/types/auth";
 
 declare module 'next-auth' {
   /**
@@ -6,7 +6,7 @@ declare module 'next-auth' {
    */
 
   interface User {
-    user: AppUser;
+    user: UserData;
     token: string;
   }
 
