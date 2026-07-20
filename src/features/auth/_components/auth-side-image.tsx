@@ -27,14 +27,14 @@ export default function AuthSideImage({
   return (
     <div
       className={`flex ${link && !title ? 'flex-col-reverse justify-content-center' : 'flex-col'
-        } items-center gap-10 ${wrapperClassName}`}
+        } items-center gap-6 ${wrapperClassName}`}
     >
       <Image
         src={src}
         alt={alt}
-        width="690"
-        height="112"
-        className={`w-auto ${link && !title ? 'rotate-180' : ''
+        width={280}
+        height={40}
+        className={`object-center object-cover ${link && !title ? 'rotate-180' : ''
           }   ${className}`}
       />
 

@@ -34,5 +34,18 @@
     "loginPromptCta": "الانتقال إلى تسجيل الدخول",
     "cancel": "إلغاء",
     "currency": "$"
+  },
+    "login": {
+    "email": "البريد الالكتروني",
+    "emailRequired": "البريد الالكتروني مطلوب",
+    "password": "كلمة المرور",
+    "passwordRequired": "كلمة المرور مطلوبة",
+    "rememberMe": "تذكرني",
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "login": "تسجيل الدخول",
+    "noAccount": "ليس لديك حساب؟",
+    "createAccount": "أنشئ حساباً الآن!",
+    "unknownError": "خطأ غير معروف",
+    "somethingWentWwrong": "حدث خطأ ما"
   }
 }

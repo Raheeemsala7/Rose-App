@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Providers } from '@/src/shared/context/providers';
 import { routing } from '@/src/i18n/routing';
-import Header from '@/src/shared/components/header';
+import localFont from 'next/font/local';
 
 const sarabun = Sarabun({
   variable: '--font-sarabun',
@@ -19,6 +19,16 @@ const tajawal = Tajawal({
   subsets: ['arabic'],
   weight: ['200', '300', '400', '500', '700', '800', '900'],
   display: 'swap',
+});
+const edwardian = localFont({
+  src: [
+    {
+      path: '../../../public/fonts/Edwardian.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-edwardian',
 });
 
 interface LocaleLayoutProps {
@@ -65,7 +75,7 @@ export default async function LocaleLayout({
       lang={locale}
       dir={locale === 'ar' ? 'rtl' : 'ltr'}
       suppressHydrationWarning
-      className={`${sarabun.variable} ${tajawal.variable} ${fontClass}  h-full antialiased`}
+      className={`${sarabun.variable} ${tajawal.variable}  ${edwardian.variable} ${fontClass}  h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-ds-sans">
         <Providers locale={locale}>

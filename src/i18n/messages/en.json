@@ -34,5 +34,18 @@
     "loginPromptCta": "Go to login",
     "cancel": "Cancel",
     "currency": "$"
+  },
+    "login": {
+    "email": "Email",
+    "emailRequired": "Email is required",
+    "password": "Password",
+    "passwordRequired": "Your password is required",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot your password?",
+    "login": "Login",
+    "noAccount": "Don't have an account?",
+    "createAccount": "Create one now!",
+    "unknownError": "Unknown error",
+    "somethingWentWwrong": "Something went wrong"
   }
 }
