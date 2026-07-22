@@ -33,12 +33,14 @@
     "loginPromptBody": "Please log in to use this feature.",
     "loginPromptCta": "Go to login",
     "cancel": "Cancel",
-    "currency": "$"
+    "currency": "$",
+    "Rating": "Rating",
+    "ratings": "ratings"
   },
-    "login": {
+  "login": {
     "username": "Username",
     "usernameRequired": "Username is required",
-  "usernameMin": "Username must be at least 3 characters",
+    "usernameMin": "Username must be at least 3 characters",
     "password": "Password",
     "passwordRequired": "Your password is required",
     "rememberMe": "Remember me",

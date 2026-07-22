@@ -57,20 +57,20 @@ const UserDropMenu = ({ name, firstName }: { name: string; firstName: string }) 
 
                     </div>
                 </DropdownMenuGroup>
-                <DropdownMenuGroup>
-                    <Separator className="bg-zinc-100 dark:bg-zinc-700 mb-1" />
+                <Separator className="bg-zinc-100 dark:bg-zinc-700 mb-1" />
+                <DropdownMenuGroup className={"p-1"}>
                     <DropdownMenuItem className={"dark:text-zinc-50 hover:bg-zinc-100 dark:hover:bg-zinc-700"}>
                         <Link href={"/profile"} className="flex items-center gap-2">
                             <Settings className="size-5" />
                             <span className="text-base"> Dashboard</span>
                         </Link>
                     </DropdownMenuItem>
-                    <Separator className="bg-zinc-100 dark:bg-zinc-700 mt-1" />
 
                 </DropdownMenuGroup>
+                <Separator className="bg-zinc-100 dark:bg-zinc-700 mt-1" />
                 <DropdownMenuGroup className={"p-1.25"}>
                     <DropdownMenuItem
-                        onClick={async() => {
+                        onClick={async () => {
                             await signOut({
                                 // redirect:"/login"
                             })

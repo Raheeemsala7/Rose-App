@@ -33,7 +33,9 @@
     "loginPromptBody": "يرجى تسجيل الدخول لاستخدام هذه الميزة.",
     "loginPromptCta": "الانتقال إلى تسجيل الدخول",
     "cancel": "إلغاء",
-    "currency": "$"
+    "currency": "$",
+    "Rating": "تقيم",
+    "ratings": "تقييمات"
   },
   "login": {
     "username": "اسم المستخدم",

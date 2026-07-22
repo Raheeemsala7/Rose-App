@@ -15,3 +15,11 @@ declare type IErrorResponse = {
 };
 
 declare type ApiResponse<T> = SuccessResponse<T> | IErrorResponse;
+
+
+declare type MetadataData = {
+  page: string;
+  limit: string;
+  total: string;
+  totalPages: string;
+} 

@@ -25,6 +25,7 @@ import { Link, usePathname } from '@/src/i18n/navigation';
 import {  useSession } from 'next-auth/react';
 import RoseIcon from '@/public/icons/rose-icon';
 import UserDropMenu from './user-dropmenu';
+import { SearchBox } from './search-box';
 
 
 const navItems = [
@@ -41,16 +42,6 @@ const Header = () => {
   const t = useTranslations('header');
   const pathname = usePathname();
 
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [query, setQuery] = useState('');
-
-  const handleFocus = () => {
-    setSearchOpen(true);
-  };
-
-  const handleBlur = () => {
-    setSearchOpen(false);
-  };
 
   return (
     <div className="w-full font-sans">
@@ -65,71 +56,7 @@ const Header = () => {
           </Link>
 
           {/* Search */}
-          <div className={`relative flex-1 transition-all`}>
-            <div className="flex items-center gap-2 rounded-lg bg-white dark:bg-zinc-700 border border-zinc-300 dark:border-zinc-600 px-3.5 py-2">
-              <Search size={16} className="text-zinc-400" />
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-                placeholder={t('searchPlaceholder')}
-                className="w-full bg-transparent text-sm outline-none placeholder:text-zinc-400"
-              />
-              {query && (
-                <button
-                  onClick={() => setQuery('')}
-                  aria-label="clear"
-                  className="flex text-[var(--color-nav-muted)]"
-                >
-                  <X size={14} />
-                </button>
-              )}
-            </div>
-
-            {searchOpen && (
-              <div className="absolute left-0 right-0 top-[calc(100%+8px)] z-100 bg-white dark:bg-zinc-800 max-h-[420px] overflow-y-auto rounded-xl  p-4 shadow-2xl">
-                <div className="mb-2.5 text-base  font-semibold text-maroon-700">
-                  {t('searchDefault')}
-                </div>
-
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-start gap-4">
-                    <div>
-                      <Image
-                        src={'/search-image.png'}
-                        alt="TEST"
-                        height={80}
-                        width={80}
-                      />
-                    </div>
-                    <div className="flex-1 flex justify-between items-start text-black dark:text-background">
-                      <div className="space-y-1">
-                        <div className="text-base font-semibold ">
-                          Dreamy White Roses Bouquet
-                        </div>
-                        <div>
-                          <span className="text-xl font-bold">140</span>{' '}
-                          <span className="text-sm">EGP</span>
-                        </div>
-                      </div>
-
-                      <div>
-                        <p className="flex gap-1.5">
-                          <Star
-                            className="fill-yellow-400 stroke-yellow-400"
-                            size={24}
-                          />
-                          <span>Rating: 4.5/5</span>
-                          <span className="text-blue-600">(8 ratings)</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+          <SearchBox />
 
           {/* Right cluster */}
           <div className="flex flex-shrink-0 items-center gap-4">
@@ -180,44 +107,3 @@ const Header = () => {
 };
 
 export default Header;
-// {/* Login prompt modal (guest gate) */}
-// {loginPrompt && (
-//     <div
-//         className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40"
-//         onClick={() => setLoginPrompt(false)}
-//     >
-//         <div onClick={(e) => e.stopPropagation()} className="w-80 rounded-xl bg-[var(--color-surface)] p-7 text-center">
-//             <div className="mb-2 text-3xl">🔒</div>
-//             <div className="mb-1.5 text-base font-bold text-[var(--color-text-primary)]">{t.loginPromptTitle}</div>
-//             <div className="mb-5 text-[13px] text-[var(--color-text-secondary)]">{t.loginPromptBody}</div>
-//             <div className="flex justify-center gap-2.5">
-//                 <button
-//                     onClick={() => setLoginPrompt(false)}
-//                     className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2 text-[13px]"
-//                 >
-//                     {t.cancel}
-//                 </button>
-//                 <button
-//                     onClick={() => setLoginPrompt(false)}
-//                     className="rounded-md bg-[var(--color-brand)] px-4 py-2 text-[13px] font-semibold text-[var(--color-surface)]"
-//                 >
-//                     {t.loginPromptCta}
-//                 </button>
-//             </div>
-//         </div>
-//     </div>
-// )}
-
-// {/* Toast for product navigation (demo feedback) */}
-// {toastMsg && (
-//     <div className="fixed bottom-6 left-1/2 z-[200] -translate-x-1/2 rounded-lg bg-[var(--color-nav-bg)] px-4.5 py-2.5 text-[13px] text-[var(--color-surface)]">
-//         {toastMsg}
-//     </div>
-// )}
-
-// {/* Page filler so sticky behavior is visible when scrolling */}
-// <div className="min-h-[900px] bg-[var(--color-surface-muted)] p-10">
-//     <p className="text-[13px] text-[var(--color-nav-muted)]">
-//         {isRTL ? "محتوى الصفحة هنا لاختبار التمرير والسلوك الثابت للهيدر." : "Page content goes here — scroll to test sticky Header behavior."}
-//     </p>
-// </div>

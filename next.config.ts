@@ -3,7 +3,19 @@ import createNextIntlPlugin from 'next-intl/plugin';
 
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.dribbble.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'rose-app.elevate-bootcamp.cloud',
+      },
+    ],
+  },
 };
 
 const withNextIntl = createNextIntlPlugin();
