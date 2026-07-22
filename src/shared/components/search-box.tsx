@@ -4,8 +4,9 @@ import { useProductsQuery } from "@/src/features/products/hooks/products.hook";
 import { Search, Star, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SearchResultSkeleton } from "./search-skeleton";
+import { cn } from "../lib/utils";
 
 export const SearchBox = () => {
     const t = useTranslations("header");
@@ -13,6 +14,7 @@ export const SearchBox = () => {
     const [searchOpen, setSearchOpen] = useState(false);
     const [query, setQuery] = useState("");
     const [debouncedQuery, setDebouncedQuery] = useState("");
+    const containerRef = useRef<HTMLDivElement>(null);
 
     const { data, isLoading } = useProductsQuery(
         {
@@ -29,24 +31,43 @@ export const SearchBox = () => {
     }, [query]);
 
 
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (
+                containerRef.current &&
+                !containerRef.current.contains(event.target as Node)
+            ) {
+                setSearchOpen(false);
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+
 
 
     return (
-        <div className="relative flex-1">
-            <div className="flex items-center gap-2 rounded-lg border px-3.5 py-2">
-                <Search size={16} />
+        <div ref={containerRef}
+            className="relative flex-1">
+            <div className="flex items-center gap-2 rounded-xl border px-3.5 py-2 dark:bg-zinc-700 border-zinc-600">
+                <Search size={16} className={cn(query ? "dark:text-zinc-50" : "dark:text-zinc-400")} />
 
                 <input
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     onFocus={() => setSearchOpen(true)}
                     placeholder={t("searchPlaceholder")}
-                    className="w-full bg-transparent outline-none"
+                    className="w-full bg-transparent dark:text-zinc-50 outline-none placeholder:text-zinc-400"
                 />
 
                 {query && (
                     <button onClick={() => setQuery("")}>
-                        <X size={14} />
+                        <X size={14} className="dark:text-zinc-50" />
                     </button>
                 )}
             </div>
