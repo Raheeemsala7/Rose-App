@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { SearchResultSkeleton } from "./search-skeleton";
 import { cn } from "../lib/utils";
+import Link from "next/link";
 
 export const SearchBox = () => {
     const t = useTranslations("header");
@@ -83,7 +84,7 @@ export const SearchBox = () => {
                     {isLoading && <SearchResultSkeleton />}
                     <div className="flex flex-col gap-4 z-100">
                         {data?.payload.data.map((product) => (
-                            <div className="flex items-start gap-4">
+                            <Link href={`/products/${product.id}`} className="flex items-start gap-4">
                                 <div className="size-20 rounded-lg">
                                     <Image
                                         src={product.cover}
@@ -115,7 +116,7 @@ export const SearchBox = () => {
                                         </p>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
 

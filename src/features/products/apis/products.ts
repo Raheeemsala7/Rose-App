@@ -29,3 +29,6 @@ export async function getProductsApi(params: ParamsProducts) {
 
     return data;
 }
+
+
+

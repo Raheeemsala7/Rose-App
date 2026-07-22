@@ -3,8 +3,8 @@
 import { mergeProps } from '@base-ui/react/merge-props';
 import { useRender } from '@base-ui/react/use-render';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '../../lib/utils';
 
-import { cn } from '@/lib/utils';
 
 const badgeVariants = cva(
   'inline-flex h-6 items-center justify-center rounded-full border px-2.5 text-xs font-medium transition-colors',
