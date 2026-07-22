@@ -1,6 +1,6 @@
 "use client";
 
-import { useProductsQuery } from "@/src/features/products/hooks/products.hook";
+import { useGetProductsQuery } from "@/src/features/products/hooks/products.hook";
 import { Search, Star, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -17,7 +17,7 @@ export const SearchBox = () => {
     const [debouncedQuery, setDebouncedQuery] = useState("");
     const containerRef = useRef<HTMLDivElement>(null);
 
-    const { data, isLoading } = useProductsQuery(
+    const { data, isLoading } = useGetProductsQuery(
         {
             search: debouncedQuery,
             limit: 5,

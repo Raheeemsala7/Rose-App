@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ParamsProducts, Product } from "../types/product";
 
 
-export function useProductsQuery(params: ParamsProducts) {
+export function useGetProductsQuery(params: ParamsProducts) {
     return useQuery({
         queryKey: ["products", params],
         queryFn: async () => {

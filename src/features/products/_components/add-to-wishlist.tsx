@@ -16,15 +16,15 @@ export default function AddToWishlist() {
           className="absolute top-2 inset-s-2 flex items-center justify-center text-white bg-zinc-800 rounded-full h-7.5 p-2.5 gap-0.75 cursor-pointer hover:bg-zinc-800"
           onClick={() => setIsWishlisted(false)}
         >
-          <HeartMinus className="w-4.5 h-4.5" />
+          <HeartMinus className="w-4.5 h-4.5 text-maroon-600" />
           <p>{t('removeFromWishlist')}</p>
         </Button>
       ) : (
         <Button
-          className="absolute top-2 inset-s-2 w-7.5 h-7.5 rounded-full bg-white text-maroon-600 hover:bg-white cursor-pointer flex items-center justify-center"
+          className="absolute top-2 inset-s-2 w-7.5 h-7.5 !px-0 rounded-full bg-white text-maroon-600 hover:bg-white cursor-pointer flex items-center justify-center"
           onClick={() => setIsWishlisted(true)}
         >
-          <HeartPlus className="w-4.5 h-4.5" />
+          <HeartPlus className="w-4.5 h-4.5 text-maroon-600" />
         </Button>
       )}
     </>

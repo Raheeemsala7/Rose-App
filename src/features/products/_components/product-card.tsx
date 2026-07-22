@@ -10,10 +10,7 @@ import AddToWishlist from './add-to-wishlist';
 import AddToCart from './add-to-cart';
 import { calculateOriginalPrice, formatPrice } from '@/src/shared/lib/price.utils';
 
-// Translation
-// State
-// Variables
-// Functions
+
 
 export default function ProductCard({
   id,
