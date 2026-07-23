@@ -11,8 +11,6 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
             <div className="grid h-screen grid-cols-1 lg:grid-cols-2 dark:bg-ds-bg-inverse overflow-y-auto">
                 <div className="flex w-full items-center justify-center overflow-auto px-4 py-2">
                     <div className="mx-auto w-full max-w-lg rounded-xl  space-y-2.5">
-                        <LangToggle />
-
                         {children}
                     </div>
                 </div>

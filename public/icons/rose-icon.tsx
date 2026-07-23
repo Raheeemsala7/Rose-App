@@ -1,5 +1,5 @@
-import * as React from 'react';
-const RoseIcon = (props: React.SVG) => (
+import {SVGProps} from "react"
+const RoseIcon = (props : SVGProps<SVGSVGElement> ) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"

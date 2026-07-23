@@ -1,10 +1,16 @@
 import LoginForm from '@/src/features/auth/_components/login-form'
-import React from 'react'
+import { Suspense } from 'react';
 
-const page = () => {
-  return (
-    <LoginForm />
+export  async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ callbackUrl?: string }>;
+}) {
+  const params = await searchParams;  return (
+      <Suspense fallback={<p>loading...</p>}>
+        <LoginForm callbackUrl={params.callbackUrl}  />
+      </Suspense>
   )
 }
 
-export default page
+export default Page

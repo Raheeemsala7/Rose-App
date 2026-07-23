@@ -1,14 +1,12 @@
+"use client"
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 
 import { signIn } from 'next-auth/react';
-import { useSearchParams } from 'next/navigation';
 import { LoginFormType, loginSchema } from '../schemas/login.schema';
 
-export function useLogin() {
-    const searchParams = useSearchParams();
-    const callbackUrl = searchParams.get('callbackUrl');
+export function useLogin(callbackUrl?: string) {
     const t = useTranslations('login');
     const tButton = useTranslations('button');
     const {

@@ -9,12 +9,15 @@ import { Button } from '@/src/shared/components/ui/button'
 import { Separator } from '@/src/shared/components/ui/separator'
 import SeparatorIcon from '@/public/icons/separator-icon'
 import ThemeToggle from '@/src/shared/components/theme-toggle'
+import LangToggle from '@/src/shared/components/lang-toggle'
 
-const LoginForm = () => {
+const LoginForm = ({ callbackUrl }: { callbackUrl?: string; }) => {
   const { handleSubmit, control, errors, isSubmitting, onSubmit, t, tButton } =
-    useLogin();
+    useLogin(callbackUrl);
   return (
     <div>
+      <LangToggle />
+
       <ThemeToggle />
       <div className='flex justify-center items-center flex-col gap-6 mb-4'>
         <SeparatorIcon />
@@ -47,7 +50,7 @@ const LoginForm = () => {
                     label={t('username')}
                     placeholder={t('username')}
                     isError={fieldState.invalid}
-                      className='dark:text-zinc-50' 
+                    className='dark:text-zinc-50'
                     id="input-field-email"
                   />
                   {fieldState.invalid && (
@@ -75,7 +78,7 @@ const LoginForm = () => {
                       id="input-field-password"
                     />
                     {fieldState.invalid && (
-                      <FieldError  className="text-red-600 dark:text-red-500" errors={[fieldState.error]} />
+                      <FieldError className="text-red-600 dark:text-red-500" errors={[fieldState.error]} />
                     )}
                   </div>
                 )}

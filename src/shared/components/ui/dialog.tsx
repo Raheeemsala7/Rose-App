@@ -3,9 +3,10 @@
 import * as React from 'react';
 import { Dialog as DialogPrimitive } from '@base-ui/react/dialog';
 
-import { cn } from '@/lib/utils';
-import { Button } from '@/shared/components/ui/button';
+
 import { XIcon } from 'lucide-react';
+import { cn } from '../../lib/utils';
+import { Button } from './button';
 
 function Dialog({
   ...props
@@ -103,7 +104,7 @@ function DialogContent({
             <Button
               variant="ghost"
               className="absolute top-4 right-4"
-              size="icon-sm"
+              size="icon"
             >
               <XIcon />
               <span className="sr-only">Close</span>
