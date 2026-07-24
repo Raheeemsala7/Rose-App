@@ -45,5 +45,7 @@ class ErrorBoundaryInternal extends Component<ErrorBoundaryProps, ErrorBoundaryS
 function ProductsErrorFallback() {
   const t = useTranslations('home');
 
-  return <div className="text-ds-text-primary text-base">{t('failedToLoadProducts')}</div>;
+  return <div className="text-ds-text-primary text-base">
+    {t('failedToLoadProducts')}
+  </div>;
 }
