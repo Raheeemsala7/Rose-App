@@ -7,6 +7,7 @@ export async function GET(req: NextRequest) {
         const data = await getProductsApi({
             page: Number(searchParams.get("page")) || 1,
             limit: Number(searchParams.get("limit")) || 10,
+            search: searchParams.get("search") || undefined,
             categoryId: searchParams.get("categoryId") || undefined,
             subCategoryId: searchParams.get("subCategoryId") || undefined,
             occasionId: searchParams.get("occasionId") || undefined,

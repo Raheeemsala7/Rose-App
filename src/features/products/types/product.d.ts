@@ -43,7 +43,5 @@ export  interface ParamsProducts {
     minRating?: number;
     sortBy?: SortBy;
     sortOrder?: SortOrder;
-
-    // Not found on real api 
     search?:string;
 }

@@ -121,7 +121,9 @@ export const SearchBox = () => {
                     </div>
 
                     {query && !isLoading && data?.payload.data?.length === 0 && (
-                        <p>لا توجد نتائج.</p>
+                        <div className="flex justify-center items-center py-5">
+                            <p className="text-lg dark:text-zinc-50">لا توجد نتائج.</p>
+                        </div>
                     )}
                 </div>
             )}

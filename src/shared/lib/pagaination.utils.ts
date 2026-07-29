@@ -1,21 +1,39 @@
-export function getPageNumbers({ current, total }: { current: number, total: number }) {
-    const pages = [];
-    const siblingCount = 1;
+type GetPageNumbersProps = {
+  current: number;
+  total: number;
+};
 
-    const start = Math.max(2, current - siblingCount);
-    const end = Math.min(total - 1, current + siblingCount);
+export function getPageNumbers({
+  current,
+  total,
+}: GetPageNumbersProps): (number | "...")[] {
+  const pages: (number | "...")[] = [];
 
-    pages.push(1);
+  const start = Math.max(2, current - 2);
+  const end = Math.min(total - 1, current + 2);
 
-    if (start > 2) pages.push("start-ellipsis");
+  // أول صفحة
+  pages.push(1);
 
-    for (let i = start; i <= end; i++) {
-        pages.push(i);
-    }
+  // ...
+  if (start > 2) {
+    pages.push("...");
+  }
 
-    if (end < total - 1) pages.push("end-ellipsis");
+  // الصفحات حول الحالية
+  for (let i = start; i <= end; i++) {
+    pages.push(i);
+  }
 
-    if (total > 1) pages.push(total);
+  // ...
+  if (end < total - 1) {
+    pages.push("...");
+  }
 
-    return pages;
+  // آخر صفحة
+  if (total > 1) {
+    pages.push(total);
+  }
+
+  return pages;
 }

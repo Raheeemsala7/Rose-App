@@ -11,13 +11,7 @@ export const loginApi = async ({ username, password }: LoginRequest) => {
       'Content-Type': 'application/json',
     },
   });
-  console.log("@@@@@@@@@@@@@@@@")
-  console.log(res)
-  console.log("@@@@@@@@@@@@@@@@")
   const data: ApiResponse<AuthResponse> = await res.json();
-  console.log("###############")
-  console.log(data)
-  console.log("###############")
   if (!data.status) {
     throw new Error(data.message);
   }
