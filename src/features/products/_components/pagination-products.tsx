@@ -27,12 +27,12 @@ function PageButton({
             aria-current={active ? "page" : undefined}
             className={[
                 "inline-flex h-9 w-9 items-center justify-center rounded-md border text-sm font-medium transition-colors",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-600",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2  border dark:border-none",
                 disabled
-                    ? "cursor-not-allowed opacity-40 border-gray-200 text-gray-400"
+                    ? "cursor-not-allowed opacity-40 border-ds-muted dark:bg-ds-plain  text-gray-400"
                     : active
-                        ? "bg-red-700 border-red-700 text-white shadow-sm"
-                        : "border-gray-200 text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-300",
+                        ? "bg-ds-primary text-white shadow-sm"
+                        : "border-ds-muted dark:border-none text-gray-700 dark:text-white dark:bg-ds-plain ",
             ].join(" ")}
         >
             {children}
@@ -71,6 +71,7 @@ export default function PaginationProducts({
                 ariaLabel="First page"
                 disabled={page === 1}
                 onClick={() => goTo(1)}
+                
             >
                 <ChevronsLeft size={16} />
             </PageButton>
