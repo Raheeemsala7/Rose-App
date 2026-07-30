@@ -51,18 +51,16 @@
     "unknownError": "خطأ غير معروف",
     "somethingWentWwrong": "حدث خطأ ما"
   },
-    "home-page": {
+  "home-page": {
     "hero-section": {
       "banner": {
         "card-title": "بدء من 10.99 ج.م",
         "card-description": "هدايا خاصة للأشخاص الذين تحبهم",
         "card-button": "تسوق الأن",
-
         "carousel-title": "قولها بالزهور",
         "carousel-description": "هدايا أنيقة لكل لحظة خاصة.",
         "carousel-button": "أشترى الآن!"
       },
-
       "occasions": {
         "wedding": {
           "title": "الزفاف",
@@ -77,7 +75,6 @@
           "description": "احتفلي بكل عام من الحب بمفاجأة ذات معنى"
         }
       },
-
       "features": {
         "free-delivery": {
           "title": "توصيل مجاني",
@@ -118,6 +115,8 @@
     "hot": "شائع",
     "addToCart": "أضف إلى السلة",
     "addToWishlist": "أضف إلى المفضلة",
-    "removeFromWishlist": "إزالة من المفضلة"
+    "removeFromWishlist": "إزالة من المفضلة",
+    "category": "قسم",
+    "reset": "اعادة"
   }
 }

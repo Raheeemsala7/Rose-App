@@ -5,7 +5,7 @@ interface GetOccasionsParams {
   limit?: number;
 }
 
-export async function getOccasions({ ...params }: GetOccasionsParams): Promise<Occasion[]> {
+export async function getOccasionsApi({ ...params }: GetOccasionsParams) {
   const response = await fetch(
     `${process.env.API_URL}/occasions?${new URLSearchParams(params as Record<string, string>).toString()}`
   );
@@ -18,5 +18,5 @@ export async function getOccasions({ ...params }: GetOccasionsParams): Promise<O
     throw new Error(data.message || 'Failed to fetch occasions');
   }
 
-  return data.payload.data;
+  return data;
 }

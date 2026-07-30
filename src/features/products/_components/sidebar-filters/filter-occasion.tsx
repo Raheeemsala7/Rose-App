@@ -1,15 +1,14 @@
 "use client"
-import { Category } from '@/src/features/categories/types/categories';
+import { Occasion } from '@/src/features/occasions/types/occasions';
 import { usePathname, useRouter } from '@/src/i18n/navigation';
 import { cn } from '@/src/shared/lib/utils';
 import { X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
-import { id } from 'zod/v4/locales';
 
 
-export function FilterCategory({ categories, categoryId }: { categories: Category[], categoryId: string }) {
+export function FilterOccasion({ occasions, occasionId }: { occasions: Occasion[], occasionId: string }) {
     /** Translations */
     const t = useTranslations("product")
     /** Hooks */
@@ -20,10 +19,10 @@ export function FilterCategory({ categories, categoryId }: { categories: Categor
     const handleSelect = (id: string) => {
         const params = new URLSearchParams(searchParams.toString());
 
-        if (categoryId === id) {
-            params.delete("categoryId");
+        if (occasionId === id) {
+            params.delete("occasionId");
         } else {
-            params.set("categoryId", id);
+            params.set("occasionId", id);
         }
         params.set("page", "1");
         router.push(`${pathname}?${params.toString()}`);
@@ -32,7 +31,7 @@ export function FilterCategory({ categories, categoryId }: { categories: Categor
     const resetFilter = () => {
         const params = new URLSearchParams(searchParams.toString());
 
-        params.delete("categoryId");
+        params.delete("occasionId");
         params.set("page", "1"); // اختياري
 
         router.push(`${pathname}?${params.toString()}`);
@@ -41,29 +40,26 @@ export function FilterCategory({ categories, categoryId }: { categories: Categor
         <div>
             <div className="flex justify-between items-center mb-3">
                 <span className="text-xl dark:text-white font-semibold">{t("category")}</span>
-                {categoryId && (
+                {occasionId && (
                     <button className="flex gap-0.5 items-center text-red-600 dark:text-red-500 cursor-pointer" onClick={() => resetFilter()}>
                         <X size={15} /> {t("reset")}
                     </button>
                 )}
             </div>
-            <div className="h-56 overflow-y-auto space-y-2.5">
+            <div className="h-56 overflow-y-auto grid grid-cols-2 gap-2.5">
                 {
-                    categories.map((category) => {
-                        const active = categoryId === category.id;
+                    occasions.map((occasion) => {
+                        const active = occasionId === occasion.id;
                         return (
                             <div
-                                key={category.id}
-                                className={cn(`bg-zinc-200  dark:bg-zinc-700 text-black dark:text-white dark:hover:text-black flex gap-2 items-center rounded-sm
-                                     hover:bg-maroon-50 dark:hover:bg-soft-pink-100 group` , active && "bg-maroon-50 dark:bg-soft-pink-100 dark:text-black")}
-                                onClick={() => handleSelect(category.id)}
+                                key={occasion.id}
+                                className={cn(`h-19 rounded-lg relative`)}
+                                onClick={() => handleSelect(occasion.id)}
                             >
-                                <div className={cn("px-2.5 py-1 h-10 bg-zinc-500 rounded-sm group-hover:bg-maroon-600 dark:group-hover:bg-soft-pink-300",
-                                    active && "bg-maroon-600 dark:bg-soft-pink-300"
-                                )}>
-                                    <Image className='object-center object-cover' src={category.image} height={25} width={25} alt={category.title} />
+                                <div className='absolute inset-0 size-full bg-black/45 flex justify-center items-center text-white'>
+                                    {occasion.title}
                                 </div>
-                                <span className="fp-cat-label">{category.title}</span>
+                                <Image className='size-full object-cover object-center rounded-lg' src={occasion.image} height={76} width={100} alt={occasion.title} />
                             </div>
                         );
                     })

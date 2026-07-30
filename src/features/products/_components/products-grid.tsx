@@ -3,14 +3,15 @@ import ProductCard from './product-card'
 import { getProductsApi } from '../apis/products'
 import PaginationProducts from './pagination-products'
 
-export async function ProductsGrid({ page, categoryId }: { page: number; categoryId: string }) {
-    const products = await getProductsApi({ page, limit: 12, categoryId, })
+export async function ProductsGrid({ page, categoryId ,occasionId ,minRating,maxPrice,minPrice}: { page: number; categoryId: string;occasionId: string,minRating:number,    minPrice?: number;
+    maxPrice?: number; }) {
+    const products = await getProductsApi({ page, limit: 12, categoryId,occasionId,minRating,maxPrice,minPrice })
 
     if (!products.status) {
         return <p>Error</p>
     }
 
-    const totalPages = Number(products.payload.metadata.totalPages)
+    const totalPages = Number(products.payload.metadata.totalPages ?? 1)
 
 
     return (
@@ -20,7 +21,9 @@ export async function ProductsGrid({ page, categoryId }: { page: number; categor
                     <ProductCard key={product.id} {...product} />
                 ))}
             </div>
-            <PaginationProducts page={page} totalPages={totalPages} />
+            {totalPages > 1 && (
+                <PaginationProducts page={page} totalPages={totalPages} />
+            )}
         </div>
     )
 }

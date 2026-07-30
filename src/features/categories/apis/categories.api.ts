@@ -7,7 +7,7 @@ interface GetOccasionsParams {
 
 export async function getCategoriesApi({ ...params }: GetOccasionsParams) {
   const response = await fetch(
-    `${process.env.API_URL}/categories?${new URLSearchParams(params as Record<string, string>).toString()}`
+    `${process.env.API_URL}/categories?${new URLSearchParams(params as Record<string, string>).toString()}`,
   );
   const data: ApiResponse<{
     data: Category[];

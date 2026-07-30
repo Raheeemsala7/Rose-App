@@ -51,18 +51,16 @@
     "unknownError": "Unknown error",
     "somethingWentWwrong": "Something went wrong"
   },
-   "home-page": {
+  "home-page": {
     "hero-section": {
       "banner": {
         "card-title": "Staring from 10.99 EGP",
         "card-description": "Special Gifts For The People You Love",
         "card-button": "Shop Now",
-
         "carousel-title": "Say It with Flowers",
         "carousel-description": "Elegant gifts for every special moment.",
         "carousel-button": "I’m buying!"
       },
-
       "occasions": {
         "wedding": {
           "title": "Wedding",
@@ -77,7 +75,6 @@
           "description": "Mark Every Year of Love with a Meaningful Surprise"
         }
       },
-
       "features": {
         "free-delivery": {
           "title": "Free Delivery",
@@ -118,6 +115,8 @@
     "hot": "Hot",
     "addToCart": "Add to cart",
     "addToWishlist": "Add to wishlist",
-    "removeFromWishlist": "Remove from wishlist"
+    "removeFromWishlist": "Remove from wishlist",
+    "category": "category",
+    "reset": "Reset"
   }
 }
