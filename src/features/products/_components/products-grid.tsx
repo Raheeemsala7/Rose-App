@@ -3,8 +3,8 @@ import ProductCard from './product-card'
 import { getProductsApi } from '../apis/products'
 import PaginationProducts from './pagination-products'
 
-export async function ProductsGrid({ page }: { page: number }) {
-    const products = await getProductsApi({ page, limit: 12 })
+export async function ProductsGrid({ page, categoryId }: { page: number; categoryId: string }) {
+    const products = await getProductsApi({ page, limit: 12, categoryId, })
 
     if (!products.status) {
         return <p>Error</p>

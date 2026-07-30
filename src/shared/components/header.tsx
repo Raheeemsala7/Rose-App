@@ -17,12 +17,12 @@ import {
   X,
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import  { useState } from 'react';
+import { useState } from 'react';
 import LanguageSwitcher from './language-switcher';
 import Image from 'next/image';
 import { cn } from '../lib/utils';
 import { Link, usePathname } from '@/src/i18n/navigation';
-import {  useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import RoseIcon from '@/public/icons/rose-icon';
 import UserDropMenu from './user-dropmenu';
 import { SearchBox } from './search-box';
@@ -38,9 +38,10 @@ const navItems = [
 ];
 
 const Header = () => {
-  const { status , data } = useSession();
+  const { status, data } = useSession();
   const t = useTranslations('header');
   const pathname = usePathname();
+
 
 
   return (
@@ -68,9 +69,19 @@ const Header = () => {
                 <User size={20} />
                 {t('login')}
               </Link>
-            ) : (
+            ) : status === "loading" ? (
+              <p>loading...</p>
+            ) : status === "authenticated" && data.user ? (
               <UserDropMenu name={`${data?.user.firstName} ${data?.user.lastName}`} firstName={data?.user.firstName} />
-            )}
+            ) :
+              <Link
+                href={'/login'}
+                className="flex items-center gap-1.5 px-4 py-1.5 text-base text-zinc-700 dark:text-zinc-50 border-e border-zinc-200 dark:border-zinc-700"
+              >
+                <User size={20} />
+                {t('login')}
+              </Link>
+            }
 
             <div className="flex items-center gap-2.5 text-zinc-700 dark:text-zinc-50">
               <Heart size={24} />
@@ -90,7 +101,7 @@ const Header = () => {
                 className={cn(
                   'flex items-center gap-1.5 text-base font-medium text-white dark:text-black no-underline py-2.5',
                   isActive &&
-                    'text-soft-pink-200 border-b-2 border-soft-pink-200 dark:text-maroon-800 dark:border-maroon-800'
+                  'text-soft-pink-200 border-b-2 border-soft-pink-200 dark:text-maroon-800 dark:border-maroon-800'
                 )}
                 key={item.key}
                 href={item.href}
