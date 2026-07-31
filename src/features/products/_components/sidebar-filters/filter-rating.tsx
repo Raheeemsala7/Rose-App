@@ -40,7 +40,7 @@ const FilterRating = ({ minRating }: { minRating?: number }) => {
     };
 
     return (
-        <div className="fp-section">
+        <div >
             <div className="flex justify-between items-center mb-3">
                 <span className="text-xl dark:text-white font-semibold">{t("category")}</span>
                 {minRating && (

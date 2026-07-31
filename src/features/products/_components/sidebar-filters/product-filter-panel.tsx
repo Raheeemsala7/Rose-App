@@ -3,6 +3,7 @@ import { CategoriesFilterSection } from "./categories-filter-section";
 import { OccasionFilterSection } from "./occasion-filter-section";
 import FilterRating from "./filter-rating";
 import FilterPrice from "./filter-price";
+import ResetAllFilters from "./reset-filters";
 
 export default function ProductFilterPanel({ categoryId, occasionId, minRating, maxPrice, minPrice }: {
     categoryId: string; occasionId: string; minRating: number; minPrice?: number;
@@ -18,6 +19,7 @@ export default function ProductFilterPanel({ categoryId, occasionId, minRating, 
             {/* </Suspense> */}
             <FilterRating minRating={minRating} />
             <FilterPrice minPrice={minPrice} maxPrice={maxPrice} />
+            <ResetAllFilters />
         </>
     );
 }

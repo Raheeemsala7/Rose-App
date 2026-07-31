@@ -20,8 +20,8 @@ export default async function page({
         <section className='py-12'>
             <div className="max-w-7xl mx-auto px-4">
                 <div className='grid grid-cols-[300px_1fr] gap-6'>
-                    <aside>
-                        <ProductFilterPanel categoryId={categoryId} occasionId={occasionId} minRating={minRating} />
+                    <aside className='max-w-full overflow-hidden space-y-4'>
+                        <ProductFilterPanel categoryId={categoryId} occasionId={occasionId} minRating={minRating} minPrice={minPrice} maxPrice={maxPrice} />
                     </aside>
                     <Suspense key={currentPage} fallback={<ProductsGridSkeleton />}>
                         <ProductsGrid page={currentPage} categoryId={categoryId} occasionId={occasionId} minRating={minRating} maxPrice={maxPrice} minPrice={minPrice} />
