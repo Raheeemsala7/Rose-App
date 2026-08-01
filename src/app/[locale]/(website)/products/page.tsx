@@ -14,8 +14,6 @@ export default async function page({
     const { page, categoryId, occasionId, minRating, maxPrice, minPrice } = await searchParams
     const currentPage = Number(page) || 1
 
-
-
     return (
         <section className='py-12'>
             <div className="max-w-7xl mx-auto px-4">

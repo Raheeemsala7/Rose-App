@@ -13,7 +13,6 @@ export async function ProductsGrid({ page, categoryId ,occasionId ,minRating,max
 
     const totalPages = Number(products.payload.metadata.totalPages ?? 1)
 
-
     return (
         <div className="flex flex-col gap-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

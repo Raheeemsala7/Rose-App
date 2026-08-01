@@ -27,7 +27,7 @@ function PageButton({
             aria-current={active ? "page" : undefined}
             className={[
                 "inline-flex h-9 w-9 items-center justify-center rounded-md border text-sm font-medium transition-colors",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2  border dark:border-none",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2  border dark:border-none cursor-pointer",
                 disabled
                     ? "cursor-not-allowed opacity-40 border-ds-muted dark:bg-ds-plain  text-gray-400"
                     : active
@@ -43,16 +43,18 @@ function PageButton({
 type PaginationProps = {
     page: number;
     totalPages?: number;
-    onPageChange?: (page: number) => void;
 };
 
 export default function PaginationProducts({
     page,
     totalPages = 10,
-    onPageChange,
 }: PaginationProps) {
-      const router = useRouter();
-  const searchParams = useSearchParams();
+    /**Hooks */
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    /** Variables */
+    const pages = getPageNumbers({ current: page, total: totalPages });
+
     const goTo = (p: number) => {
         const clamped = Math.min(Math.max(p, 1), totalPages);
 
@@ -63,7 +65,6 @@ export default function PaginationProducts({
         router.push(`?${params.toString()}`);
     };
 
-    const pages = getPageNumbers({ current: page, total: totalPages });
 
     return (
         <div dir="ltr" className="flex items-center justify-center gap-1.5 p-6">
@@ -71,7 +72,7 @@ export default function PaginationProducts({
                 ariaLabel="First page"
                 disabled={page === 1}
                 onClick={() => goTo(1)}
-                
+
             >
                 <ChevronsLeft size={16} />
             </PageButton>

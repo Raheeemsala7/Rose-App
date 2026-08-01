@@ -117,6 +117,12 @@
     "addToWishlist": "أضف إلى المفضلة",
     "removeFromWishlist": "إزالة من المفضلة",
     "category": "قسم",
-    "reset": "اعادة"
+    "reset": "اعادة",
+    "error": {
+      "errorPageTitle": "حدث خطأ غير متوقع",
+      "errorPageDescription": "تعذر تحميل المنتجات. يرجى المحاولة مرة أخرى.",
+      "tryAgain": "إعادة المحاولة",
+      "noProductsFound": "لم يتم العثور على منتجات."
+    }
   }
 }

@@ -8,13 +8,14 @@ import { useEffect, useRef, useState } from "react";
 import { SearchResultSkeleton } from "./search-skeleton";
 import { cn } from "../lib/utils";
 import Link from "next/link";
+import { useDebounce } from "../lib/use-debounced";
 
 export const SearchBox = () => {
     const t = useTranslations("header");
 
     const [searchOpen, setSearchOpen] = useState(false);
     const [query, setQuery] = useState("");
-    const [debouncedQuery, setDebouncedQuery] = useState("");
+    const debouncedQuery = useDebounce(query, 500);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const { data, isLoading } = useGetProductsQuery(
@@ -23,14 +24,6 @@ export const SearchBox = () => {
             limit: 5,
         },
     );
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setDebouncedQuery(query);
-        }, 500);
-
-        return () => clearTimeout(timer);
-    }, [query]);
-
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
