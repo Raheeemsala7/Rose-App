@@ -29,6 +29,17 @@ export async function getProductsApi(params: ParamsProducts) {
 
     return data;
 }
+export async function getProductApi(id: string) {
+    const response = await fetch(
+        `${process.env.API_URL}/products/${id}`
+    );
+    const data: ApiResponse<{ product: Product }> = await response.json();
+    console.log(data)
+    if (!data.status) {
+        throw new Error(data.message || "Failed to fetch product");
+    }
+    return data;
+}
 
 
 

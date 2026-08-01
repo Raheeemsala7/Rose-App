@@ -9,7 +9,7 @@ export interface Product {
     discountType: string;
     discountValue: string;
     cover: string;
-    gallery: string[];
+    gallery: string;
     categoryId: string;
     subCategoryId: string;
     immutable: boolean;

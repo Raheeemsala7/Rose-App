@@ -110,13 +110,44 @@
     "failedToLoadProducts": "Failed to load products. Try again."
   },
   "product": {
+    "errorPage": "Failed When Fetch Products",
     "outOfStock": "Out of stock",
     "new": "New",
     "hot": "Hot",
     "addToCart": "Add to cart",
     "addToWishlist": "Add to wishlist",
     "removeFromWishlist": "Remove from wishlist",
-    "category": "category",
-    "reset": "Reset"
+    "currency": "EGP",
+    "leftInStock": "{count} left in stock",
+    "rating": "Rating: {rating}/5",
+    "ratingsCount": "({count} ratings)",
+    "noProductsFound": "No products found.",
+    "failedToLoadProducts": "Failed to load products. Try again.",
+    "error": {
+      "errorPageTitle": "Something went wrong",
+      "errorPageDescription": "We couldn't load the products. Please try again.",
+      "tryAgain": "Try Again",
+      "noProductsFound": "No products found."
+    },
+    "product-reviews": {
+      "title": "Product Reviews",
+      "general-rating": "General rating:",
+      "ratings": "ratings",
+      "no-ratings": "No ratings yet.",
+      "no-reviews": "No Reviews yet.",
+      "loading": "Loading...",
+      "form-review-validation": {
+        "required": "This field is required",
+        "rating-required": "Please select a rating",
+        "form-rating": "Your rating:",
+        "form-title": "Title",
+        "form-title-placeholder": "Enter review title",
+        "form-review": "Review",
+        "form-review-placeholder": "What do you think of this product?",
+        "form-button": "Add Review",
+        "form-login-link": "Please login to be able to review the product"
+      }
+    },
+    "related-product": "Related Products"
   }
 }
