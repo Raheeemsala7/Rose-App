@@ -23,6 +23,7 @@ export default function Page({ params }: Props) {
       <ThemeToggle />
 
       <div className="max-w-11/12 mx-auto">
+      <h6  className="bg-ds-primary text-ds-primary">fkldfjkldjfkdfjk</h6>
         <BannerHomePage />
         <OccasionsSection />
         <FeaturesSection />

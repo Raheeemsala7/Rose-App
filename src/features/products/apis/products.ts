@@ -34,7 +34,6 @@ export async function getProductApi(id: string) {
         `${process.env.API_URL}/products/${id}`
     );
     const data: ApiResponse<{ product: Product }> = await response.json();
-    console.log(data)
     if (!data.status) {
         throw new Error(data.message || "Failed to fetch product");
     }
