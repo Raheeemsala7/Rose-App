@@ -11,7 +11,7 @@ import { id } from 'zod/v4/locales';
 
 export function FilterCategory({ categories, categoryId }: { categories: Category[], categoryId: string }) {
     /** Translations */
-    const t = useTranslations("product")
+    const t = useTranslations("filters")
     /** Hooks */
     const router = useRouter();
     const pathname = usePathname();
@@ -31,9 +31,8 @@ export function FilterCategory({ categories, categoryId }: { categories: Categor
 
     const resetFilter = () => {
         const params = new URLSearchParams(searchParams.toString());
-
         params.delete("categoryId");
-        params.set("page", "1"); // اختياري
+        params.set("page", "1");
 
         router.push(`${pathname}?${params.toString()}`);
     };

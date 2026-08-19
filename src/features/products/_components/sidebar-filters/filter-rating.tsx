@@ -9,7 +9,7 @@ const MAX_RATING = 5;
 
 const FilterRating = ({ minRating }: { minRating?: number }) => {
     /** Translations */
-    const t = useTranslations("product")
+    const t = useTranslations("filters")
     /** Hooks */
     const [hoverRating, setHoverRating] = useState(0);
     const router = useRouter();
@@ -38,11 +38,10 @@ const FilterRating = ({ minRating }: { minRating?: number }) => {
 
         router.push(`${pathname}?${params.toString()}`);
     };
-
     return (
         <div >
             <div className="flex justify-between items-center mb-3">
-                <span className="text-xl dark:text-white font-semibold">{t("category")}</span>
+                <span className="text-xl dark:text-white font-semibold">{t("rating")}</span>
                 {minRating && (
                     <button className="flex gap-0.5 items-center text-red-600 dark:text-red-500 cursor-pointer" onClick={resetRating}>
                         <X size={12} /> Reset

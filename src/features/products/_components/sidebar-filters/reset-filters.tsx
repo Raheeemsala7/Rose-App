@@ -1,9 +1,13 @@
 "use client";
 
 import { RotateCcw } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function ResetAllFilters({}) {
+    /** Translations */
+    const t = useTranslations("filters")
+    /** Hooks */
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -38,7 +42,7 @@ export default function ResetAllFilters({}) {
             disabled={!anyActive}
         >
             <RotateCcw size={14} />
-            Reset All
+            {t("resetAll")}
         </button>
     );
 }

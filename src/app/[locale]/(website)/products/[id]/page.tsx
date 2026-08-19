@@ -1,12 +1,11 @@
 import ProductImageGallery from '@/src/features/products/_components/product/product-image-gallery'
 import ProductInfo from '@/src/features/products/_components/product/product-info'
-import { getProductApi } from '@/src/features/products/apis/products';
-import React from 'react'
+import RelatedProducts from '@/src/features/products/_components/product/related-products/related-products';
+import { getSingleProductApi } from '@/src/features/products/apis/products';
 
 export default async function page({params} : {params: Promise<{id:string}>}) {
   const {id} = await params;
-  console.log("id" , id)
-  const product = await getProductApi(id);
+  const product = await getSingleProductApi(id);
   
   const productData = product.payload.product
   console.log("productData" , productData)
@@ -22,7 +21,7 @@ export default async function page({params} : {params: Promise<{id:string}>}) {
       {/* <ProductReviews product={product} /> */}
 
       {/* Related Product */}
-      {/* <RelatedProducts product={product} /> */}
+      <RelatedProducts productCategoryId={productData.categoryId} rating={productData.rating} />
     </div>
   )
 }

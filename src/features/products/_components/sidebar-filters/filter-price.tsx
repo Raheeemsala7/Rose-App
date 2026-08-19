@@ -26,7 +26,7 @@ export default function FilterPrice({
     maxPrice,
 }: FilterPriceProps) {
     /** Translations */
-    const t = useTranslations("product")
+    const t = useTranslations("filters")
     // Navigation
     const router = useRouter();
     const pathname = usePathname();
@@ -80,18 +80,18 @@ useEffect(() => {
     return (
         <div className="w-full ">
             <div className="flex justify-between items-center mb-3">
-                <span className="text-xl dark:text-white font-semibold">{t("category")}</span>
+                <span className="text-xl dark:text-white font-semibold">{t("price")}</span>
 
                 {(minPrice !== undefined || maxPrice !== undefined) && (
                     <button className="flex gap-0.5 items-center text-red-600 dark:text-red-500 cursor-pointer" onClick={resetPrice}>
-                        <X size={12} /> Reset
+                        <X size={12} /> {t("reset")}
                     </button>
                 )}
             </div>
 
             <div className="flex items-center gap-2">
                 <div>
-                    <Label className="mb-2 text-base dark:text-white">From</Label>
+                    <Label className="mb-2 text-base dark:text-white">{t("from")}</Label>
 
                     <Input
                         type="number"
@@ -103,7 +103,7 @@ useEffect(() => {
                 </div>
 
                 <div>
-                    <Label className="mb-2 text-base dark:text-white">To</Label>
+                    <Label className="mb-2 text-base dark:text-white">{t("to")}</Label>
                     <Input
                         type="number"
                         placeholder={String(PRICE_CEILING)}

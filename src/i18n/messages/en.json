@@ -150,7 +150,17 @@
     },
     "related-product": "Related Products"
   },
-     "orders": {
+  "filters": {
+    "category": "Category",
+    "occasion": "Occasion",
+    "rating": "Rating",
+    "price": "Price",
+    "from": "from",
+    "to": "to",
+    "reset": "Reset",
+    "resetAll": "Reset All"
+  },
+  "orders": {
     "title": "Orders",
     "no-orders": "You haven't placed any orders yet!",
     "no-orders-desc": "Start shopping and your orders will appear here.",
@@ -178,7 +188,7 @@
     "failed-to-load": "Failed to load orders",
     "try-again": "Something went wrong. Please try again later.",
     "retry": "Retry",
-    "errorTitle":"Something went wrong. Please try again later.",
-    "errorDesc":"Something went wrong. Please try again later."
+    "errorTitle": "Something went wrong. Please try again later.",
+    "errorDesc": "Something went wrong. Please try again later."
   }
 }

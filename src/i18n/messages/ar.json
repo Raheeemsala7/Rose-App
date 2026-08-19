@@ -150,6 +150,16 @@
     },
     "related-product": "المنتجات ذات الصلة"
   },
+  "filters": {
+    "category": "الفئة",
+    "occasion": "المناسبة",
+    "rating": "التقييم",
+    "price": "السعر",
+    "from": "من",
+    "to": "إلى",
+    "reset": " إعادة",
+    "resetAll": "إعادة الكل"
+  },
     "orders": {
     "title": "الطلبات",
     "no-orders": "لم تقم بأي طلبيات حتى الآن!",

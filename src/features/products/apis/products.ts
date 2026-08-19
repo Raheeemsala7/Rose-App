@@ -29,7 +29,7 @@ export async function getProductsApi(params: ParamsProducts) {
 
     return data;
 }
-export async function getProductApi(id: string) {
+export async function getSingleProductApi(id: string) {
     const response = await fetch(
         `${process.env.API_URL}/products/${id}`
     );

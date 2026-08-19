@@ -10,7 +10,7 @@ import { useSearchParams } from 'next/navigation';
 
 export function FilterOccasion({ occasions, occasionId }: { occasions: Occasion[], occasionId: string }) {
     /** Translations */
-    const t = useTranslations("product")
+    const t = useTranslations("filters")
     /** Hooks */
     const router = useRouter();
     const pathname = usePathname();
@@ -39,7 +39,7 @@ export function FilterOccasion({ occasions, occasionId }: { occasions: Occasion[
     return (
         <div>
             <div className="flex justify-between items-center mb-3">
-                <span className="text-xl dark:text-white font-semibold">{t("category")}</span>
+                <span className="text-xl dark:text-white font-semibold">{t("occasion")}</span>
                 {occasionId && (
                     <button className="flex gap-0.5 items-center text-red-600 dark:text-red-500 cursor-pointer" onClick={() => resetFilter()}>
                         <X size={15} /> {t("reset")}
