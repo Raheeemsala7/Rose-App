@@ -1,5 +1,6 @@
 import ProductImageGallery from '@/src/features/products/_components/product/product-image-gallery'
 import ProductInfo from '@/src/features/products/_components/product/product-info'
+import ProductReviews from '@/src/features/products/_components/product/product-reviews/product-reviews';
 import RelatedProducts from '@/src/features/products/_components/product/related-products/related-products';
 import { getSingleProductApi } from '@/src/features/products/apis/products';
 
@@ -18,7 +19,7 @@ export default async function page({params} : {params: Promise<{id:string}>}) {
     </div>
 
       {/* Product Reviews */}
-      {/* <ProductReviews product={product} /> */}
+      <ProductReviews id={productData.id} rating={productData.rating} ratings={productData.ratings} />
 
       {/* Related Product */}
       <RelatedProducts productCategoryId={productData.categoryId} rating={productData.rating} />

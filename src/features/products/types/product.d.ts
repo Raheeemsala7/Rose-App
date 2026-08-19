@@ -1,3 +1,5 @@
+import { UserData } from "../../auth/types/auth";
+
 export interface Product {
     id: string;
     title: string;
@@ -32,7 +34,7 @@ export interface Product {
     };
 }
 
-export  interface ParamsProducts {
+export interface ParamsProducts {
     page?: number;
     limit?: number;
     categoryId?: string;
@@ -43,5 +45,32 @@ export  interface ParamsProducts {
     minRating?: number;
     sortBy?: SortBy;
     sortOrder?: SortOrder;
-    search?:string;
+    search?: string;
 }
+
+
+
+export default interface IProductReviews {
+    id: string;
+    content: string;
+    headline: string;
+    rating: number;
+    createdAt: string;
+    updatedAt: string;
+    productId: string;
+    userId: string;
+    product: {
+        id: string;
+        title: string;
+    };
+    user: UserData;
+}
+
+export interface IMetadata {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+}
+
+export type FormReviewValue = z.infer<typeof formReviewSchema>;

@@ -1,4 +1,4 @@
-import IProductReviews from '../../../types/product-reviews';
+import IProductReviews from '../../../types/product';
 import FormReview from './form-review';
 import { ReviewsList } from './reviews-list';
 

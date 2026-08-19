@@ -1,7 +1,7 @@
 import { Star } from 'lucide-react';
-import { cn } from '@/shared/lib/utils/tailwind-cn';
 import { useTranslations } from 'next-intl';
 import { IReviewsListProps } from './reviews';
+import { cn } from '@/src/shared/lib/utils';
 
 export function ReviewsList({ reviews }: IReviewsListProps) {
   const t = useTranslations('product.product-reviews');

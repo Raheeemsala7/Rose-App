@@ -1,20 +1,22 @@
 'use client';
-import { Button } from '@/shared/components/ui/button';
-import { Field, FieldError, FieldGroup, FieldLabel } from '@/shared/components/ui/field';
-import { Input } from '@/shared/components/ui/input';
-import { Textarea } from '@/shared/components/ui/textarea';
-import { cn } from '@/shared/lib/utils/tailwind-cn';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Star } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { formReviewSchema, FormReviewValue } from '../../../schemas/form-review.schema';
 import { useTranslations } from 'next-intl';
-import useAddReview from '../../../hooks/use-add-review';
 import { toast } from 'sonner';
-import { Link } from '@/i18n/navigation';
 import { useRouter } from 'next/navigation';
+import { Link } from '@/src/i18n/navigation';
+import { cn } from '@/src/shared/lib/utils';
+import { Field, FieldError, FieldGroup, FieldLabel } from '@/src/shared/components/ui/field';
+import { Input } from '@/src/shared/components/ui/input';
+import { Textarea } from '@/src/shared/components/ui/textarea';
+import { Button } from '@/src/shared/components/ui/button';
+import useAddReview from '../../../hooks/add-review';
+import { FormReviewValue } from '../../../types/product';
+import { formReviewSchema } from '../../../schema/form-review.schema';
 
 export default function FormReview({ productId }: { productId: string }) {
   //   Translations
@@ -161,7 +163,9 @@ export default function FormReview({ productId }: { productId: string }) {
           {error && <p className="text-ds-text-danger text-sm">{error.message}</p>}
 
           {/* Button */}
-          <Button isLoading={isPending} type="submit" className={`cursor-pointer`}>
+          <Button
+            // isLoading={isPending}
+            type="submit" className={`cursor-pointer`}>
             {t('form-button')}
           </Button>
         </FieldGroup>
