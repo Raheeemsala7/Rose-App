@@ -109,6 +109,12 @@
     "noProductsForOccasion": "لا توجد منتجات لهذه المناسبة.",
     "failedToLoadProducts": "فشل تحميل المنتجات. حاول مجدداً."
   },
+    "occasionsPage": {
+    "title": "المناسبات",
+    "subtitle": "اعثر على الهدية المثالية لكل احتفال",
+    "view-products": "تسوق لهذه المناسبة",
+    "empty": "لا توجد مناسبات متاحة حاليًا."
+  },
 "product": {
     "errorPage": "حدث خطأ اثناء جلب البيانات",
     "outOfStock": "نفدت الكمية",

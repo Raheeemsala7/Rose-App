@@ -109,6 +109,12 @@
     "noProductsForOccasion": "No products found for this occasion.",
     "failedToLoadProducts": "Failed to load products. Try again."
   },
+    "occasionsPage": {
+    "title": "Occasions",
+    "subtitle": "Find the perfect gift for every celebration",
+    "view-products": "Shop this occasion",
+    "empty": "No occasions available yet."
+  },
   "product": {
     "errorPage": "Failed When Fetch Products",
     "outOfStock": "Out of stock",
