@@ -1,11 +1,14 @@
 'use client';
 
+
 import { HeartMinus, HeartPlus } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useSession } from 'next-auth/react';
+import { getGuestWishlist, toggleGuestWishlistItem } from '../../wish-list/storage/guest-wishlist';
 import { Button } from '@/src/shared/components/ui/button';
 import { cn } from '@/src/shared/lib/utils';
+import { useAddToWishlist } from '../../wish-list/hooks/use-add-to-wishlist';
 
 type AddToWishlistVariant = 'card' | 'details';
 

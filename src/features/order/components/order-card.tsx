@@ -8,9 +8,6 @@ import { Order } from "../types/order";
 interface OrderCardProps {
     order: Order;
 }
-
-// Status maps will use translations dynamically in component
-
 export default function OrderCard({ order }: OrderCardProps) {
     // Translation
     const t = useTranslations("orders");
@@ -25,9 +22,6 @@ export default function OrderCard({ order }: OrderCardProps) {
 
     // Functions
     const formatPrice = (value: number) => format.number(value);
-    const formatRating = (value?: number) =>
-        format.number(value ?? 0, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-
     const getStatusLabel = (state: string) => {
         const statusMap: { [key: string]: { label: string; key: string; color: string } } = {
             pending: { label: t("pending"), key: "pending", color: "bg-yellow-500" },
@@ -39,13 +33,13 @@ export default function OrderCard({ order }: OrderCardProps) {
     };
 
     // Variables
-    const status = getStatusLabel(order.state);
+    const status = getStatusLabel(order.status);
 
-    const paymentStatus = order.isPaid
+    const paymentStatus = order.paymentMethod === "CREDIT_CARD"
         ? { label: t("paid"), color: "bg-emerald-500" }
         : { label: t("not-paid"), color: "bg-red-500" };
 
-    const deliveryStatus = order.isDelivered
+    const deliveryStatus = order.status === "DELIVERED"
         ? { label: t("delivered"), color: "text-green-600" }
         : { label: t("pending"), color: "text-yellow-600" };
 
@@ -61,11 +55,11 @@ export default function OrderCard({ order }: OrderCardProps) {
         : "N/A";
 
     return (
-        <div className="bg-white shadow-md mx-auto border border-gray-200 rounded-2xl max-w-[1280px] overflow-hidden">
+        <div className="bg-zinc-100 dark:bg-zinc-800 shadow-md mx-auto rounded-2xl max-w-[1280px] overflow-hidden">
             {/* Header */}
             <div className="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-2 bg-[#A6252A] px-3 sm:px-4 py-2 text-white">
                 <div className="font-primary font-semibold text-lg sm:text-2xl leading-tight break-all">
-                    {t("order-header")} {order.orderNumber || `#${order._id}` || "N/A"}
+                    {t("order-header")} {`#${order.id}` || "N/A"}
                 </div>
                 <div className="font-primary font-normal text-sm sm:text-base leading-tight sm:text-right">
                     {t("created-in")} {formattedCreatedAt}
@@ -73,12 +67,12 @@ export default function OrderCard({ order }: OrderCardProps) {
             </div>
 
             {/* Content */}
-            <div className="bg-gray-50 px-4 pt-4 pb-6 border-gray-200 border-t">
+            <div className=" px-4 pt-4 pb-6">
                 {/* Total + Payment */}
                 <div className="flex lg:flex-row flex-col lg:justify-between lg:items-center gap-3 mb-4 pb-4">
                     <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                        <span className="font-primary font-medium text-gray-900 text-xl sm:text-2xl leading-tight">
-                            {t("total-price")} {formatPrice(order.totalPrice || 0)} EGP
+                        <span className="font-primary font-medium text-zinc-700 dark:text-zinc-50 text-xl sm:text-2xl leading-tight">
+                            {t("total-price")} {formatPrice(Number(order.total) || 0)} EGP
                         </span>
                         <span
                             className={`px-3 py-1 rounded-full text-white font-primary font-semibold text-sm sm:text-base leading-none ${paymentStatus.color}`}
@@ -88,7 +82,7 @@ export default function OrderCard({ order }: OrderCardProps) {
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2">
-                        <span className="font-primary font-semibold text-black text-sm sm:text-base leading-none">
+                        <span className="font-primary font-semibold text-zinc-700 dark:text-zinc-50 text-sm sm:text-base leading-none">
                             {t("status")}:
                         </span>
                         <span
@@ -99,24 +93,24 @@ export default function OrderCard({ order }: OrderCardProps) {
                     </div>
                 </div>
 
-                <div className="bg-gray-200 mb-4 w-full h-px" />
+                <div className="bg-zinc-200 dark:bg-zinc-600 mb-4 w-full h-px" />
 
                 {/* Payment + Delivery */}
                 <div className="space-y-3 mb-6 text-sm">
                     <div className="flex flex-wrap items-center gap-2">
-                        <span className="font-medium" style={{ color: "#71717A" }}>
+                        <span className="font-medium text-zinc-700 dark:text-zinc-50">
                             {t("payment-method")}
                         </span>
                         <div className="flex items-center gap-2">
-                            <Banknote className="w-5 h-5" style={{ color: "#71717A" }} />
-                            <span className="font-primary font-semibold text-sm sm:text-base leading-none" style={{ color: "#71717A" }}>
-                                {order.paymentType === "cash" ? t("cash") : t("credit-card")}
+                            <Banknote className="w-5 h-5 text-zinc-700 dark:text-zinc-50" />
+                            <span className="font-primary font-semibold text-sm sm:text-base leading-none text-zinc-700 dark:text-zinc-50">
+                                {order.paymentMethod === "CASH_ON_DELIVERY" ? t("cash") : t("credit-card")}
                             </span>
                         </div>
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2">
-                        <span className="font-medium text-gray-700 text-sm sm:text-base">{t("delivery-status")}</span>
+                        <span className="font-medium text-zinc-700 dark:text-zinc-50 text-sm sm:text-base">{t("delivery-status")}</span>
                         <div className="flex items-center gap-2">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -146,9 +140,9 @@ export default function OrderCard({ order }: OrderCardProps) {
 
                 {/* Products */}
                 <div>
-                    <div className="mb-4 font-semibold text-gray-800">{t("order-items")}</div>
+                    <div className="mb-4 font-semibold text-zinc-700 dark:text-zinc-50">{t("order-items")}</div>
 
-                    <div className="bg-white p-5 rounded-xl">
+                    <div className="bg-white dark:bg-zinc-700 p-5 rounded-xl">
                         <div
                             className={`relative ${!showAll && showToggle ? "max-h-[240px] overflow-hidden" : ""
                                 }`}
@@ -158,42 +152,32 @@ export default function OrderCard({ order }: OrderCardProps) {
                                     .slice(0, previewCount)
                                     .map((item, index) => (
                                         <div
-                                            key={`${item.product._id}-preview-${index}`}
-                                            className="flex items-stretch gap-0 shadow-sm hover:shadow-md pr-3 sm:pr-5 border border-gray-200 rounded-xl min-h-[130px] sm:min-h-[150px] overflow-hidden transition-all duration-300"
-                                            style={{ backgroundColor: "#FAFAFA" }}
+                                            key={`${item.product.id}-preview-${index}`}
+                                            className="flex items-stretch gap-0 rounded-xl min-h-[130px] sm:min-h-[150px] overflow-hidden transition-all duration-300"
                                         >
                                             <div className="relative flex-shrink-0 w-[96px] sm:w-[120px] min-h-full">
                                                 <Image
                                                     sizes="auto"
-                                                    src={item.product?.imgCover || "/placeholder.png"}
-                                                    alt={item.product?.title || "Product"}
-                                                    fill
-                                                    className="object-cover"
+                                                    src={item.product.cover || "/placeholder.png"}
+                                                    alt={item.product.title || "Product"}
+                                                    height={150}
+                                                    width={120}
+                                                    className="object-fill object-center"
                                                 />
                                             </div>
 
-                                            <div className="flex flex-col flex-1 justify-between pt-1 pb-2 sm:pb-3 pl-3 sm:pl-4 min-w-0">
+                                            <div className="flex flex-col flex-1 justify-between gap-4 pt-1 pb-2 sm:pb-3 ps-3 sm:ps-4 min-w-0">
                                                 <div className="space-y-1">
-                                                    <h3 className="font-semibold text-[#8B1538] text-sm sm:text-base line-clamp-2">
+                                                    <h6 className="font-semibold text-maroon-700 dark:text-soft-pink-200 text-base sm:text-xl line-clamp-2">
                                                         {item.product?.title || "Product"}
-                                                    </h3>
-                                                    <div className="flex flex-wrap items-center gap-1.5">
-                                                        <span className="text-yellow-500 text-base sm:text-lg">★</span>
-                                                        <span className="font-medium text-gray-700 text-xs sm:text-sm">
-                                                            {t("rating")} {formatRating(item.product?.rateAvg)}/5
-                                                        </span>
-                                                        <span className="text-blue-600 text-xs sm:text-sm">
-                                                            ({format.number(item.product?.rateCount || 0)} rating
-                                                            {item.product?.rateCount === 1 ? "" : "s"})
-                                                        </span>
-                                                    </div>
+                                                    </h6>
                                                 </div>
                                                 <div className="flex items-center gap-2">
                                                     <span className="font-medium text-red-500 text-xs sm:text-sm">
                                                         (×{item.quantity || 1})
                                                     </span>
-                                                    <span className="font-bold text-gray-900 text-base sm:text-lg">
-                                                        {formatPrice(item.price || 0)} <span className="text-sm sm:text-base">EGP</span>
+                                                    <span className="font-bold text-zinc-700 dark:text-zinc-50 text-base sm:text-xl">
+                                                        {formatPrice(Number(item.price) || 0)} <span className="text-sm sm:text-base">EGP</span>
                                                     </span>
                                                 </div>
                                             </div>
@@ -204,45 +188,32 @@ export default function OrderCard({ order }: OrderCardProps) {
                                     .slice(previewCount)
                                     .map((item, index) => (
                                         <div
-                                            key={`${item.product._id}-fade-${index}`}
-                                            className="flex items-stretch gap-0 shadow-sm hover:shadow-md pr-3 sm:pr-5 border border-gray-200 rounded-xl min-h-[130px] sm:min-h-[150px] overflow-hidden transition-all duration-300"
-                                            style={{
-                                                backgroundColor: "#FAFAFA",
-                                                opacity: showAll || !showToggle ? 1 : 0.5,
-                                            }}
+                                            key={`${item.product.id}-preview-${index}`}
+                                            className="flex items-stretch gap-0 rounded-xl min-h-[130px] sm:min-h-[150px] overflow-hidden transition-all duration-300"
                                         >
                                             <div className="relative flex-shrink-0 w-[96px] sm:w-[120px] min-h-full">
                                                 <Image
                                                     sizes="auto"
-                                                    src={item.product?.imgCover || "/placeholder.png"}
-                                                    alt={item.product?.title || "Product"}
-                                                    fill
-                                                    className="object-cover"
+                                                    src={item.product.cover || "/placeholder.png"}
+                                                    alt={item.product.title || "Product"}
+                                                    height={150}
+                                                    width={120}
+                                                    className="object-fill object-center"
                                                 />
                                             </div>
 
-                                            <div className="flex flex-col flex-1 justify-between pt-1 pb-2 sm:pb-3 pl-3 sm:pl-4 min-w-0">
+                                            <div className="flex flex-col flex-1 justify-between gap-4 pt-1 pb-2 sm:pb-3 ps-3 sm:ps-4 min-w-0">
                                                 <div className="space-y-1">
-                                                    <h3 className="font-semibold text-[#8B1538] text-sm sm:text-base line-clamp-2">
+                                                    <h6 className="font-semibold text-maroon-700 dark:text-soft-pink-200 text-base sm:text-xl line-clamp-2">
                                                         {item.product?.title || "Product"}
-                                                    </h3>
-                                                    <div className="flex flex-wrap items-center gap-1.5">
-                                                        <span className="text-yellow-500 text-base sm:text-lg">★</span>
-                                                        <span className="font-medium text-gray-700 text-xs sm:text-sm">
-                                                            {t("rating")} {formatRating(item.product?.rateAvg)}/5
-                                                        </span>
-                                                        <span className="text-blue-600 text-xs sm:text-sm">
-                                                            ({format.number(item.product?.rateCount || 0)} rating
-                                                            {item.product?.rateCount === 1 ? "" : "s"})
-                                                        </span>
-                                                    </div>
+                                                    </h6>
                                                 </div>
                                                 <div className="flex items-center gap-2">
                                                     <span className="font-medium text-red-500 text-xs sm:text-sm">
                                                         (×{item.quantity || 1})
                                                     </span>
-                                                    <span className="font-bold text-gray-900 text-base sm:text-lg">
-                                                        {formatPrice(item.price || 0)} <span className="text-sm sm:text-base">EGP</span>
+                                                    <span className="font-bold text-zinc-700 dark:text-zinc-50 text-base sm:text-xl">
+                                                        {formatPrice(Number(item.price) || 0)} <span className="text-sm sm:text-base">EGP</span>
                                                     </span>
                                                 </div>
                                             </div>
@@ -251,7 +222,7 @@ export default function OrderCard({ order }: OrderCardProps) {
                             </div>
 
                             {!showAll && showToggle && (
-                                <div className="bottom-0 absolute inset-x-0 flex justify-center bg-gradient-to-t from-white to-transparent pt-4 pb-4">
+                                <div className="bottom-0 absolute inset-x-0 flex justify-center bg-gradient-to-t from-white dark:from-zinc-700 to-transparent pt-4 pb-4">
                                     <button
                                         onClick={() => setShowAll(true)}
                                         className="flex flex-col items-center hover:opacity-70 font-medium text-[#A6252A] text-base leading-none transition-opacity"
@@ -285,14 +256,14 @@ export default function OrderCard({ order }: OrderCardProps) {
                                 ) : (
                                     <>
                                         {t("show-all")}
-                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        {/* <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
                                                 strokeWidth={2}
                                                 d="M19 9l-7 7-7-7"
                                             />
-                                        </svg>
+                                        </svg> */}
                                     </>
                                 )}
                             </button>

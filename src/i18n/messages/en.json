@@ -149,5 +149,36 @@
       }
     },
     "related-product": "Related Products"
+  },
+     "orders": {
+    "title": "Orders",
+    "no-orders": "You haven't placed any orders yet!",
+    "no-orders-desc": "Start shopping and your orders will appear here.",
+    "go-home": "Go to Home",
+    "order-header": "Order",
+    "created-in": "Created in:",
+    "total-price": "Total price:",
+    "payment-status": "Payment status",
+    "paid": "Paid",
+    "not-paid": "Not Paid",
+    "status": "Status",
+    "payment-method": "Payment Method:",
+    "delivery-status": "Delivery Status:",
+    "cash": "Cash",
+    "credit-card": "Credit Card",
+    "pending": "Pending",
+    "processing": "Processing",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled",
+    "order-items": "Order Items:",
+    "show-all": "Show All",
+    "show-less": "Show Less",
+    "rating": "Rating:",
+    "quantity": "Quantity:",
+    "failed-to-load": "Failed to load orders",
+    "try-again": "Something went wrong. Please try again later.",
+    "retry": "Retry",
+    "errorTitle":"Something went wrong. Please try again later.",
+    "errorDesc":"Something went wrong. Please try again later."
   }
 }
