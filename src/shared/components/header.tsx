@@ -79,7 +79,7 @@ const Header = () => {
 
 
           {/* Logo */}
-          <Link href="/" className="flex-1 lg:flex-shrink-0 flex justify-center items-center no-underline">
+          <Link href="/" className="flex-1  lg:contents flex justify-center items-center no-underline">
             <RoseIcon className="h-9 sm:h-10 w-auto" />
           </Link>
 
@@ -89,7 +89,7 @@ const Header = () => {
           </div>
 
           {/* Right actions */}
-          <div className="flex flex-shrink-0 items-center gap-1 sm:gap-2 ms-auto">
+          <div className="flex flex-shrink-0 items-center gap-1 sm:gap-2">
 
             {/* Cart — always visible on mobile for quick access */}
             <button

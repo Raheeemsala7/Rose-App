@@ -34,7 +34,7 @@ export default function Explore() {
         {/* explore button */}
         <Link
           href="/products"
-          className="text-ds-text-inverse bg-ds-bg-primary font-semibold flex items-center justify-center gap-2.5 py-2.5 px-4 rounded-xl w-full sm:w-auto mt-3"
+          className="text-white bg-ds-primary font-semibold flex items-center justify-center gap-2.5 py-2.5 px-4 rounded-xl w-full sm:w-auto mt-3"
         >
           {t('exploreButton')}{' '}
           {isRTL ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}

@@ -1,15 +1,11 @@
-"use client";
-import FeaturesSection  from "@/src/features/home/components/features-section/features-section";
-import BannerHomePage   from "@/src/features/home/components/hero-section/banner-section/banner-section";
+import BestSellerSection from "@/src/features/home/components/best-seller/best-seller-section";
+import FeaturesSection from "@/src/features/home/components/features-section/features-section";
+import BannerHomePage from "@/src/features/home/components/hero-section/banner-section/banner-section";
 import OccasionsSection from "@/src/features/home/components/hero-section/occasions-section/occasions-section";
-import { use } from "react";
+import MostPopularSection from "@/src/features/home/components/most-popular/most-popular-section";
 
-type Props = { params: Promise<{ locale: string }> };
 
-export default function Page({ params }: Props) {
-  // locale is available if needed by child server components
-  const { locale } = use(params);
-  void locale;
+export default function Page() {
 
   return (
     /*
@@ -21,6 +17,10 @@ export default function Page({ params }: Props) {
       <BannerHomePage />
       <OccasionsSection />
       <FeaturesSection />
+
+      <BestSellerSection />
+
+        <MostPopularSection />
     </div>
   );
 }
