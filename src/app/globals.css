@@ -87,6 +87,9 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Extra-small breakpoint (480px) — smaller than Tailwind's default sm (640px) */
+  --breakpoint-xs: 30rem; /* 480px */
 }
 
 

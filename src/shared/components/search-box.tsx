@@ -70,7 +70,7 @@ export const SearchBox = () => {
                 <div className="absolute inset-x-0 top-full mt-2 bg-white dark:bg-zinc-800 max-h-105 overflow-y-auto rounded-xl  py-2 px-4 shadow-2xl ">
 
                     {!query && (
-                        <div className="mb-2.5 text-base  font-semibold text-maroon-700">
+                        <div className="mb-2.5 text-base font-semibold text-burgundy-700 dark:text-cream-200">
                             {t('searchDefault')}
                         </div>
                     )}

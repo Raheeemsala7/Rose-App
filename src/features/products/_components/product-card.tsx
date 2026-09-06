@@ -62,7 +62,7 @@ export default function ProductCard({
             {stock === 0 && <Badge>{t('outOfStock')}</Badge>}
             {isNew && <Badge className="bg-white text-zinc-700 hover:bg-white">{t('new')}</Badge>}
             {isHot && (
-              <Badge className="bg-maroon-50 text-maroon-600 hover:bg-maroon-50">{t('hot')}</Badge>
+              <Badge className="bg-burgundy-50 text-burgundy-700 hover:bg-burgundy-50">{t('hot')}</Badge>
             )}
           </div>
         </Link>

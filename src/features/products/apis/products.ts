@@ -31,12 +31,20 @@ export async function getProductsApi(params: ParamsProducts) {
 }
 export async function getSingleProductApi(id: string) {
     const response = await fetch(
-        `${process.env.API_URL}/products/${id}`
+        `${process.env.API_URL}/products/${id}`,
+        { cache: 'no-store' }
     );
+
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: Failed to fetch product ${id}`);
+    }
+
     const data: ApiResponse<{ product: Product }> = await response.json();
+
     if (!data.status) {
         throw new Error(data.message || "Failed to fetch product");
     }
+
     return data;
 }
 

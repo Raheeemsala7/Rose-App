@@ -2,30 +2,34 @@
 
 import { useSyncExternalStore } from 'react';
 import { useTheme } from 'next-themes';
-import { useTranslations } from 'next-intl';
+import { Moon, Sun } from 'lucide-react';
 
 export default function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
-  const t = useTranslations('theme');
+
+  /* Avoid hydration mismatch — render nothing until mounted */
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,
     () => false
   );
 
-  const toggleTheme = () => {
-    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
-  };
+  if (!mounted) {
+    return (
+      <div className="p-1.5 rounded-full w-8 h-8" aria-hidden />
+    );
+  }
+
+  const isDark = resolvedTheme === 'dark';
 
   return (
     <button
       type="button"
-      className='text-red-500'
-      onClick={toggleTheme}
-      aria-label={t('toggle')}
-      disabled={!mounted}
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      className="p-1.5 rounded-full text-burgundy-700 dark:text-blush-200 hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer"
     >
-      {mounted && resolvedTheme === 'dark' ? t('light') : t('dark')}
+      {isDark ? <Sun size={18} /> : <Moon size={18} />}
     </button>
   );
 }
