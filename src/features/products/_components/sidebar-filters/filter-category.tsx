@@ -53,12 +53,12 @@ export function FilterCategory({ categories, categoryId }: { categories: Categor
                         return (
                             <div
                                 key={category.id}
-                                className={cn(`bg-zinc-200  dark:bg-zinc-700 text-black dark:text-white dark:hover:text-black flex gap-2 items-center rounded-sm
-                                     hover:bg-maroon-50 dark:hover:bg-soft-pink-100 group` , active && "bg-maroon-50 dark:bg-soft-pink-100 dark:text-black")}
+                                className={cn(`bg-cream-200 dark:bg-burgundy-800 text-burgundy-900 dark:text-cream-100 flex gap-2 items-center rounded-sm cursor-pointer
+                                     hover:bg-burgundy-50 dark:hover:bg-burgundy-700 group` , active && "bg-burgundy-50 dark:bg-burgundy-700")}
                                 onClick={() => handleSelect(category.id)}
                             >
-                                <div className={cn("px-2.5 py-1 h-10 bg-zinc-500 rounded-sm group-hover:bg-maroon-600 dark:group-hover:bg-soft-pink-300",
-                                    active && "bg-maroon-600 dark:bg-soft-pink-300"
+                                <div className={cn("px-2.5 py-1 h-10 bg-burgundy-400 dark:bg-burgundy-600 rounded-sm group-hover:bg-burgundy-700 dark:group-hover:bg-burgundy-500",
+                                    active && "bg-burgundy-700 dark:bg-burgundy-500"
                                 )}>
                                     <Image className='object-center object-cover' src={category.image} height={25} width={25} alt={category.title} />
                                 </div>

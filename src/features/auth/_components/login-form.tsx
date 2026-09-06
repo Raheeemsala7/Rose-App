@@ -18,7 +18,6 @@ const LoginForm = ({ callbackUrl }: { callbackUrl?: string; }) => {
     <div>
       <LangToggle />
 
-      <ThemeToggle />
       <div className='flex justify-center items-center flex-col gap-6 mb-4'>
         <SeparatorIcon />
         <h3
@@ -94,7 +93,7 @@ const LoginForm = ({ callbackUrl }: { callbackUrl?: string; }) => {
                         id="rememberMe"
                         checked={field.value}
                         onCheckedChange={field.onChange}
-                        className={"border-maroon-700 rounded-lg "}
+                        className={"border-burgundy-500 rounded-lg "}
                       />
                       <label
                         htmlFor="rememberMe"
@@ -107,7 +106,7 @@ const LoginForm = ({ callbackUrl }: { callbackUrl?: string; }) => {
                 />
                 <Link
                   href="/forget-password"
-                  className="text-sm font-semibold text-maroon-700 dark:text-soft-pink-300 hover:underline"
+                  className="text-sm font-semibold text-burgundy-700 dark:text-cream-300 hover:underline"
                 >
                   {t('forgotPassword')}
                 </Link>
@@ -117,7 +116,7 @@ const LoginForm = ({ callbackUrl }: { callbackUrl?: string; }) => {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="cursor-pointer mt-10 bg-maroon-600 text-white dark:bg-soft-pink-300 dark:hover:bg-soft-pink-400 dark:text-zinc-800 rounded-xl"
+              className="cursor-pointer mt-10 bg-burgundy-800 hover:bg-burgundy-700 text-cream-100 rounded-xl"
             >
               {isSubmitting ? tButton('loading') : t('login')}
             </Button>
@@ -125,7 +124,7 @@ const LoginForm = ({ callbackUrl }: { callbackUrl?: string; }) => {
             <Separator className='mt-3 bg-zinc-200 dark:bg-zinc-600' />
 
             <p className="text-center text-sm font-semibold text-zinc-800 dark:text-zinc-50">
-              {t('noAccount')} <Link href="/register" className="text-maroon-700 dark:text-soft-pink-300 hover:underline">
+              {t('noAccount')} <Link href="/register" className="text-burgundy-700 dark:text-cream-300 hover:underline">
                 {t('createAccount')}
               </Link>
             </p>

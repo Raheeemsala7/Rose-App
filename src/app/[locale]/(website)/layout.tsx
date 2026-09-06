@@ -1,13 +1,15 @@
-import Header from '@/src/shared/components/header'
-import React from 'react'
+import Header from '@/src/shared/components/header';
+import React from 'react';
 
-const layout = ({children}: {children: React.ReactNode}) => {
+const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-    <Header />
-    {children}
+      <Header />
+      <main className="min-h-screen bg-cream-100 dark:bg-burgundy-950">
+        {children}
+      </main>
     </>
-  )
-}
+  );
+};
 
-export default layout
+export default layout;

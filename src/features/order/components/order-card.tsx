@@ -57,7 +57,7 @@ export default function OrderCard({ order }: OrderCardProps) {
     return (
         <div className="bg-zinc-100 dark:bg-zinc-800 shadow-md mx-auto rounded-2xl max-w-[1280px] overflow-hidden">
             {/* Header */}
-            <div className="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-2 bg-[#A6252A] px-3 sm:px-4 py-2 text-white">
+            <div className="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-2 bg-burgundy-800 px-3 sm:px-4 py-2 text-cream-100">
                 <div className="font-primary font-semibold text-lg sm:text-2xl leading-tight break-all">
                     {t("order-header")} {`#${order.id}` || "N/A"}
                 </div>
@@ -168,7 +168,7 @@ export default function OrderCard({ order }: OrderCardProps) {
 
                                             <div className="flex flex-col flex-1 justify-between gap-4 pt-1 pb-2 sm:pb-3 ps-3 sm:ps-4 min-w-0">
                                                 <div className="space-y-1">
-                                                    <h6 className="font-semibold text-maroon-700 dark:text-soft-pink-200 text-base sm:text-xl line-clamp-2">
+                                                    <h6 className="font-semibold text-burgundy-700 dark:text-cream-200 text-base sm:text-xl line-clamp-2">
                                                         {item.product?.title || "Product"}
                                                     </h6>
                                                 </div>
@@ -204,7 +204,7 @@ export default function OrderCard({ order }: OrderCardProps) {
 
                                             <div className="flex flex-col flex-1 justify-between gap-4 pt-1 pb-2 sm:pb-3 ps-3 sm:ps-4 min-w-0">
                                                 <div className="space-y-1">
-                                                    <h6 className="font-semibold text-maroon-700 dark:text-soft-pink-200 text-base sm:text-xl line-clamp-2">
+                                                    <h6 className="font-semibold text-burgundy-700 dark:text-cream-200 text-base sm:text-xl line-clamp-2">
                                                         {item.product?.title || "Product"}
                                                     </h6>
                                                 </div>
@@ -225,10 +225,10 @@ export default function OrderCard({ order }: OrderCardProps) {
                                 <div className="bottom-0 absolute inset-x-0 flex justify-center bg-gradient-to-t from-white dark:from-zinc-700 to-transparent pt-4 pb-4">
                                     <button
                                         onClick={() => setShowAll(true)}
-                                        className="flex flex-col items-center hover:opacity-70 font-medium text-[#A6252A] text-base leading-none transition-opacity"
+                                        className="flex flex-col items-center hover:opacity-70 font-medium text-burgundy-700 text-base leading-none transition-opacity"
                                     >
                                         <span>{t("show-all")}</span>
-                                        <ChevronDown className="mt-1 w-6 h-6 text-[#A6252A]" />
+                                        <ChevronDown className="mt-1 w-6 h-6 text-burgundy-700" />
                                     </button>
                                 </div>
                             )}
@@ -239,7 +239,7 @@ export default function OrderCard({ order }: OrderCardProps) {
                         <div className="flex justify-center mt-6">
                             <button
                                 onClick={() => setShowAll((s: boolean) => !s)}
-                                className="flex items-center gap-2 font-medium text-[#A6252A] text-base hover:underline leading-none"
+                                className="flex items-center gap-2 font-medium text-burgundy-700 text-base hover:underline leading-none"
                             >
                                 {showAll ? (
                                     <>

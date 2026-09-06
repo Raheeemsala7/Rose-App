@@ -37,7 +37,7 @@ export default function ResetAllFilters({}) {
 
     return (
         <button
-            className="cursor-pointer flex items-center justify-center gap-2 bg-maroon-50 dark:bg-zinc-700 w-full mt-6 px-3 py-2 text-center dark:text-soft-pink-200 rounded-xl"
+            className="cursor-pointer flex items-center justify-center gap-2 bg-burgundy-50 dark:bg-burgundy-800 w-full mt-6 px-3 py-2 text-center text-burgundy-700 dark:text-cream-200 rounded-xl hover:bg-burgundy-100 dark:hover:bg-burgundy-700 transition-colors disabled:opacity-40"
             onClick={resetAll}
             disabled={!anyActive}
         >

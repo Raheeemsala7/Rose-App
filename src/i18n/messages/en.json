@@ -14,6 +14,14 @@
     "delete": "Delete",
     "confirm": "Confirm"
   },
+  "announce": {
+    "items": [
+      "Free delivery on orders over 300 SAR",
+      "14-day easy returns",
+      "Customize your bouquet on request",
+      "Exclusive season offers — shop today"
+    ]
+  },
   "header": {
     "searchPlaceholder": "Search for products...",
     "login": "Login",
@@ -54,12 +62,15 @@
   "home-page": {
     "hero-section": {
       "banner": {
-        "card-title": "Staring from 10.99 EGP",
+        "card-title": "Season Offers Today",
         "card-description": "Special Gifts For The People You Love",
         "card-button": "Shop Now",
-        "carousel-title": "Say It with Flowers",
-        "carousel-description": "Elegant gifts for every special moment.",
-        "carousel-button": "I’m buying!"
+        "carousel-title": "Gifts That Tell Your Story",
+        "carousel-description": "Rose Boutique selects roses, chocolates and perfume for every occasion — elegant, personal, delivered to your door.",
+        "carousel-button": "Shop More",
+        "occasions-button": "Browse Occasions",
+        "badge-1": "40+ gifts ready for customisation",
+        "badge-2": "Delivered within 24 hours"
       },
       "occasions": {
         "wedding": {
@@ -73,7 +84,9 @@
         "anniversary": {
           "title": "Anniversary",
           "description": "Mark Every Year of Love with a Meaningful Surprise"
-        }
+        },
+        "subtitle": "Latest Occasions",
+        "section-title": "Curated Occasion Collections"
       },
       "features": {
         "free-delivery": {
@@ -109,7 +122,7 @@
     "noProductsForOccasion": "No products found for this occasion.",
     "failedToLoadProducts": "Failed to load products. Try again."
   },
-    "occasionsPage": {
+  "occasionsPage": {
     "title": "Occasions",
     "subtitle": "Find the perfect gift for every celebration",
     "view-products": "Shop this occasion",

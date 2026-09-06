@@ -40,7 +40,7 @@ export default function ProductImageGallery({ product }: {product:Product}) {
               key={index}
               onClick={() => setSelectedImage(image)}
               className={`relative shrink-0 w-1/3 md:w-1/6 h-16 md:h-28 cursor-pointer rounded-md overflow-hidden border-2 transition-all ${
-                selectedImage === image ? 'border-maroon-600 border-2' : 'border-transparent'
+                selectedImage === image ? 'border-burgundy-600 border-2' : 'border-transparent'
               }`}
             >
               <Image

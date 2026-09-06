@@ -77,7 +77,7 @@ export default async function LocaleLayout({
       suppressHydrationWarning
       className={`${sarabun.variable} ${tajawal.variable}  ${edwardian.variable} ${fontClass}  h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-ds-sans dark:bg-zinc-800">
+      <body className="min-h-full flex flex-col font-ds-sans bg-cream-100 dark:bg-burgundy-950">
         <Providers locale={locale}>
           {children}
           </Providers>

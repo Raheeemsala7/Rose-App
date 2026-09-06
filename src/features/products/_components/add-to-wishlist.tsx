@@ -56,7 +56,7 @@ export default function AddToWishlist({ variant = 'card', productId }: AddToWish
         className={cn(
           'shrink-0 size-12 rounded-xl bg-ds-bg-muted dark:bg-ds-bg-subtle text-ds-text-plain hover:bg-ds-bg-muted dark:hover:bg-zinc-700 cursor-pointer flex items-center justify-center border border-ds-border-soft',
           isWishlisted &&
-            'bg-ds-bg-inverse hover:bg-ds-bg-inverse dark:bg-zinc-700 text-ds-text-inverse dark:text-soft-pink-300 hover:text-ds-text-inverse dark:hover:text-soft-pink-300'
+            'bg-burgundy-800 hover:bg-burgundy-800 dark:bg-burgundy-700 text-cream-100 dark:text-cream-100'
         )}
         onClick={handleToggle}
         disabled={isAdding}
@@ -80,12 +80,12 @@ export default function AddToWishlist({ variant = 'card', productId }: AddToWish
         </Button>
       ) : (
         <Button
-          className="absolute top-2 inset-s-2 h-7.5 w-7.5 rounded-full bg-white p-0 text-maroon-600 hover:bg-white cursor-pointer overflow-hidden transition-all duration-200 hover:w-auto hover:px-2.5 [&>span]:gap-0 hover:[&>span]:gap-1.5 hover:[&_p]:max-w-40 hover:[&_p]:opacity-100"
+          className="absolute top-2 inset-s-2 h-7.5 w-7.5 rounded-full bg-white p-0 text-burgundy-700 hover:bg-white cursor-pointer overflow-hidden transition-all duration-200 hover:w-auto hover:px-2.5 [&>span]:gap-0 hover:[&>span]:gap-1.5 hover:[&_p]:max-w-40 hover:[&_p]:opacity-100"
           onClick={handleToggle}
           disabled={isAdding}
         >
           <HeartPlus className="size-4.5 shrink-0" />
-          <p className="max-w-0 overflow-hidden whitespace-nowrap text-sm font-medium text-maroon-600 opacity-0 transition-all duration-200">
+          <p className="max-w-0 overflow-hidden whitespace-nowrap text-sm font-medium text-burgundy-700 opacity-0 transition-all duration-200">
             {t('addToWishlist')}
           </p>
         </Button>

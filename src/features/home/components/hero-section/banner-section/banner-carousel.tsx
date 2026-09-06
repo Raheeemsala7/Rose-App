@@ -5,13 +5,10 @@ import Image4 from '@/src/assets/images/banner-home-page/Hero-Section-Banner (4)
 import Image5 from '@/src/assets/images/banner-home-page/Hero-Section-Banner (5).png';
 
 import { useState, useEffect } from 'react';
-import { useLocale } from 'next-intl';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   type CarouselApi,
 } from '@/src/shared/components/ui/carousel';
 import Image from 'next/image';
@@ -20,74 +17,66 @@ import { cn } from '@/src/shared/lib/utils';
 const images = [Image2, Image3, Image4, Image5];
 
 const CarouselCustomDots = () => {
-  const locale = useLocale();
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
-  const isRTL = locale === 'ar';
 
   useEffect(() => {
-    if (!api) {
-      return;
-    }
+    if (!api) return;
+    setCurrent(api.selectedScrollSnap());
+    api.on('select', () => setCurrent(api.selectedScrollSnap()));
+  }, [api]);
 
-    setTimeout(() => {
-      setCurrent(api.selectedScrollSnap() + 1);
-    });
-
-    api.on('select', () => {
-      setCurrent(api.selectedScrollSnap() + 1);
-    });
+  /* Auto-advance every 5 s */
+  useEffect(() => {
+    if (!api) return;
+    const id = setInterval(() => api.scrollNext(), 5000);
+    return () => clearInterval(id);
   }, [api]);
 
   return (
-    <div className="relative w-full h-full">
-      {/* Carousel */}
-      <Carousel setApi={setApi} className="w-full h-full">
-        <CarouselContent>
+    /*
+     * The Carousel component wraps children in a relative div.
+     * CarouselContent wraps in overflow-hidden — we need this container
+     * to be absolutely positioned and fill the parent so the images show.
+     */
+    <div className="absolute inset-0">
+      <Carousel
+        setApi={setApi}
+        opts={{ loop: true }}
+        className="w-full h-full [&>[data-slot=carousel-content]]:h-full [&>[data-slot=carousel-content]>div]:h-full"
+      >
+        <CarouselContent className="h-full ml-0">
           {images.map((src, index) => (
-            <CarouselItem key={index}>
-              <figure className="w-full h-full">
+            <CarouselItem key={index} className="h-full pl-0">
+              <div className="relative w-full h-full">
                 <Image
                   src={src}
-                  alt={`img ${index + 1}`}
+                  alt={`Slide ${index + 1}`}
                   placeholder="blur"
-                  width={300}
-                  height={439}
-                  className="w-full h-full object-cover rounded-2xl"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 70vw"
+                  className="object-cover"
+                  priority={index === 0}
                 />
-              </figure>
+              </div>
             </CarouselItem>
           ))}
         </CarouselContent>
-
-        {/* Carousel Arrow Icons */}
-        <div className="absolute inset-e-8 bottom-12 translate-y-1/2 z-40 flex items-center justify-between gap-2 rounded-full bg-maroon-50 h-8.5">
-          <CarouselPrevious
-            className={cn(
-              'cursor-pointer static translate-y-0 bg-transparent hover:bg-transparent text-maroon-700 w-7.5 h-7.5',
-              isRTL && 'rotate-180'
-            )}
-          />
-          <CarouselNext
-            className={cn(
-              'cursor-pointer static translate-y-0 bg-transparent hover:bg-transparent text-maroon-700 w-7.5 h-7.5',
-              isRTL && 'rotate-180'
-            )}
-          />
-        </div>
       </Carousel>
 
-      {/* Carousel Dots */}
-      <div className="absolute top-8 inset-e-8 flex gap-1.5 z-20">
+      {/* Dot indicators — top-end corner */}
+      <div className="absolute top-5 end-5 flex gap-1.5 z-30">
         {images.map((_, index) => (
           <button
             key={index}
             onClick={() => api?.scrollTo(index)}
-            className={cn('h-2.5 rounded-full transition-all duration-300 cursor-pointer', {
-              'bg-ds-bg-primary w-8': index + 1 === current,
-              'bg-ds-bg-primary-fade w-2.5 hover:bg-ds-bg-primary-faint': index + 1 !== current,
-            })}
-            aria-label={`Slide ${index + 1}`}
+            aria-label={`Go to slide ${index + 1}`}
+            className={cn(
+              'h-2 rounded-full transition-all duration-300 cursor-pointer',
+              index === current
+                ? 'bg-burgundy-200 w-7'
+                : 'bg-cream-100/50 w-2 hover:bg-cream-100/80'
+            )}
           />
         ))}
       </div>

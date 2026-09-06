@@ -25,7 +25,7 @@ const UserDropMenu = ({ name, firstName }: { name: string; firstName: string }) 
                 <div className="flex items-center gap-0.5">
                     <div className="flex flex-col gap-0.1">
                         <span className="text-zinc-500 text-xs">Hello</span>
-                        <span className="text-base font-medium text-maroon-700 dark:text-soft-pink-200">{firstName}</span>
+                        <span className="text-base font-medium text-burgundy-700 dark:text-cream-200">{firstName}</span>
                     </div>
                     <ChevronDown className="text-zinc-500" />
 
@@ -33,7 +33,7 @@ const UserDropMenu = ({ name, firstName }: { name: string; firstName: string }) 
             } />
             <DropdownMenuContent className="w-61 relative z-100 bg-white dark:bg-zinc-600 rounded-xl" align="start">
                 <DropdownMenuGroup>
-                    <DropdownMenuLabel className={"text-maroon-700 dark:text-soft-pink-200 text-base py-1.5 px-2"}>{name}</DropdownMenuLabel>
+                    <DropdownMenuLabel className={"text-burgundy-700 dark:text-cream-200 text-base py-1.5 px-2"}>{name}</DropdownMenuLabel>
                     <Separator className="bg-zinc-100 dark:bg-zinc-700 mt-3" />
                     <div className="p-1.25">
                         <DropdownMenuItem className={"dark:text-zinc-50 hover:bg-zinc-100 dark:hover:bg-zinc-700"}>
