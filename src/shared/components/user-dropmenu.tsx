@@ -1,90 +1,87 @@
-"use client"
-import { signOut, useSession } from "next-auth/react"
-import { Button } from "./ui/button"
+"use client";
+import { signOut } from "next-auth/react";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuPortal,
     DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
     DropdownMenuTrigger,
-} from "./ui/dropdown-menu"
-import { ChevronDown, LocationEdit, LogOut, ScrollText, Settings, User } from "lucide-react"
-import { Separator } from "./ui/separator"
-import { Link } from "@/src/i18n/navigation"
+} from "./ui/dropdown-menu";
+import { ChevronDown, LocationEdit, LogOut, ScrollText, Settings, User } from "lucide-react";
+import { Separator } from "./ui/separator";
+import { Link } from "@/src/i18n/navigation";
+
 const UserDropMenu = ({ name, firstName }: { name: string; firstName: string }) => {
+    /* Initials for the avatar circle */
+    const initials = firstName ? firstName.charAt(0).toUpperCase() : "U";
+
+    const trigger = (
+        <div className="flex items-center gap-1.5 cursor-pointer select-none">
+            {/* Avatar circle — always visible */}
+            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-burgundy-700 dark:bg-blush-600 text-cream-50 text-sm font-bold flex-shrink-0">
+                {initials}
+            </div>
+            {/* Name + chevron — hidden on mobile */}
+            <div className="hidden sm:flex flex-col leading-none">
+                <span className="text-[10px] text-burgundy-400 dark:text-burgundy-400">Hello</span>
+                <span className="text-sm font-semibold text-burgundy-800 dark:text-cream-100">{firstName}</span>
+            </div>
+            <ChevronDown size={14} className="hidden sm:block text-burgundy-400" />
+        </div>
+    );
+
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger render={
-                <div className="flex items-center gap-0.5">
-                    <div className="flex flex-col gap-0.1">
-                        <span className="text-zinc-500 text-xs">Hello</span>
-                        <span className="text-base font-medium text-burgundy-700 dark:text-cream-200">{firstName}</span>
-                    </div>
-                    <ChevronDown className="text-zinc-500" />
+            <DropdownMenuTrigger render={trigger} />
 
-                </div>
-            } />
-            <DropdownMenuContent className="w-61 relative z-100 bg-white dark:bg-zinc-600 rounded-xl" align="start">
-                <DropdownMenuGroup>
-                    <DropdownMenuLabel className={"text-burgundy-700 dark:text-cream-200 text-base py-1.5 px-2"}>{name}</DropdownMenuLabel>
-                    <Separator className="bg-zinc-100 dark:bg-zinc-700 mt-3" />
-                    <div className="p-1.25">
-                        <DropdownMenuItem className={"dark:text-zinc-50 hover:bg-zinc-100 dark:hover:bg-zinc-700"}>
-                            <Link href={"/profile"} className="flex items-center gap-2">
-                                <User className="size-5" />
-                                <span className="text-base"> Profile</span>
-                            </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className={"dark:text-zinc-50 hover:bg-zinc-100 dark:hover:bg-zinc-700"}>
-                            <Link href={"/profile"} className="flex items-center gap-2">
-                                <LocationEdit className="size-5" />
-                                <span className="text-base"> My Addresses</span>
-                            </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className={"dark:text-zinc-50 hover:bg-zinc-100 dark:hover:bg-zinc-700"}>
-                            <Link href={"/profile"} className="flex items-center gap-2">
-                                <ScrollText className="size-5" />
-                                <span className="text-base"> Orders</span>
-                            </Link>
-                        </DropdownMenuItem>
+            <DropdownMenuContent
+                className="w-56 z-[100] rounded-xl border border-cream-300 dark:border-burgundy-700 bg-cream-50 dark:bg-burgundy-900 shadow-xl py-1"
+                align="end"
+                sideOffset={8}
+            >
+                {/* User name header */}
+                <DropdownMenuLabel className="px-3 py-2 text-sm font-semibold text-burgundy-800 dark:text-cream-100">
+                    {name}
+                </DropdownMenuLabel>
+                <Separator className="bg-cream-300 dark:bg-burgundy-700 my-1" />
 
-                    </div>
+                <DropdownMenuGroup className="p-1">
+                    {[
+                        { href: "/profile", icon: User, label: "Profile" },
+                        { href: "/addresses", icon: LocationEdit, label: "My Addresses" },
+                        { href: "/orders", icon: ScrollText, label: "Orders" },
+                        { href: "/dashboard", icon: Settings, label: "Dashboard" },
+                    ].map(({ href, icon: Icon, label }) => (
+                        <DropdownMenuItem
+                            key={href}
+                            className="rounded-lg px-2 py-2 text-sm text-burgundy-800 dark:text-cream-100 hover:bg-cream-200 dark:hover:bg-burgundy-800 transition-colors cursor-pointer"
+                        >
+                            <Link href={href} className="flex items-center gap-2.5 w-full no-underline">
+                                <Icon size={16} className="text-burgundy-500 dark:text-blush-400" />
+                                {label}
+                            </Link>
+                        </DropdownMenuItem>
+                    ))}
                 </DropdownMenuGroup>
-                <Separator className="bg-zinc-100 dark:bg-zinc-700 mb-1" />
-                <DropdownMenuGroup className={"p-1"}>
-                    <DropdownMenuItem className={"dark:text-zinc-50 hover:bg-zinc-100 dark:hover:bg-zinc-700"}>
-                        <Link href={"/profile"} className="flex items-center gap-2">
-                            <Settings className="size-5" />
-                            <span className="text-base"> Dashboard</span>
-                        </Link>
-                    </DropdownMenuItem>
 
-                </DropdownMenuGroup>
-                <Separator className="bg-zinc-100 dark:bg-zinc-700 mt-1" />
-                <DropdownMenuGroup className={"p-1.25"}>
+                <Separator className="bg-cream-300 dark:bg-burgundy-700 my-1" />
+
+                <DropdownMenuGroup className="p-1">
                     <DropdownMenuItem
-                        onClick={async () => {
-                            await signOut({
-                                // redirect:"/login"
-                            })
-                        }}
-                        className={"flex items-center gap-2 dark:text-zinc-50 hover:bg-zinc-100 dark:hover:bg-zinc-700"}>
-                        <LogOut className="size-5" />
-                        <span className="text-base"> Log Out</span>
+                        onClick={() => signOut()}
+                        className="rounded-lg px-2 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors cursor-pointer"
+                    >
+                        <span className="flex items-center gap-2.5 w-full">
+                            <LogOut size={16} />
+                            Log Out
+                        </span>
                     </DropdownMenuItem>
-
                 </DropdownMenuGroup>
-
             </DropdownMenuContent>
         </DropdownMenu>
-    )
-}
+    );
+};
 
-export default UserDropMenu
+export default UserDropMenu;

@@ -39,7 +39,7 @@
 // }
 
 
-export function CartLayout() {
+export default function CartLayout() {
   return (
     <div>
       <h1>CartLayout</h1>

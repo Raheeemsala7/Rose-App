@@ -27,12 +27,12 @@ import ThemeToggle from './theme-toggle';
 import { useState, useEffect } from 'react';
 
 const navItems = [
-  { key: 'Home',       href: '/',           icon: HomeIcon },
-  { key: 'Products',   href: '/products',   icon: GiftIcon },
+  { key: 'Home', href: '/', icon: HomeIcon },
+  { key: 'Products', href: '/products', icon: GiftIcon },
   { key: 'Categories', href: '/categories', icon: ClipboardList },
-  { key: 'Occasions',  href: '/occasions',  icon: PartyPopper },
-  { key: 'Contact',    href: '/contact',    icon: Headset },
-  { key: 'About',      href: '/about',      icon: Info },
+  { key: 'Occasions', href: '/occasions', icon: PartyPopper },
+  { key: 'Contact', href: '/contact', icon: Headset },
+  { key: 'About', href: '/about', icon: Info },
 ];
 
 const Header = () => {
@@ -63,38 +63,65 @@ const Header = () => {
         {/* ════════════════════════════════════
             TOP ROW  –  logo / search / actions
             ════════════════════════════════════ */}
-        <div className="flex items-center gap-3 bg-cream-100 dark:bg-burgundy-950 border-b border-cream-300 dark:border-burgundy-800 px-4 sm:px-6 py-2.5">
+        <div className="flex items-center justify-betwee lg:justify-center gap-3 bg-cream-100 dark:bg-burgundy-950 border-b border-cream-300 dark:border-burgundy-800 px-4 sm:px-6 py-2.5">
+
+
+          {/* Hamburger — below lg */}
+          <button
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
+            onClick={() => setMobileOpen((v) => !v)}
+            className="lg:hidden p-1.5 rounded-full text-burgundy-700 dark:text-blush-200 hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer"
+          >
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+
 
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0 no-underline">
+          <Link href="/" className="flex-1 lg:flex-shrink-0 flex justify-center items-center no-underline">
             <RoseIcon className="h-9 sm:h-10 w-auto" />
           </Link>
 
           {/* Search – always visible, takes available space between logo and actions */}
-          <div className="flex-1 min-w-0">
+          <div className="flex-1 min-w-0 hidden lg:flex">
             <SearchBox />
           </div>
 
           {/* Right actions */}
-          <div className="flex flex-shrink-0 items-center gap-1.5 sm:gap-2.5 ms-auto">
+          <div className="flex flex-shrink-0 items-center gap-1 sm:gap-2 ms-auto">
 
-            {/* Auth – hide text on mobile */}
+            {/* Cart — always visible on mobile for quick access */}
+            <button
+              aria-label="Cart"
+              className="p-1.5 rounded-full text-burgundy-700 dark:text-blush-200 hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer"
+            >
+              <ShoppingCart size={20} />
+            </button>
+
+            {/* Wishlist + Notifications — visible sm+ */}
+            <div className="flex items-center gap-0.5 text-burgundy-700 dark:text-blush-200">
+              <button aria-label="Wishlist" className="p-1.5 rounded-full hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer"><Heart size={20} /></button>
+              <button aria-label="Notifications" className="hidden sm:flex p-1.5 rounded-full hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer"><BellIcon size={20} /></button>
+            </div>
+
+            {/* Auth */}
             {status === 'unauthenticated' && (
               <Link
                 href="/login"
                 className={cn(
-                  'flex items-center gap-1 px-2.5 py-1.5 rounded-full text-sm font-medium transition-colors',
+                  'flex items-center gap-1 p-1.5 sm:px-3 sm:py-1.5 rounded-full text-sm font-medium transition-colors',
                   'text-burgundy-700 dark:text-blush-200',
-                  'border border-burgundy-300 dark:border-burgundy-600',
                   'hover:bg-burgundy-50 dark:hover:bg-burgundy-800',
+                  'sm:border sm:border-burgundy-300 sm:dark:border-burgundy-600',
                 )}
               >
-                <User size={17} />
+                <User size={20} />
                 <span className="hidden sm:inline">{t('login')}</span>
               </Link>
             )}
             {status === 'loading' && (
-              <div className="h-8 w-8 sm:w-20 rounded-full bg-cream-300 dark:bg-burgundy-800 animate-pulse" />
+              <div className="h-8 w-8 rounded-full bg-cream-300 dark:bg-burgundy-800 animate-pulse" />
             )}
             {status === 'authenticated' && data?.user && (
               <UserDropMenu
@@ -103,30 +130,16 @@ const Header = () => {
               />
             )}
 
-            {/* Icon trio – hide on very small screens */}
-            <div className="hidden xs:flex items-center gap-1 text-burgundy-700 dark:text-blush-200">
-              <button aria-label="Wishlist"       className="p-1.5 rounded-full hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer"><Heart       size={20} /></button>
-              <button aria-label="Cart"           className="p-1.5 rounded-full hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer"><ShoppingCart size={20} /></button>
-              <button aria-label="Notifications"  className="p-1.5 rounded-full hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer"><BellIcon     size={20} /></button>
-            </div>
-
-            {/* Theme + Lang – hide on xs */}
+            {/* Theme + Lang — desktop only */}
             <div className="hidden sm:flex items-center">
               <ThemeToggle />
               <LanguageSwitcher>{t('langToggle')}</LanguageSwitcher>
             </div>
-
-            {/* Hamburger – visible below lg */}
-            <button
-              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={mobileOpen}
-              aria-controls="mobile-nav"
-              onClick={() => setMobileOpen((v) => !v)}
-              className="lg:hidden p-1.5 rounded-full text-burgundy-700 dark:text-blush-200 hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer"
-            >
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
           </div>
+        </div>
+
+        <div className="flex-1 min-w-0 lg:hidden px-6">
+          <SearchBox />
         </div>
 
         {/* ════════════════════════════════════
@@ -237,8 +250,8 @@ const Header = () => {
           )}
 
           <div className="flex items-center gap-2 ms-auto text-burgundy-700 dark:text-blush-200">
-            <button aria-label="Wishlist"      className="p-1.5 rounded-full hover:bg-burgundy-50 dark:hover:bg-burgundy-800 cursor-pointer"><Heart       size={19} /></button>
-            <button aria-label="Cart"          className="p-1.5 rounded-full hover:bg-burgundy-50 dark:hover:bg-burgundy-800 cursor-pointer"><ShoppingCart size={19} /></button>
+            <button aria-label="Wishlist" className="p-1.5 rounded-full hover:bg-burgundy-50 dark:hover:bg-burgundy-800 cursor-pointer"><Heart size={19} /></button>
+            <button aria-label="Cart" className="p-1.5 rounded-full hover:bg-burgundy-50 dark:hover:bg-burgundy-800 cursor-pointer"><ShoppingCart size={19} /></button>
             <ThemeToggle />
             <LanguageSwitcher>{t('langToggle')}</LanguageSwitcher>
           </div>

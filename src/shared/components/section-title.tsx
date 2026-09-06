@@ -15,7 +15,7 @@ export default function SectionTitle({ subtitle, title, className }: SectionTitl
     <div
       className={cn(
         'flex flex-col gap-1.5',
-        isRTL ? 'items-end text-right' : 'items-start text-left',
+        isRTL ? 'items-start text-right' : 'items-start text-left',
         className,
       )}
     >
