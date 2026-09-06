@@ -70,8 +70,8 @@ const Header = () => {
             <RoseIcon className="h-9 sm:h-10 w-auto" />
           </Link>
 
-          {/* Search – hidden on very small screens, always visible sm+ */}
-          <div className="flex-1 hidden xs:block min-w-0">
+          {/* Search – always visible, takes available space between logo and actions */}
+          <div className="flex-1 min-w-0">
             <SearchBox />
           </div>
 
@@ -197,11 +197,6 @@ const Header = () => {
           >
             <X size={20} />
           </button>
-        </div>
-
-        {/* Search inside drawer (xs screens) */}
-        <div className="px-5 py-3 xs:hidden border-b border-cream-300 dark:border-burgundy-800">
-          <SearchBox />
         </div>
 
         {/* Nav links */}

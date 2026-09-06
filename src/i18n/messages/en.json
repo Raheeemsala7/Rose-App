@@ -43,7 +43,8 @@
     "cancel": "Cancel",
     "currency": "$",
     "Rating": "Rating",
-    "ratings": "ratings"
+    "ratings": "ratings",
+    "noResults": "No products found for your search."
   },
   "login": {
     "username": "Username",

@@ -43,7 +43,8 @@
     "cancel": "إلغاء",
     "currency": "$",
     "Rating": "تقيم",
-    "ratings": "تقييمات"
+    "ratings": "تقييمات",
+    "noResults": "لا توجد منتجات لهذا البحث."
   },
   "login": {
     "username": "اسم المستخدم",
