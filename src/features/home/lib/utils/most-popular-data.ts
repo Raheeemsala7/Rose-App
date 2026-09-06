@@ -1,8 +1,6 @@
-import { getOccasions } from '@/src/features/occasions/apis/occasions.api';
 import { Occasion } from '@/src/features/occasions/types/occasions';
 // import { getProducts } from '@/src/features/products/apis/products';
 import { Product } from '@/src/features/products/types/product';
-import { cache } from 'react';
 
 
 const OCCASIONS_LIMIT = 4;

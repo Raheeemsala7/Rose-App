@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Product } from '../types/product';
 import { Link } from '@/src/i18n/navigation';
-import AddToWishlist from './add-to-wishlist';
+// import AddToWishlist from './add-to-wishlist';
 import { calculateOriginalPrice, formatPrice } from '@/src/shared/lib/price.utils';
 import { cn } from '@/src/shared/lib/utils';
 
@@ -82,7 +82,7 @@ export default function ProductCard({
         </div>
 
         {/* Wishlist button — top end */}
-        <AddToWishlist productId={id} />
+        {/* <AddToWishlist productId={id} /> */}
       </div>
 
       {/* ── Body ── */}

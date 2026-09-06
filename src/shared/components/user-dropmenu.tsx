@@ -5,12 +5,10 @@ import {
     DropdownMenuContent,
     DropdownMenuGroup,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { ChevronDown, LocationEdit, LogOut, ScrollText, Settings, User } from "lucide-react";
-import { Separator } from "./ui/separator";
 import { Link } from "@/src/i18n/navigation";
 
 const UserDropMenu = ({ name, firstName }: { name: string; firstName: string }) => {
@@ -41,11 +39,10 @@ const UserDropMenu = ({ name, firstName }: { name: string; firstName: string }) 
                 align="end"
                 sideOffset={8}
             >
-                {/* User name header */}
-                <DropdownMenuLabel className="px-3 py-2 text-sm font-semibold text-burgundy-800 dark:text-cream-100">
+                {/* User name header — plain div, not a GroupLabel (avoids Group context requirement) */}
+                <div className="px-3 py-2 text-sm font-semibold text-burgundy-800 dark:text-cream-100 border-b border-cream-300 dark:border-burgundy-700 mb-1">
                     {name}
-                </DropdownMenuLabel>
-                <Separator className="bg-cream-300 dark:bg-burgundy-700 my-1" />
+                </div>
 
                 <DropdownMenuGroup className="p-1">
                     {[
@@ -65,8 +62,6 @@ const UserDropMenu = ({ name, firstName }: { name: string; firstName: string }) 
                         </DropdownMenuItem>
                     ))}
                 </DropdownMenuGroup>
-
-                <Separator className="bg-cream-300 dark:bg-burgundy-700 my-1" />
 
                 <DropdownMenuGroup className="p-1">
                     <DropdownMenuItem
