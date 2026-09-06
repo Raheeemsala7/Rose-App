@@ -61,7 +61,7 @@ export async function ProductsGrid({
         lg+:           3 columns (sidebar takes ~72, grid gets the rest)
         xl+:           4 columns when there is enough room
       */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
         {products.payload.data.map((product) => (
           <ProductCard key={product.id} {...product} />
         ))}
