@@ -39,7 +39,7 @@ export function FilterCategory({ categories, categoryId }: { categories: Categor
     return (
         <div>
             <div className="flex justify-between items-center mb-3">
-                <span className="text-xl dark:text-white font-semibold">{t("category")}</span>
+                <span className="text-base font-semibold text-burgundy-900 dark:text-cream-100">{t("category")}</span>
                 {categoryId && (
                     <button className="flex gap-0.5 items-center text-red-600 dark:text-red-500 cursor-pointer" onClick={() => resetFilter()}>
                         <X size={15} /> {t("reset")}

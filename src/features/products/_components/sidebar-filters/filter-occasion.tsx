@@ -39,7 +39,7 @@ export function FilterOccasion({ occasions, occasionId }: { occasions: Occasion[
     return (
         <div>
             <div className="flex justify-between items-center mb-3">
-                <span className="text-xl dark:text-white font-semibold">{t("occasion")}</span>
+                <span className="text-base font-semibold text-burgundy-900 dark:text-cream-100">{t("occasion")}</span>
                 {occasionId && (
                     <button className="flex gap-0.5 items-center text-red-600 dark:text-red-500 cursor-pointer" onClick={() => resetFilter()}>
                         <X size={15} /> {t("reset")}

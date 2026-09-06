@@ -80,7 +80,7 @@ useEffect(() => {
     return (
         <div className="w-full ">
             <div className="flex justify-between items-center mb-3">
-                <span className="text-xl dark:text-white font-semibold">{t("price")}</span>
+                <span className="text-base font-semibold text-burgundy-900 dark:text-cream-100">{t("price")}</span>
 
                 {(minPrice !== undefined || maxPrice !== undefined) && (
                     <button className="flex gap-0.5 items-center text-red-600 dark:text-red-500 cursor-pointer" onClick={resetPrice}>
@@ -98,7 +98,7 @@ useEffect(() => {
                         placeholder={String(PRICE_FLOOR)}
                         value={fromPrice}
                         onChange={(e) => setFromPrice(e.target.value)}
-                        className="border border-zinc-300 dark:border-zinc-600 dark:bg-zinc-700 dark:text-white"
+                        className="border border-cream-300 dark:border-burgundy-700 bg-white dark:bg-burgundy-800 text-burgundy-900 dark:text-cream-100"
                         />
                 </div>
 
@@ -109,7 +109,7 @@ useEffect(() => {
                         placeholder={String(PRICE_CEILING)}
                         value={toPrice}
                         onChange={(e) => setToPrice(e.target.value)}
-                        className="border border-zinc-300 dark:border-zinc-600 dark:bg-zinc-700 dark:text-white"
+                        className="border border-cream-300 dark:border-burgundy-700 bg-white dark:bg-burgundy-800 text-burgundy-900 dark:text-cream-100"
                     />
                 </div>
             </div>

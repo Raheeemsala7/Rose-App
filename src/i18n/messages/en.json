@@ -178,7 +178,8 @@
     "from": "from",
     "to": "to",
     "reset": "Reset",
-    "resetAll": "Reset All"
+    "resetAll": "Reset All",
+    "filters": "Filters"
   },
   "orders": {
     "title": "Orders",

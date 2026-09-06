@@ -1,31 +1,66 @@
-import ProductFilterPanel from '@/src/features/products/_components/sidebar-filters/product-filter-panel'
-import { ProductsGrid } from '@/src/features/products/_components/products-grid'
-import { ProductsGridSkeleton } from '@/src/features/products/skeletons/products-grid-skeleton'
-import { Suspense } from 'react'
+import { Suspense } from 'react';
+import ProductFilterPanel from '@/src/features/products/_components/sidebar-filters/product-filter-panel';
+import MobileFilterDrawer from '@/src/features/products/_components/sidebar-filters/mobile-filter-drawer';
+import { ProductsGrid } from '@/src/features/products/_components/products-grid';
+import { ProductsGridSkeleton } from '@/src/features/products/skeletons/products-grid-skeleton';
 
-export default async function page({
-    searchParams,
+interface SearchParams {
+  page?: string;
+  categoryId?: string;
+  occasionId?: string;
+  minRating?: number;
+  minPrice?: number;
+  maxPrice?: number;
+}
+
+export default async function ProductsPage({
+  searchParams,
 }: {
-    searchParams: Promise<{
-        page?: string; categoryId: string; occasionId: string; minRating: number, minPrice?: number;
-        maxPrice?: number;
-    }>
+  searchParams: Promise<SearchParams>;
 }) {
-    const { page, categoryId, occasionId, minRating, maxPrice, minPrice } = await searchParams
-    const currentPage = Number(page) || 1
+  const { page, categoryId, occasionId, minRating, maxPrice, minPrice } =
+    await searchParams;
+  const currentPage = Number(page) || 1;
 
-    return (
-        <section className='py-12'>
-            <div className="max-w-7xl mx-auto px-4">
-                <div className='grid grid-cols-[300px_1fr] gap-6'>
-                    <aside className='max-w-full overflow-hidden space-y-4'>
-                        <ProductFilterPanel categoryId={categoryId} occasionId={occasionId} minRating={minRating} minPrice={minPrice} maxPrice={maxPrice} />
-                    </aside>
-                    <Suspense key={currentPage} fallback={<ProductsGridSkeleton />}>
-                        <ProductsGrid page={currentPage} categoryId={categoryId} occasionId={occasionId} minRating={minRating} maxPrice={maxPrice} minPrice={minPrice} />
-                    </Suspense>
-                </div>
+  /* Shared filter props */
+  const filterProps = {
+    categoryId:  categoryId  || undefined,
+    occasionId:  occasionId  || undefined,
+    minRating:   minRating   ? Number(minRating) : undefined,
+    minPrice:    minPrice    ? Number(minPrice)  : undefined,
+    maxPrice:    maxPrice    ? Number(maxPrice)  : undefined,
+  };
+
+  return (
+    <section className="py-6 sm:py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+
+        {/* ── Mobile: filter trigger button ── */}
+        <div className="lg:hidden mb-4">
+          <MobileFilterDrawer>
+            <ProductFilterPanel {...filterProps} />
+          </MobileFilterDrawer>
+        </div>
+
+        {/* ── Layout: sidebar on desktop, full-width grid on mobile ── */}
+        <div className="flex gap-6">
+
+          {/* Sidebar — desktop only */}
+          <aside className="hidden lg:block w-72 flex-shrink-0">
+            <div className="sticky top-24 rounded-2xl border border-cream-300 dark:border-burgundy-800 bg-white dark:bg-burgundy-900 p-5 space-y-6 shadow-sm">
+              <ProductFilterPanel {...filterProps} />
             </div>
-        </section>
-    )
+          </aside>
+
+          {/* Products grid */}
+          <div className="flex-1 min-w-0">
+            <Suspense key={`${currentPage}-${JSON.stringify(filterProps)}`} fallback={<ProductsGridSkeleton />}>
+              <ProductsGrid page={currentPage} {...filterProps} />
+            </Suspense>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
 }

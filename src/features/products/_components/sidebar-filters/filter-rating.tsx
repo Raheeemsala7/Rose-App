@@ -41,7 +41,7 @@ const FilterRating = ({ minRating }: { minRating?: number }) => {
     return (
         <div >
             <div className="flex justify-between items-center mb-3">
-                <span className="text-xl dark:text-white font-semibold">{t("rating")}</span>
+                <span className="text-base font-semibold text-burgundy-900 dark:text-cream-100">{t("rating")}</span>
                 {minRating && (
                     <button className="flex gap-0.5 items-center text-red-600 dark:text-red-500 cursor-pointer" onClick={resetRating}>
                         <X size={12} /> Reset

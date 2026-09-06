@@ -4,7 +4,7 @@ export async function getProductsApi(params: ParamsProducts) {
     const searchParams = new URLSearchParams();
 
     Object.entries(params).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
+        if (value !== undefined && value !== null && value !== "") {
             searchParams.append(key, String(value));
         }
     });
@@ -23,6 +23,8 @@ export async function getProductsApi(params: ParamsProducts) {
         };
     }> = await response.json();
 
+    console.log(data);
+    
     if (!data.status) {
         throw new Error(data.message || "Failed to fetch products");
     }

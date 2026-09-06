@@ -25,26 +25,28 @@ import { SearchBox } from './search-box';
 import AnnounceBar from './announce-bar';
 import ThemeToggle from './theme-toggle';
 import { useState, useEffect } from 'react';
+import { useLocale } from 'next-intl';
 
 const navItems = [
-  { key: 'Home', href: '/', icon: HomeIcon },
-  { key: 'Products', href: '/products', icon: GiftIcon },
+  { key: 'Home',       href: '/',           icon: HomeIcon },
+  { key: 'Products',   href: '/products',   icon: GiftIcon },
   { key: 'Categories', href: '/categories', icon: ClipboardList },
-  { key: 'Occasions', href: '/occasions', icon: PartyPopper },
-  { key: 'Contact', href: '/contact', icon: Headset },
-  { key: 'About', href: '/about', icon: Info },
+  { key: 'Occasions',  href: '/occasions',  icon: PartyPopper },
+  { key: 'Contact',    href: '/contact',    icon: Headset },
+  { key: 'About',      href: '/about',      icon: Info },
 ];
 
 const Header = () => {
   const { status, data } = useSession();
   const t = useTranslations('header');
   const pathname = usePathname();
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
+
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  /* Close drawer whenever the route changes */
   useEffect(() => { setMobileOpen(false); }, [pathname]);
 
-  /* Prevent body scroll while drawer is open */
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -55,55 +57,48 @@ const Header = () => {
 
   return (
     <div className="w-full font-ds-sans">
-      {/* ── Announcement bar (not sticky — scrolls away) ── */}
       <AnnounceBar />
 
       <header className="sticky top-0 z-50 w-full shadow-ds-soft">
 
-        {/* ════════════════════════════════════
-            TOP ROW  –  logo / search / actions
-            ════════════════════════════════════ */}
-        <div className="flex items-center justify-betwee lg:justify-center gap-3 bg-cream-100 dark:bg-burgundy-950 border-b border-cream-300 dark:border-burgundy-800 px-4 sm:px-6 py-2.5">
+        {/* ── Top row ── */}
+        <div className="flex items-center gap-2 sm:gap-3 bg-cream-100 dark:bg-burgundy-950 border-b border-cream-300 dark:border-burgundy-800 px-3 sm:px-5 py-2.5">
 
-
-          {/* Hamburger — below lg */}
+          {/* Hamburger — always on the leading edge on mobile */}
           <button
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
             onClick={() => setMobileOpen((v) => !v)}
-            className="lg:hidden p-1.5 rounded-full text-burgundy-700 dark:text-blush-200 hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer"
+            className="lg:hidden flex-shrink-0 p-1.5 rounded-full text-burgundy-700 dark:text-blush-200 hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer"
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
 
-
-          {/* Logo */}
-          <Link href="/" className="flex-1  lg:contents flex justify-center items-center no-underline">
+          {/* Logo — centred on mobile, leading on desktop */}
+          <Link href="/" className="flex-shrink-0 no-underline lg:me-2">
             <RoseIcon className="h-9 sm:h-10 w-auto" />
           </Link>
 
-          {/* Search – always visible, takes available space between logo and actions */}
-          <div className="flex-1 min-w-0 hidden lg:flex">
+          {/* Search — grows between logo and actions on desktop, full-width row on mobile handled below */}
+          <div className="flex-1 min-w-0 hidden lg:block">
             <SearchBox />
           </div>
 
-          {/* Right actions */}
-          <div className="flex flex-shrink-0 items-center gap-1 sm:gap-2">
-
-            {/* Cart — always visible on mobile for quick access */}
-            <button
-              aria-label="Cart"
-              className="p-1.5 rounded-full text-burgundy-700 dark:text-blush-200 hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer"
-            >
+          {/* Right cluster */}
+          <div className="flex items-center gap-1 sm:gap-1.5 ms-auto">
+            {/* Cart always visible */}
+            <button aria-label="Cart" className="p-1.5 rounded-full text-burgundy-700 dark:text-blush-200 hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer">
               <ShoppingCart size={20} />
             </button>
-
-            {/* Wishlist + Notifications — visible sm+ */}
-            <div className="flex items-center gap-0.5 text-burgundy-700 dark:text-blush-200">
-              <button aria-label="Wishlist" className="p-1.5 rounded-full hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer"><Heart size={20} /></button>
-              <button aria-label="Notifications" className="hidden sm:flex p-1.5 rounded-full hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer"><BellIcon size={20} /></button>
-            </div>
+            {/* Wishlist */}
+            <button aria-label="Wishlist" className="p-1.5 rounded-full text-burgundy-700 dark:text-blush-200 hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer">
+              <Heart size={20} />
+            </button>
+            {/* Bell — sm+ */}
+            <button aria-label="Notifications" className="hidden sm:flex p-1.5 rounded-full text-burgundy-700 dark:text-blush-200 hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer">
+              <BellIcon size={20} />
+            </button>
 
             {/* Auth */}
             {status === 'unauthenticated' && (
@@ -130,7 +125,7 @@ const Header = () => {
               />
             )}
 
-            {/* Theme + Lang — desktop only */}
+            {/* Theme + Lang — sm+ */}
             <div className="hidden sm:flex items-center">
               <ThemeToggle />
               <LanguageSwitcher>{t('langToggle')}</LanguageSwitcher>
@@ -138,13 +133,12 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="flex-1 min-w-0 lg:hidden px-6">
+        {/* Search bar — full width below top row on mobile */}
+        <div className="lg:hidden px-3 py-2 bg-cream-100 dark:bg-burgundy-950 border-b border-cream-300 dark:border-burgundy-800">
           <SearchBox />
         </div>
 
-        {/* ════════════════════════════════════
-            DESKTOP NAV ROW  (lg+)
-            ════════════════════════════════════ */}
+        {/* ── Desktop nav ── */}
         <nav
           aria-label="Main navigation"
           className="hidden lg:flex items-center justify-center gap-1 bg-burgundy-800 dark:bg-burgundy-950 px-6"
@@ -172,11 +166,7 @@ const Header = () => {
         </nav>
       </header>
 
-      {/* ════════════════════════════════════
-          MOBILE DRAWER  (below lg)
-          ════════════════════════════════════ */}
-
-      {/* Backdrop */}
+      {/* ── Backdrop ── */}
       <div
         className={cn(
           'fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden',
@@ -186,18 +176,30 @@ const Header = () => {
         aria-hidden
       />
 
-      {/* Drawer panel */}
+      {/* ── Drawer ──
+          LTR: slides in from left  → hidden: -translate-x-full,  open: translate-x-0
+          RTL: slides in from right → hidden:  translate-x-full,  open: translate-x-0
+          We use inset-inline-start (start-0) so the panel always attaches to the
+          correct physical edge for the current direction, then use separate
+          translate classes for each direction.
+      */}
       <aside
         id="mobile-nav"
         aria-label="Mobile navigation"
+        aria-hidden={!mobileOpen}
         className={cn(
           'fixed top-0 z-50 h-full w-72 max-w-[85vw]',
           'bg-cream-100 dark:bg-burgundy-950',
           'shadow-2xl transition-transform duration-300 ease-in-out lg:hidden',
           'flex flex-col',
-          /* RTL-aware slide direction */
-          'start-0 rtl:start-auto rtl:end-0',
-          mobileOpen ? 'translate-x-0' : '-translate-x-full rtl:translate-x-full'
+          // Physical edge — start-0 = left in LTR, right in RTL
+          'start-0',
+          // Translate — must match the physical edge
+          mobileOpen
+            ? 'translate-x-0'
+            : isRTL
+              ? 'translate-x-full'   // off-screen to the right (RTL)
+              : '-translate-x-full'  // off-screen to the left  (LTR)
         )}
       >
         {/* Drawer header */}
@@ -222,7 +224,8 @@ const Header = () => {
                 'flex items-center gap-3 px-5 py-3.5 text-base font-medium no-underline transition-colors',
                 'text-burgundy-800 dark:text-cream-100',
                 'hover:bg-burgundy-50 dark:hover:bg-burgundy-800',
-                isActive(item.href) && 'bg-burgundy-100 dark:bg-burgundy-800 text-burgundy-900 dark:text-blush-200 font-semibold'
+                isActive(item.href) &&
+                  'bg-burgundy-100 dark:bg-burgundy-800 text-burgundy-900 dark:text-blush-200 font-semibold'
               )}
             >
               <item.icon size={18} aria-hidden />
@@ -231,9 +234,8 @@ const Header = () => {
           ))}
         </nav>
 
-        {/* Drawer footer – theme & lang */}
+        {/* Drawer footer */}
         <div className="border-t border-cream-300 dark:border-burgundy-800 px-5 py-4 flex items-center justify-between gap-3">
-          {/* Auth */}
           {status === 'unauthenticated' && (
             <Link
               href="/login"
@@ -248,10 +250,7 @@ const Header = () => {
               {data.user.firstName}
             </span>
           )}
-
-          <div className="flex items-center gap-2 ms-auto text-burgundy-700 dark:text-blush-200">
-            <button aria-label="Wishlist" className="p-1.5 rounded-full hover:bg-burgundy-50 dark:hover:bg-burgundy-800 cursor-pointer"><Heart size={19} /></button>
-            <button aria-label="Cart" className="p-1.5 rounded-full hover:bg-burgundy-50 dark:hover:bg-burgundy-800 cursor-pointer"><ShoppingCart size={19} /></button>
+          <div className="flex items-center gap-1.5 ms-auto text-burgundy-700 dark:text-blush-200">
             <ThemeToggle />
             <LanguageSwitcher>{t('langToggle')}</LanguageSwitcher>
           </div>
