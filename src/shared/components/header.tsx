@@ -26,14 +26,15 @@ import AnnounceBar from './announce-bar';
 import ThemeToggle from './theme-toggle';
 import { useState, useEffect } from 'react';
 import { useLocale } from 'next-intl';
+import { CartButton } from '@/src/features/cart/_components/cart-button';
 
 const navItems = [
-  { key: 'Home',       href: '/',           icon: HomeIcon },
-  { key: 'Products',   href: '/products',   icon: GiftIcon },
+  { key: 'Home', href: '/', icon: HomeIcon },
+  { key: 'Products', href: '/products', icon: GiftIcon },
   { key: 'Categories', href: '/categories', icon: ClipboardList },
-  { key: 'Occasions',  href: '/occasions',  icon: PartyPopper },
-  { key: 'Contact',    href: '/contact',    icon: Headset },
-  { key: 'About',      href: '/about',      icon: Info },
+  { key: 'Occasions', href: '/occasions', icon: PartyPopper },
+  { key: 'Contact', href: '/contact', icon: Headset },
+  { key: 'About', href: '/about', icon: Info },
 ];
 
 const Header = () => {
@@ -88,9 +89,7 @@ const Header = () => {
           {/* Right cluster */}
           <div className="flex items-center gap-1 sm:gap-1.5 ms-auto">
             {/* Cart always visible */}
-            <button aria-label="Cart" className="p-1.5 rounded-full text-burgundy-700 dark:text-blush-200 hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer">
-              <ShoppingCart size={20} />
-            </button>
+            <CartButton />
             {/* Wishlist */}
             <button aria-label="Wishlist" className="p-1.5 rounded-full text-burgundy-700 dark:text-blush-200 hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer">
               <Heart size={20} />
@@ -226,7 +225,7 @@ const Header = () => {
                 'text-burgundy-800 dark:text-cream-100',
                 'hover:bg-burgundy-50 dark:hover:bg-burgundy-800',
                 isActive(item.href) &&
-                  'bg-burgundy-100 dark:bg-burgundy-800 text-burgundy-900 dark:text-blush-200 font-semibold'
+                'bg-burgundy-100 dark:bg-burgundy-800 text-burgundy-900 dark:text-blush-200 font-semibold'
               )}
             >
               <item.icon size={18} aria-hidden />
