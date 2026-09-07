@@ -3,10 +3,7 @@ import { Product } from '@/src/features/products/types/product';
 import BestSellerCarousel from './best-seller-carousel';
 import { getProductsApi } from '@/src/features/products/apis/products';
 import Explore from './explore';
-import ProductsErrorBoundary from '@/src/shared/error-boundary';
-import { Suspense } from 'react';
-import BestSellerCarouselSkeleton from '@/src/features/products/skeletons/best-seller-carousel.skeleton';
-
+import SectionTitle from '@/src/shared/components/section-title';
 
 export async function BestSellerCarouselSlot({
   products,
@@ -18,36 +15,46 @@ export async function BestSellerCarouselSlot({
   const t = await getTranslations('home');
 
   if (products.length === 0) {
-    return <div>{t('noProductsFound')}</div>;
+    return (
+      <p className="text-center py-8 text-burgundy-400 dark:text-burgundy-500">
+        {t('noProductsFound')}
+      </p>
+    );
   }
 
   return <BestSellerCarousel products={products} variant={variant} />;
 }
 
-
-
 export default async function BestSellerSection() {
-  const products = await getProductsApi({
-    sortBy: 'bestSelling',
-  });
+  const t = await getTranslations('home');
 
-  
+  let products: Product[] = [];
+  try {
+    const res = await getProductsApi({ sortBy: 'bestSelling', limit: 12 });
+    products = res.payload.data;
+  } catch {
+    return null;
+  }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-9 max-w-11/12 mx-auto mt-27">
-      <div className="lg:col-span-3">
-        <Explore />
+    <section aria-label={t('bestSeller.title')} className="mt-16 mb-12">
+      {/* ── Header ── */}
+      <div className="mb-8">
+        <SectionTitle
+          subtitle={t('bestSeller.subtitle')}
+          title={t('bestSeller.title')}
+        />
       </div>
 
-      <div className="lg:col-span-9">
-        <ProductsErrorBoundary>
-          <Suspense fallback={<BestSellerCarouselSkeleton />}>
-            <BestSellerCarouselSlot products={products.payload.data} />
-          </Suspense>
-        </ProductsErrorBoundary>
+      {/* ── Two-column layout: explore panel + carousel ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+        <div className="lg:col-span-3">
+          <Explore />
+        </div>
+        <div className="lg:col-span-9">
+          <BestSellerCarouselSlot products={products} />
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
-
-

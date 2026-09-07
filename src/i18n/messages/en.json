@@ -114,7 +114,9 @@
       "bestSelling": "Best Selling",
       "description": "Check Out <highlight>What Everyone's</highlight> Buying <highlight>Right Now</highlight>",
       "subDescription": "Not sure what to choose? <br></br> Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
-      "exploreButton": "Explore gifts"
+      "exploreButton": "Explore gifts",
+      "title": "Best Sellers",
+      "subtitle": "Top Picks"
     },
     "viewAll": "View All",
     "mostPopular": "Most Popular",

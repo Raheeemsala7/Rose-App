@@ -10,7 +10,8 @@ export async function getProductsApi(params: ParamsProducts) {
     });
 
     const response = await fetch(
-        `${process.env.API_URL}/products?${searchParams.toString()}`
+        `${process.env.API_URL}/products?${searchParams.toString()}`,
+        { next: { revalidate: 300 } }   // cache for 5 minutes
     );
 
     const data: ApiResponse<{
@@ -23,8 +24,6 @@ export async function getProductsApi(params: ParamsProducts) {
         };
     }> = await response.json();
 
-    console.log(data);
-    
     if (!data.status) {
         throw new Error(data.message || "Failed to fetch products");
     }

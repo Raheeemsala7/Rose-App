@@ -147,6 +147,7 @@ const Header = () => {
             <Link
               key={item.key}
               href={item.href}
+              prefetch
               className={cn(
                 'relative flex items-center gap-1.5 text-sm font-medium no-underline py-3 px-4',
                 'text-cream-100 dark:text-cream-200 transition-colors',

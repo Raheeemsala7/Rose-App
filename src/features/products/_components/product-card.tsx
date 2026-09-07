@@ -1,9 +1,10 @@
-import { ShoppingCart, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Product } from '../types/product';
 import { Link } from '@/src/i18n/navigation';
-// import AddToWishlist from './add-to-wishlist';
+import AddToWishlist from './add-to-wishlist';
+import AddToCart from './add-to-cart';
 import { calculateOriginalPrice, formatPrice } from '@/src/shared/lib/price.utils';
 import { cn } from '@/src/shared/lib/utils';
 
@@ -82,7 +83,7 @@ export default function ProductCard({
         </div>
 
         {/* Wishlist button — top end */}
-        {/* <AddToWishlist productId={id} /> */}
+        <AddToWishlist productId={id} />
       </div>
 
       {/* ── Body ── */}
@@ -123,18 +124,7 @@ export default function ProductCard({
           </div>
 
           {/* Add to cart */}
-          <button
-            aria-label={t('addToCart')}
-            disabled={isOut}
-            className={cn(
-              'flex items-center justify-center w-9 h-9 rounded-xl transition-colors cursor-pointer flex-shrink-0',
-              isOut
-                ? 'bg-cream-200 dark:bg-burgundy-800 text-burgundy-300 cursor-not-allowed'
-                : 'bg-burgundy-800 dark:bg-blush-600 text-cream-50 hover:bg-burgundy-700 dark:hover:bg-blush-500',
-            )}
-          >
-            <ShoppingCart size={16} />
-          </button>
+          <AddToCart productId={id} stock={stock} />
         </div>
       </div>
     </article>
