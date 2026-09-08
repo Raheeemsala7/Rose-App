@@ -1,14 +1,19 @@
 "use client"
+
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-
 import { signIn } from 'next-auth/react';
 import { LoginFormType, loginSchema } from '../schemas/login.schema';
+import { useMergeCartOnLogin } from '@/src/features/cart/hooks/add-cart.hook';
+
 
 export function useLogin(callbackUrl?: string) {
     const t = useTranslations('login');
     const tButton = useTranslations('button');
+
+    const { mutateAsync: mergeCart } = useMergeCartOnLogin();
+
     const {
         handleSubmit,
         control,
@@ -22,6 +27,7 @@ export function useLogin(callbackUrl?: string) {
             rememberMe: false,
         },
     });
+
     async function onSubmit(data: LoginFormType) {
         try {
             const loginResponse = await signIn('credentials', {
@@ -29,6 +35,7 @@ export function useLogin(callbackUrl?: string) {
                 password: data.password,
                 redirect: false,
             });
+
             if (!loginResponse?.ok) {
                 setError('root', {
                     type: 'server',
@@ -36,6 +43,11 @@ export function useLogin(callbackUrl?: string) {
                 });
                 return;
             }
+
+            // Merge guest cart into server cart before redirect.
+            // Errors are silently ignored — a failed merge should not block login.
+            await mergeCart().catch(() => null);
+
             const destination = callbackUrl || '/';
             window.location.href = destination;
         } catch (error) {
@@ -45,6 +57,7 @@ export function useLogin(callbackUrl?: string) {
             });
         }
     }
+
     return {
         handleSubmit,
         control,

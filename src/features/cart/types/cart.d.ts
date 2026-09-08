@@ -1,9 +1,8 @@
 export interface CartItem {
     quantity: number;
     product: IProduct;
-    cartId: string |undefined
+    cartId: string | undefined;
 }
-
 
 export interface ApiCartItem {
     id: string;
@@ -14,7 +13,13 @@ export interface ApiCartItem {
     updatedAt: string;
     product: IProduct;
 }
+
 export interface AddToCartPayload {
+    productId: string;
+    quantity: number;
+}
+
+export interface GuestCartMergePayload {
     productId: string;
     quantity: number;
 }
