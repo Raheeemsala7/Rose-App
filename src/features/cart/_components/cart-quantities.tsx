@@ -8,14 +8,14 @@ export default function CartQuantities() {
   const t = useTranslations('cart-list');
 
   // Cart Context
-  const { productIds } = useCart();
+  const { products } = useCart();
 
   // Items Count
-  const itemsCount =  productIds.length ;
+  const itemsCount =  products?.length ;
 
   return (
     <span className="font-medium text-base text-ds-text-muted ms-2.5">
-      {t('cart-count', { count: itemsCount })}
+      {t('cart-count', { count: itemsCount || 0 })}
     </span>
   );
 }

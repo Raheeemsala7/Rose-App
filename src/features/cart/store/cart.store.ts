@@ -5,6 +5,7 @@ import { persist } from "zustand/middleware";
 import { Product } from "../../products/types/product";
 
 export type GuestCartItem = {
+ cartId?: string;
  productId: string;
   quantity: number;
 };

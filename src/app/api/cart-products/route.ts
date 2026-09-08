@@ -1,4 +1,4 @@
-import { getCartProductsApi } from '@/src/features/cart/apis/cart.apis';
+import { getAllGuestCartsApi } from '@/src/features/cart/apis/cart.apis';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
   }
 
   const productIds = ids.split(',');
-  const products = await getCartProductsApi(productIds);
+  const products = await getAllGuestCartsApi(productIds);
 
   return NextResponse.json(products);
 }

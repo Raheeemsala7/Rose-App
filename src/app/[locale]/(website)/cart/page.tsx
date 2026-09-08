@@ -1,4 +1,5 @@
 import CartBody from "@/src/features/cart/_components/cart-body";
+import CartButtonClear from "@/src/features/cart/_components/cart-button-clear";
 import CartQuantities from "@/src/features/cart/_components/cart-quantities";
 import CartTotalPrise from "@/src/features/cart/_components/cart-total-prise";
 import { Link } from "@/src/i18n/navigation";
@@ -23,7 +24,7 @@ export default function CartPage() {
         </h1>
 
         {/* Clear Button */}
-        {/* <CartButtonClear /> */}
+        <CartButtonClear />
       </div>
 
       {/* Cart Total Prise */}

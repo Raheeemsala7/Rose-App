@@ -6,14 +6,23 @@ import Image from "next/image";
 import CartEmpty from "./cart-empty";
 import CartSkeleton from "./skeleton/cart-skeleton";
 import { Button } from "@/src/shared/components/ui/button";
-import { Star, Trash2 } from "lucide-react";
+import { Loader2, Star, Trash2 } from "lucide-react";
 import { useGuestCartStore } from "../store/cart.store";
 import { id } from "zod/v4/locales";
+import CartFooter from "./cart-footer";
+import { useRemoveItemCart } from "../hooks/add-cart.hook";
+import { useState } from "react";
+import { cn } from "@/src/shared/lib/utils";
+import { toast } from "sonner";
 
 
 export default function CartBody() {
   // Translations
   const t = useTranslations('cart-list');
+
+  // State
+  const [removingId, setRemovingId] = useState<string | null>(null);
+
 
   // Cart Hook
   const {
@@ -30,26 +39,21 @@ export default function CartBody() {
 
 
   // Delete Hook
-  // const { isPending, deleteUserCart } = useDeleteCartItem();
+  const { mutateAsync, isPending } = useRemoveItemCart();
 
   // Remove Cart Item Function
   async function removeItem(productId?: string) {
     if (!productId) return;
 
-    if (!isAuthenticated) {
-      removeGuestItem(productId)
-      return
+    setRemovingId(productId)
+
+    try {
+      await mutateAsync(productId)
+    } catch (error) {
+      toast.error("فشل الحذف من السلة")
+    } finally {
+      setRemovingId(null)
     }
-
-    // Authenticated
-    // const cartItem = userData?.find((item) => item.productId === productId);
-    // if (!cartItem) return;
-
-    // deleteUserCart(cartItem!.id, {
-    //   onSuccess: () => {
-    //     refreshCart();
-    //   },
-    // });
   }
 
   // Loading State
@@ -106,18 +110,23 @@ export default function CartBody() {
 
               {/* Remove Item Button */}
               <Button
-                onClick={() => removeItem(product?.product.id)}
+                onClick={() => removeItem(product?.cartId ?? product.product.id)}
                 variant={'destructive'}
-                disabled={isLoading}
-                className="flex items-center gap-1.5 cursor-pointer"
+                disabled={removingId === product.product.id}
+                className={cn("flex items-center gap-1.5 cursor-pointer", removingId === product.product.id && "opacity-200")}
               >
-                <Trash2 className="size-5" />
-                {t('cart-remove')}
+                {removingId === product.product.id ? <>
+                  <Loader2 className="animate-spin transition-all size-5" />
+                  <Trash2 className="size-5" />
+                  {t('cart-remove')}
+                </> : <>
+                  <Trash2 className="size-5" />
+                  {t('cart-remove')}</>}
               </Button>
             </div>
 
             {/* Footer */}
-            {/* <CartFooter product={product} /> */}
+            <CartFooter item={product} />
           </div>
         </div>
       ))}

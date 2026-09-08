@@ -1,10 +1,9 @@
-import { getAuthCartProducts } from "@/src/features/cart/apis/cart.apis";
-import { CartItem } from "@/src/features/cart/types/cart";
+import { getAuthCartApi } from "@/src/features/cart/apis/cart.apis";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
 
-    const products = await getAuthCartProducts(req)
+    const products = await getAuthCartApi(req)
 
     if (!products.status) {
         return NextResponse.json(

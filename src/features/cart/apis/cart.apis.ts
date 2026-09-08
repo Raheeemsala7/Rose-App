@@ -6,7 +6,7 @@ import { RESPONSES } from "@/src/shared/constant/api.responses";
 import { HEADERS } from "@/src/shared/constant/api.constant";
 import { CartItem, GetCartPayload } from "../types/cart";
 
-export async function getCartProductsApi(productIds: string[]) {
+export async function getAllGuestCartsApi(productIds: string[]) {
 
     if (!productIds.length) return [];
 
@@ -27,7 +27,7 @@ export async function getCartProductsApi(productIds: string[]) {
 
 
 
-export async function getGuestCartProducts(productIds: string[]): Promise<Product[]> {
+export async function getGuestCartApi(productIds: string[]): Promise<Product[]> {
     if (productIds.length === 0) return [];
 
     const response = await fetch(`/api/cart-products?ids=${productIds.join(',')}`);
@@ -40,7 +40,7 @@ export async function getGuestCartProducts(productIds: string[]): Promise<Produc
 }
 
 
-export async function getAuthCartProducts(req: NextRequest) {
+export async function getAuthCartApi(req: NextRequest) {
     const token = await getToken({ req })
 
     if (!token?.token) return RESPONSES.unauthorized

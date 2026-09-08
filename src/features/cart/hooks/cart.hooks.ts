@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useGuestCartStore } from '../store/cart.store';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { Product } from '../../products/types/product';
-import { getGuestCartProducts } from '../apis/cart.apis';
+import { getGuestCartApi } from '../apis/cart.apis';
 import { useCallback } from 'react';
 import { HEADERS } from '@/src/shared/constant/api.constant';
 import { CartItem, GetCartPayload } from '../types/cart';
@@ -59,14 +59,7 @@ export function useCart() {
     // }, [isAuthenticated]);
 
 
-    const addItem = (productId: string, quantity = 1) => {
-        if (isAuthenticated) {
-            // هنا هنحط React Query mutation
-            // addCartItemMutation.mutate({ productId, quantity })
-            return;
-        }
-        addGuestItem(productId, quantity);
-    };
+
 
 
     const items = isAuthenticated
@@ -114,7 +107,6 @@ export function useCart() {
         cartCount,
         totalPrice,
 
-        addItem,
         clearCart,
 
         isAuthenticated,
@@ -136,7 +128,7 @@ export function useGuestCartProducts(productIds: string[], isAuthenticated: bool
     return useQuery({
         queryKey: ['cart-products', productIds.slice().sort()],
         queryFn: async () => {
-            const products = await getGuestCartProducts(productIds);
+            const products = await getGuestCartApi(productIds);
 
             return products
                 .map((product) => {
@@ -151,6 +143,7 @@ export function useGuestCartProducts(productIds: string[], isAuthenticated: bool
                     return {
                         product,
                         quantity: cartItem.quantity,
+                        cartId: undefined
                     };
                 })
                 .filter(
@@ -159,6 +152,7 @@ export function useGuestCartProducts(productIds: string[], isAuthenticated: bool
                     ): item is {
                         product: Product;
                         quantity: number;
+                        cartId: undefined
                     } => item !== null
                 );
         }, enabled: !isAuthenticated,
@@ -185,6 +179,7 @@ export function useAuthCartProducts(isAuthenticated: boolean) {
             }
 
             return data.payload.cartItems.map((item: any) => ({
+                cartId: item.id,
                 product: item.product,
                 quantity: item.quantity,
             }));
