@@ -8,6 +8,8 @@ import { HEADERS } from "@/src/shared/constant/api.constant";
 
 export async function addToCartAction({ productId, quantity }: AddToCartPayload) {
     const token = await getNextAuthToken()
+    console.log("TOKEN L: " , token);
+    
     if (!token?.token) return RESPONSES.unauthorized
 
     const res = await fetch(`${process.env.API_URL}/cart`, {
