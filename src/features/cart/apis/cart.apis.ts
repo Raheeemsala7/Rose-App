@@ -41,7 +41,13 @@ export async function getGuestCartApi(productIds: string[]): Promise<Product[]> 
 
 
 export async function getAuthCartApi(req: NextRequest) {
-    const token = await getToken({ req })
+    const token = await getToken({
+        req,
+        cookieName: process.env.NEXT_AUTH_SESSION_COOKIE_NAME,
+    })
+
+    console.log("TOKEN" , token);
+    
 
     if (!token?.token) return RESPONSES.unauthorized
 
