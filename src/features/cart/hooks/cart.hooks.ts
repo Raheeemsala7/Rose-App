@@ -4,8 +4,10 @@ import { useSession } from 'next-auth/react';
 import { useGuestCartStore } from '../store/cart.store';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { Product } from '../../products/types/product';
-import { getClientCartProducts } from '../apis/cart.apis';
+import { getGuestCartProducts } from '../apis/cart.apis';
 import { useCallback } from 'react';
+import { HEADERS } from '@/src/shared/constant/api.constant';
+import { CartItem, GetCartPayload } from '../types/cart';
 
 export function useCart() {
     const { status } = useSession();
@@ -15,34 +17,30 @@ export function useCart() {
     const clearCart = useGuestCartStore((state) => state.clearCart)
 
     const isAuthenticated = status === 'authenticated';
-      const isAuthLoading = status === 'loading';
+    const isAuthLoading = status === 'loading';
 
 
 
     // Get Products Ids
     const productIds = itemsGuest.map((item) => item.productId);
 
-    // Get User Products
+    // Get Guest Cart Products
     const {
-        data: products,
-        isLoading: isProductsLoading,
-        isFetching: isProductsFetching
-    } = useCartProducts(productIds);
+        data: productsGuest,
+        isLoading: isGuestProductsLoading,
+        isFetching: isGuestProductsFetching
+    } = useGuestCartProducts(productIds, isAuthenticated);
 
-    const isEmpty = itemsGuest.length === 0;
+    // Get User Cart Products
+    const {
+        data: productsAuth,
+        isLoading: isAuthProductsLoading,
+        isFetching: isAuthProductsFetching
+    } = useAuthCartProducts(isAuthenticated);
 
-    const cartCount = itemsGuest.reduce(
-        (total, item) => total + item.quantity,
-        0
-    );
 
-    // Total Price
-    const totalPrice =
-        products?.reduce((acc, product) => {
-            const cartItem = itemsGuest.find((item) => item.productId === product.id);
-            const quantity = cartItem?.quantity ?? 0;
-            return acc + Number(product.price) * quantity;
-        }, 0) ?? 0;
+
+
 
     //Get Cart Data
     // const refreshCart = useCallback(async () => {
@@ -71,10 +69,48 @@ export function useCart() {
     };
 
 
-    return {
-        items: itemsGuest,
-        products,
+    const items = isAuthenticated
+        ? productsAuth
+        : productsGuest;
 
+
+
+    // Total Price
+    // const totalPrice =
+    //     items?.reduce((acc, product) => {
+    //         const cartItem = itemsGuest.find((item) => item.productId === product.id);
+    //         const quantity = cartItem?.quantity ?? 0;
+    //         return acc + Number(product.price) * quantity;
+    //     }, 0) ?? 0;
+
+
+    // const isEmpty = items.length === 0;
+
+    // const cartCount = items.reduce(
+    //     (total, item) => total + item.quantity,
+    //     0
+    // );
+
+    const totalPrice = items?.reduce(
+        (total, item) =>
+            total + Number(item.product.price) * item.quantity,
+        0
+    );
+
+    const cartCount = items?.reduce(
+        (total, item) => total + item.quantity,
+        0
+    );
+    const isEmpty = items?.length === 0;
+
+
+
+
+    return {
+        productIds,
+        products: items,
+
+        isEmpty,
         cartCount,
         totalPrice,
 
@@ -83,18 +119,79 @@ export function useCart() {
 
         isAuthenticated,
         isLoading: isAuthLoading,
-        isProductsLoading,
-        isProductsFetching,
+        isCartLoading: isAuthenticated
+            ? isAuthProductsLoading
+            : isGuestProductsLoading,
+
+        isCartFetching: isAuthenticated
+            ? isAuthProductsFetching
+            : isGuestProductsFetching,
+
     };
 }
 
 
 
-export function useCartProducts(productIds: string[]) {
+export function useGuestCartProducts(productIds: string[], isAuthenticated: boolean) {
     return useQuery({
         queryKey: ['cart-products', productIds.slice().sort()],
-        queryFn: () => getClientCartProducts(productIds),
-        enabled: productIds.length > 0,
+        queryFn: async () => {
+            const products = await getGuestCartProducts(productIds);
+
+            return products
+                .map((product) => {
+                    const cartItem = useGuestCartStore
+                        .getState()
+                        .items.find(
+                            (item) => item.productId === product.id
+                        );
+
+                    if (!cartItem) return null;
+
+                    return {
+                        product,
+                        quantity: cartItem.quantity,
+                    };
+                })
+                .filter(
+                    (
+                        item
+                    ): item is {
+                        product: Product;
+                        quantity: number;
+                    } => item !== null
+                );
+        }, enabled: !isAuthenticated,
         placeholderData: keepPreviousData,
     });
 }
+
+
+export function useAuthCartProducts(isAuthenticated: boolean) {
+    return useQuery({
+        queryKey: ['cart'],
+        queryFn: async (): Promise<CartItem[]> => {
+
+            const res = await fetch("/api/auth/cart", {
+                headers: {
+                    ...HEADERS.JsonBody
+                }
+            })
+
+            const data: ApiResponse<GetCartPayload> = await res.json()
+
+            if (!data.status) {
+                throw new Error(data.message || "Failed fetch")
+            }
+
+            return data.payload.cartItems.map((item: any) => ({
+                product: item.product,
+                quantity: item.quantity,
+            }));
+        },
+        enabled: isAuthenticated,
+    });
+}
+
+
+

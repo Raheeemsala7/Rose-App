@@ -2,10 +2,11 @@
 
 import { create } from "zustand"
 import { persist } from "zustand/middleware";
+import { Product } from "../../products/types/product";
 
 export type GuestCartItem = {
-    productId: string;
-    quantity: number;
+ productId: string;
+  quantity: number;
 };
 
 type GuestCartStore = {

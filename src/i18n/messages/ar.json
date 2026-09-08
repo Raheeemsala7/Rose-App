@@ -213,5 +213,23 @@
     "retry": "إعادة محاولة",
     "errorTitle": "حدث خطأ ما. يرجى المحاولة لاحقاً.",
     "errorDesc": "حدث خطأ ما. يرجى المحاولة لاحقاً."
+  },
+   "cart-list": {
+    "cart-title": "السلة",
+    "cart-count": "{count, number, items-count} منتج",
+    "cart-clear": "إفراغ السلة",
+    "cart-clear-info": "هل أنت متأكد أنك تريد إفراغ السلة؟",
+    "cart-clear-cancle": "إلغاء",
+    "cart-clear-confirm": "تأكيد",
+    "cart-clearing": "جارِ التفريغ...",
+    "cart-clear-error": "حصل خطأ أثناء تفريغ السلة. حاول مرة أخرى.",
+    "cart-total": "الإجمالي:",
+    "cart-currency": "ج.م",
+    "cart-rating": "التقييم: <bold>{rating, number, rating-base}</bold>",
+    "cart-rating-count": "{count, number, rating-count} تقييم",
+    "cart-remove": "إزالة",
+    "cart-item-quantity": "(×{quantity, number, items-count})",
+    "cart-empty": "عربة التسوق فاضية، تحب تبدأ التسوق؟",
+    "cart-button": "متابعة التسوق"
   }
 }

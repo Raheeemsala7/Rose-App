@@ -6,9 +6,9 @@ import { useCart } from '../hooks/cart.hooks';
 
 export function CartButton() {
 
-  const { items } = useCart()
+  const { products } = useCart()
 
-  const count = items.length
+  const count = products?.length || 0
 
   console.log(count);
   

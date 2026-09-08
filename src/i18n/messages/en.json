@@ -213,5 +213,23 @@
     "retry": "Retry",
     "errorTitle": "Something went wrong. Please try again later.",
     "errorDesc": "Something went wrong. Please try again later."
+  },
+    "cart-list": {
+    "cart-title": "CART",
+    "cart-count": "{count, number, items-count} {count, plural, one {Product} other {Products}}",
+    "cart-clear": "Clear Cart",
+    "cart-clear-info": "Are you sure you want to clear your Cart?",
+    "cart-clear-cancle": "Cancle",
+    "cart-clear-confirm": "Confirm",
+    "cart-clearing": "Clearing...",
+    "cart-clear-error": "Failed to clear cart. Please try again.",
+    "cart-total": "Total:",
+    "cart-currency": "EGP",
+    "cart-rating": "Rating: <bold>{rating, number, rating-base}</bold>",
+    "cart-rating-count": "{count, number, rating-count} {count, plural, one {rating} other {ratings}}",
+    "cart-remove": "Remove",
+    "cart-item-quantity": "(×{quantity, number, items-count})",
+    "cart-empty": "Your cart is empty, wanna try shopping?",
+    "cart-button": "Containue Shopping"
   }
 }

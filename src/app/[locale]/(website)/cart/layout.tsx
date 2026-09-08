@@ -7,6 +7,8 @@
 // import { getYouMayLikeProducts } from '@/features/products/apis/product-you-may-like.api';
 // import ProductYouMayLikeCarouselSlot from '@/features/products/components/product-you-may-like/product-you-may-like-carousel-slot';
 
+import React from "react";
+
 // interface CartLayoutProps {
 //   children: React.ReactNode;
 // }
@@ -39,10 +41,20 @@
 // }
 
 
-export default function CartLayout() {
+export default function CartLayout({children}:{children:React.ReactElement}) {
   return (
-    <div>
-      <h1>CartLayout</h1>
+    <div className="grid h-screen grid-cols-3 gap-4 w-full max-w-screen-2xl mx-auto px- py-6 xs:px-5 sm:px-6 lg:px-10">
+
+      <section className="col-span-2">{children}</section>
+
+        <section className="col-span-1">
+          {/* <OrderSummary
+            couponForm={<CouponSection />}
+            totalPrice={<TotalPrice currency="EGP" />}
+            subtotal={<SubTotalPrice currency="EGP" />}
+            checkoutButton={<CheckoutButton />}
+          /> */}
+        </section>
     </div>
   );
 }

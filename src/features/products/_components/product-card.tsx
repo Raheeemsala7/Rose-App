@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { Product } from '../types/product';
 import { Link } from '@/src/i18n/navigation';
 import AddToWishlist from './add-to-wishlist';
-import AddToCart from './add-to-cart';
+import AddToCart from '../../cart/_components/add-to-cart';
 import { calculateOriginalPrice, formatPrice } from '@/src/shared/lib/price.utils';
 import { cn } from '@/src/shared/lib/utils';
 
