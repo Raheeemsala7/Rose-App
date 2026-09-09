@@ -5,7 +5,6 @@ import {
   ClipboardList,
   GiftIcon,
   Headset,
-  Heart,
   HomeIcon,
   Info,
   Menu,
@@ -27,6 +26,7 @@ import ThemeToggle from './theme-toggle';
 import { useState, useEffect } from 'react';
 import { useLocale } from 'next-intl';
 import { CartButton } from '@/src/features/cart/_components/cart-button';
+import { WishlistButton } from '@/src/features/wishlist/_components/wishlist-button';
 
 const navItems = [
   { key: 'Home', href: '/', icon: HomeIcon },
@@ -91,9 +91,7 @@ const Header = () => {
             {/* Cart always visible */}
             <CartButton />
             {/* Wishlist */}
-            <button aria-label="Wishlist" className="p-1.5 rounded-full text-burgundy-700 dark:text-blush-200 hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer">
-              <Heart size={20} />
-            </button>
+            <WishlistButton />
             {/* Bell — sm+ */}
             <button aria-label="Notifications" className="hidden sm:flex p-1.5 rounded-full text-burgundy-700 dark:text-blush-200 hover:bg-burgundy-50 dark:hover:bg-burgundy-800 transition-colors cursor-pointer">
               <BellIcon size={20} />

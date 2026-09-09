@@ -37,20 +37,19 @@ export default function WishlistBody() {
         setAddingId(productId);
         try {
             await addToCart({ productId, quantity: 1 });
-            toast.success(tCart('cart-button'));
+            toast.success(t('added-to-cart'));
         } catch {
-            toast.error('Failed to add to cart');
+            toast.error(t('add-to-cart-error'));
         } finally {
             setAddingId(null);
         }
     }
 
-    if (isLoading) return <WishlistSkeleton />;
-    if (isWishlistLoading) return <WishlistSkeleton />;
+    if (isLoading || isWishlistLoading) return <WishlistSkeleton />;
     if (isEmpty) return <WishlistEmpty />;
 
     return (
-        <ul className="flex flex-col gap-4 mt-2 rounded-2xl border border-ds-border-muted p-4 sm:p-5">
+        <ul className="flex flex-col gap-4 mt-2 rounded-2xl border border-ds-border-muted p-4 sm:p-5 max-h-[600px] overflow-y-auto">
             {items.map((item) => {
                 const isRemoving = removingId === item.product.id;
                 const isAdding = addingId === item.product.id;
@@ -73,14 +72,14 @@ export default function WishlistBody() {
 
                         {/* Content */}
                         <div className="flex flex-col justify-between flex-1 min-w-0 gap-2">
-                            {/* Top */}
+                            {/* Top row */}
                             <div className="flex items-start justify-between gap-2">
                                 <div className="flex flex-col gap-1 min-w-0">
                                     <h3 className="font-semibold text-base text-ds-text-primary truncate sm:text-lg">
                                         {item.product.title}
                                     </h3>
-                                    <div className="flex items-center gap-1.5">
-                                        <Star className="size-4 text-orange-500 fill-orange-500 shrink-0" />
+                                    <div className="flex items-center gap-1">
+                                        <Star className="size-3.5 text-orange-500 fill-orange-500 shrink-0" />
                                         <span className="text-sm text-ds-text-default">
                                             {Number(item.product.rating.toFixed(1))}
                                         </span>
@@ -92,13 +91,10 @@ export default function WishlistBody() {
                                     variant="destructive"
                                     size="sm"
                                     disabled={isRemoving}
-                                    className={cn('shrink-0 cursor-pointer', isRemoving && 'opacity-70')}
+                                    className={cn('shrink-0 flex items-center gap-1.5 cursor-pointer', isRemoving && 'opacity-70')}
                                 >
-                                    {isRemoving
-                                        ? <Loader2 className="size-4 animate-spin" />
-                                        : <Trash2 className="size-4" />
-                                    }
-                                    <span className="hidden sm:inline ms-1.5">{t('remove')}</span>
+                                    {isRemoving ? <Loader2 className="size-4 animate-spin" /> : <Trash2 className="size-4" />}
+                                    <span className="hidden sm:inline">{t('remove')}</span>
                                 </Button>
                             </div>
 
@@ -113,14 +109,11 @@ export default function WishlistBody() {
 
                                 <Button
                                     size="sm"
-                                    disabled={isAdding}
+                                    disabled={isAdding || item.product.stock === 0}
                                     onClick={() => handleAddToCart(item.product.id)}
                                     className="flex items-center gap-1.5 cursor-pointer"
                                 >
-                                    {isAdding
-                                        ? <Loader2 className="size-4 animate-spin" />
-                                        : <ShoppingCart className="size-4" />
-                                    }
+                                    {isAdding ? <Loader2 className="size-4 animate-spin" /> : <ShoppingCart className="size-4" />}
                                     <span className="hidden sm:inline">{t('add-to-cart')}</span>
                                 </Button>
                             </div>

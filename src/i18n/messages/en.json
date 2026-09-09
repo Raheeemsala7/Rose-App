@@ -256,6 +256,16 @@
       "checkout": "Place Order"
     }
   },
+  "wishlist": {
+    "title": "Wishlist",
+    "count": "{count, plural, =0 {no items} one {# item} other {# items}}",
+    "empty": "Your wishlist is empty",
+    "browse": "Browse Products",
+    "remove": "Remove",
+    "add-to-cart": "Add to Cart",
+    "added-to-cart": "Added to cart",
+    "add-to-cart-error": "Failed to add to cart"
+  },
   "address": {
     "list": {
       "noAddresses": "No saved addresses. Add one to continue.",
@@ -275,6 +285,7 @@
       "cancel": "Cancel",
       "success": "Address saved successfully",
       "error": "Failed to save address",
+      "setPrimary": "Set as default address",
       "location": "Pin Location",
       "locationHint": "Click on the map or drag the marker to set your location"
     }

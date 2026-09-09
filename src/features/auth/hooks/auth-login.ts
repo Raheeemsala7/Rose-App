@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { signIn } from 'next-auth/react';
 import { LoginFormType, loginSchema } from '../schemas/login.schema';
 import { useMergeCartOnLogin } from '@/src/features/cart/hooks/add-cart.hook';
+import { useMergeWishlistOnLogin } from '@/src/features/wishlist/hooks/wishlist.hooks';
 
 
 export function useLogin(callbackUrl?: string) {
@@ -13,6 +14,7 @@ export function useLogin(callbackUrl?: string) {
     const tButton = useTranslations('button');
 
     const { mutateAsync: mergeCart } = useMergeCartOnLogin();
+    const { mutateAsync: mergeWishlist } = useMergeWishlistOnLogin();
 
     const {
         handleSubmit,
@@ -44,9 +46,12 @@ export function useLogin(callbackUrl?: string) {
                 return;
             }
 
-            // Merge guest cart into server cart before redirect.
-            // Errors are silently ignored — a failed merge should not block login.
-            await mergeCart().catch(() => null);
+            // Merge guest cart and wishlist into server after login.
+            // Both run in parallel — errors are silently ignored so login is never blocked.
+            await Promise.allSettled([
+                mergeCart(),
+                mergeWishlist(),
+            ]);
 
             const destination = callbackUrl || '/';
             window.location.href = destination;

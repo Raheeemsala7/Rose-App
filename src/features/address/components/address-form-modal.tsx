@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { useLocale, useTranslations } from 'next-intl';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod/v4';
 import { Loader2, MapPin } from 'lucide-react';
@@ -29,12 +29,12 @@ const MapPicker = dynamic(() => import('./map-picker'), {
 });
 
 const schema = z.object({
-    title:     z.string().min(2),
-    city:      z.string().min(2),
-    street:    z.string().min(5),
-    phone:     z.string().min(7),
+    title: z.string().min(2),
+    city: z.string().min(2),
+    street: z.string().min(5),
+    phone: z.string().min(7),
     isPrimary: z.boolean().default(false),
-    latitude:  z.number(),
+    latitude: z.number(),
     longitude: z.number(),
 });
 
@@ -61,7 +61,9 @@ export function AddressFormModal({ open, onOpenChange, onCreated }: AddressFormM
     const { mutate: createAddress, isPending } = useCreateAddress();
 
     const { register, handleSubmit, reset, control, setValue, watch, formState: { errors } } =
-        useForm<FormValues>({ resolver: zodResolver(schema), defaultValues: DEFAULT_VALUES });
+        useForm(
+            { resolver: zodResolver(schema), defaultValues: DEFAULT_VALUES }
+        );
 
     const lat = watch('latitude');
     const lng = watch('longitude');
@@ -83,6 +85,7 @@ export function AddressFormModal({ open, onOpenChange, onCreated }: AddressFormM
 
     const submitHandler = handleSubmit(onSubmit);
 
+
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent
@@ -95,7 +98,7 @@ export function AddressFormModal({ open, onOpenChange, onCreated }: AddressFormM
                     </DialogTitle>
                 </DialogHeader>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+                <form onSubmit={submitHandler} className="flex flex-col gap-4">
                     <Field label={t('labelField')} error={errors.title?.message}>
                         <Input {...register('title')} placeholder={t('labelPlaceholder')} aria-invalid={!!errors.title} />
                     </Field>
