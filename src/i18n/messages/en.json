@@ -206,6 +206,7 @@
     "order-items": "Order Items:",
     "show-all": "Show All",
     "show-less": "Show Less",
+    "more": "more",
     "rating": "Rating:",
     "quantity": "Quantity:",
     "failed-to-load": "Failed to load orders",
@@ -273,7 +274,9 @@
       "submit": "Save Address",
       "cancel": "Cancel",
       "success": "Address saved successfully",
-      "error": "Failed to save address"
+      "error": "Failed to save address",
+      "location": "Pin Location",
+      "locationHint": "Click on the map or drag the marker to set your location"
     }
   },
   "order-summary": {

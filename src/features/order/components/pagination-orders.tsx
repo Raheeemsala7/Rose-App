@@ -31,10 +31,10 @@ function PageButton({
         'inline-flex h-9 w-9 items-center justify-center rounded-md border text-sm font-medium transition-colors',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 border dark:border-none cursor-pointer',
         disabled
-          ? 'cursor-not-allowed border-ds-muted text-gray-400 opacity-40 dark:bg-ds-plain'
+          ? 'cursor-not-allowed text-ds-text-muted opacity-40 bg-ds-subtle border-ds-border-muted'
           : active
-            ? 'bg-ds-bg-primary text-white shadow-sm'
-            : 'border-ds-bg-muted text-gray-700 dark:border-none dark:bg-ds-bg-plain dark:text-white'
+            ? 'bg-ds-primary text-white border-ds-border-primary shadow-sm'
+            : 'border-ds-border-muted text-ds-text-default bg-ds-subtle hover:bg-ds-soft hover:border-ds-border-default'
       )}
     >
       {children}
