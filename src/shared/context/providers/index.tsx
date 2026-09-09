@@ -13,7 +13,10 @@ export const Providers = ({ children, locale }: { children: React.ReactNode, loc
             {/* <TanStackDevtools config={{ defaultOpen: false }} /> */}
             <NextIntlClientProvider>
                 <ThemeProvider>
-                    <NextAuthProvider>{children}</NextAuthProvider>
+                    <NextAuthProvider>
+                        <Toaster richColors position={locale === "en" ? "top-right": "top-left"} />
+                        {children}
+                    </NextAuthProvider>
                 </ThemeProvider>
             </NextIntlClientProvider>
         </ReactQueryProvider>

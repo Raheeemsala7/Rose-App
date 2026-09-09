@@ -53,27 +53,27 @@ export default function CartFooter({ item }: { item: CartItem }) {
     <div className="footer flex justify-between">
       {/* Price */}
       <div className="price flex h-fit mt-auto gap-1">
-        <span className="font-medium h-fit mt-auto text-sm text-ds-text-primary">
+        <span className="font-medium h-fit mt-auto text-xs text-ds-text-primary sm:text-sm">
           {t('cart-item-quantity', { quantity: quantityCount })}
         </span>
-        <h5 className="font-bold h-fit mt-auto text-2xl text-ds-text-plain">
+        <h5 className="font-bold h-fit mt-auto text-lg text-ds-text-plain sm:text-2xl">
           {formatLocaleNumber(Number(product.price) * quantityCount, locale)}
         </h5>
-        <span className="font-medium h-fit mt-auto text-base text-ds-text-plain">
+        <span className="font-medium h-fit mt-auto text-xs text-ds-text-plain sm:text-base">
           {t('cart-currency')}
         </span>
       </div>
 
       {/* Quantity */}
-      <div className="quantity flex items-center gap-2 h-12.25">
+      <div className="quantity flex items-center gap-1.5 sm:gap-2 h-9 sm:h-12.25">
         {/* Decrease Button */}
         <Button
           onClick={() => quantityChange(-1)}
           variant={'secondary'}
           disabled={quantityCount <= 1 || isPending}
-          className="minus w-12.25 h-full cursor-pointer"
+          className="minus w-9 h-full sm:w-12.25 cursor-pointer"
         >
-          <Minus className="size-5" />
+          <Minus className="size-3.5 sm:size-5" />
         </Button>
 
         {/* Quantity Input */}
@@ -82,7 +82,7 @@ export default function CartFooter({ item }: { item: CartItem }) {
           readOnly
           type="text"
           inputMode="numeric"
-          className="w-25.75 h-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+          className="w-10 h-full text-center text-sm sm:w-25.75 sm:text-base [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
         />
 
         {/* Increase Button */}
@@ -90,9 +90,9 @@ export default function CartFooter({ item }: { item: CartItem }) {
           onClick={() => quantityChange(1)}
           variant={'secondary'}
           disabled={isMaxStock || isPending}
-          className="plus w-12.25 h-full cursor-pointer"
+          className="plus w-9 h-full sm:w-12.25 cursor-pointer"
         >
-          <Plus className="size-5" />
+          <Plus className="size-3.5 sm:size-5" />
         </Button>
       </div>
     </div>

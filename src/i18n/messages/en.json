@@ -228,8 +228,24 @@
     "cart-rating": "Rating: <bold>{rating, number, rating-base}</bold>",
     "cart-rating-count": "{count, number, rating-count} {count, plural, one {rating} other {ratings}}",
     "cart-remove": "Remove",
+    "cart-remove-error": "Failed to remove item. Please try again.",
     "cart-item-quantity": "(×{quantity, number, items-count})",
     "cart-empty": "Your cart is empty, wanna try shopping?",
     "cart-button": "Containue Shopping"
+  },
+  "order-summary": {
+    "title": "Order Summary",
+    "sub-total": "Subtotal",
+    "total": "Total",
+    "coupon-Placeholder": "Enter coupon code",
+    "apply-button": "Apply",
+    "loading": "Loading...",
+    "coupon-found": "Coupon applied successfully",
+    "coupon-not-found": "Coupon not found",
+    "coupon-empty": "Please enter a coupon code",
+    "no-coupon": "No coupon applied",
+    "checkout-button": "Proceed to Checkout",
+    "discount": "Discount",
+    "coupon-min-purchase": "Minimum purchase not met"
   }
 }

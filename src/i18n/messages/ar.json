@@ -228,8 +228,24 @@
     "cart-rating": "التقييم: <bold>{rating, number, rating-base}</bold>",
     "cart-rating-count": "{count, number, rating-count} تقييم",
     "cart-remove": "إزالة",
+    "cart-remove-error": "فشل حذف المنتج. حاول مرة أخرى.",
     "cart-item-quantity": "(×{quantity, number, items-count})",
     "cart-empty": "عربة التسوق فاضية، تحب تبدأ التسوق؟",
     "cart-button": "متابعة التسوق"
+  },
+  "order-summary": {
+    "title": "ملخص الطلب",
+    "sub-total": "المجموع الفرعي",
+    "total": "الإجمالي",
+    "coupon-Placeholder": "أدخل كود الكوبون",
+    "apply-button": "تطبيق",
+    "loading": "جارِ التحميل...",
+    "coupon-found": "تم تطبيق الكوبون بنجاح",
+    "coupon-not-found": "الكوبون غير موجود",
+    "coupon-empty": "أدخل كود الكوبون أولاً",
+    "no-coupon": "لا يوجد كوبون مطبّق",
+    "checkout-button": "إتمام الطلب",
+    "discount": "خصم",
+    "coupon-min-purchase": "الحد الأدنى للشراء غير مكتمل"
   }
 }

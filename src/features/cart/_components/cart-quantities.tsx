@@ -14,7 +14,7 @@ export default function CartQuantities() {
   const itemsCount =  products?.length ;
 
   return (
-    <span className="font-medium text-base text-ds-text-muted ms-2.5">
+    <span className="font-medium text-sm text-ds-text-muted ms-1.5 sm:text-base sm:ms-2.5">
       {t('cart-count', { count: itemsCount || 0 })}
     </span>
   );
