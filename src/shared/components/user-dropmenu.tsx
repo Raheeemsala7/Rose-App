@@ -5,10 +5,9 @@ import {
     DropdownMenuContent,
     DropdownMenuGroup,
     DropdownMenuItem,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { ChevronDown, LocationEdit, LogOut, ScrollText, Settings, User } from "lucide-react";
+import { ChevronDown, LogOut, ScrollText, Settings, User } from "lucide-react";
 import { Link } from "@/src/i18n/navigation";
 
 const UserDropMenu = ({ name, firstName }: { name: string; firstName: string }) => {
@@ -47,7 +46,6 @@ const UserDropMenu = ({ name, firstName }: { name: string; firstName: string }) 
                 <DropdownMenuGroup className="p-1">
                     {[
                         { href: "/profile", icon: User, label: "Profile" },
-                        { href: "/addresses", icon: LocationEdit, label: "My Addresses" },
                         { href: "/orders", icon: ScrollText, label: "Orders" },
                         { href: "/dashboard", icon: Settings, label: "Dashboard" },
                     ].map(({ href, icon: Icon, label }) => (
