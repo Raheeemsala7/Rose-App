@@ -20,7 +20,6 @@ export default function BestSellerCarousel({ products, variant = 'default' }: Be
 
   return (
     <div className="relative px-6">
-      dfkdf;kdf;kd;fdk;fk
       <Carousel opts={{ align: 'start' }}>
         <CarouselContent className='p-4 sm:p-0'>
           {products.map((product) => (
