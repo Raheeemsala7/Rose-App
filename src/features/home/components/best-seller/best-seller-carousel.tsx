@@ -20,15 +20,16 @@ export default function BestSellerCarousel({ products, variant = 'default' }: Be
 
   return (
     <div className="relative px-6">
+      dfkdf;kdf;kd;fdk;fk
       <Carousel opts={{ align: 'start' }}>
-        <CarouselContent>
+        <CarouselContent className='p-4 sm:p-0'>
           {products.map((product) => (
             <CarouselItem
               key={product.id}
               className={
                 isRelated
-                  ? 'basis-1/2 md:basis-1/3 lg:basis-1/4'
-                  : 'basis-1/2 sm:basis-1/3 lg:basis-1/3'
+                  ? 'basis-1/1 md:basis-1/3 lg:basis-1/4'
+                  : 'basis-1/1 sm:basis-1/3 lg:basis-1/3'
               }
             >
               <ProductCard {...product} />

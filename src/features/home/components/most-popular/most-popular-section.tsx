@@ -44,7 +44,7 @@ export default async function MostPopularSection({ activeTabId }: Props) {
       <Suspense
         key={activeId}
         fallback={
-          <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
             {Array.from({ length: 8 }).map((_, i) => (
               <ProductCardSkeleton key={i} i={i} />
             ))}

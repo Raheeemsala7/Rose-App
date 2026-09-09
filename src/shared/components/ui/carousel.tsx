@@ -181,8 +181,8 @@ function CarouselPrevious({
       className={cn(
         'absolute touch-manipulation rounded-full w-9.5 h-9.5 cursor-pointer bg-ds-bg-primary text-ds-bg-subtle hover:bg-ds-bg-primary border-0',
         orientation === 'horizontal'
-          ? 'inset-y-0 -left-4 my-auto'
-          : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
+          ? 'inset-y-0 -left-9 my-auto bg-ds-primary'
+          : '-top-12 left-1/3 bg-amber-400 -translate-x-1/2 rotate-90',
         className
       )}
       disabled={!canScrollPrev}
@@ -211,7 +211,7 @@ function CarouselNext({
       className={cn(
         'absolute touch-manipulation rounded-full w-9.5 h-9.5 cursor-pointer bg-ds-bg-primary text-ds-bg-subtle hover:bg-ds-bg-primary border-0',
         orientation === 'horizontal'
-          ? 'inset-y-0 -right-4 my-auto'
+          ? 'inset-y-0 -right-9 my-auto bg-ds-primary'
           : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
         className
       )}

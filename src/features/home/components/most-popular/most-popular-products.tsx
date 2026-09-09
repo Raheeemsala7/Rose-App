@@ -41,7 +41,7 @@ export default async function MostPopularProducts({ occasionId }: Props) {
 
   return (
     <div>
-      <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-0">
         {products.map((product) => (
           <ProductCard key={product.id} {...product} />
         ))}
