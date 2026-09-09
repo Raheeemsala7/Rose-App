@@ -1,8 +1,6 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
-import { ICoupon } from '../types/copons';
 import { useCouponStore } from '../store/coupon.store';
 import { useApplyCoupon } from '../hooks/coupon.hook';
 import { useCart } from '@/src/features/cart/hooks/cart.hooks';
@@ -13,7 +11,6 @@ import { CouponList } from './coupon-list';
 export function CouponSection() {
     const t = useTranslations('order-summary');
 
-    const [coupons, setCoupons] = useState<ICoupon[]>([]);
     const setCoupon = useCouponStore((state) => state.setCoupon);
     const clearCoupon = useCouponStore((state) => state.clearCoupon);
     const { totalPrice } = useCart();
@@ -25,7 +22,6 @@ export function CouponSection() {
             const coupon = await applyCoupon(code);
 
             if (!coupon) {
-                setCoupons([]);
                 clearCoupon();
                 toast.error(t('coupon-not-found'));
                 return;
@@ -34,7 +30,6 @@ export function CouponSection() {
             const minPurchase = Number(coupon.minPurchase) || 0;
             const subtotal = Number(totalPrice) || 0;
 
-            setCoupons([coupon]);
             setCoupon(coupon);
 
             if (subtotal < minPurchase) {
@@ -48,15 +43,14 @@ export function CouponSection() {
         }
     }
 
-    function handleRemoveCoupon(id: string) {
-        setCoupons((prev) => prev.filter((c) => c.id !== id));
+    function handleRemoveCoupon() {
         clearCoupon();
     }
 
     return (
         <div className="space-y-3">
             <CouponForm onApply={handleApplyCoupon} isPending={isPending} />
-            <CouponList coupons={coupons} onRemove={handleRemoveCoupon} />
+            <CouponList onRemove={handleRemoveCoupon} />
         </div>
     );
 }

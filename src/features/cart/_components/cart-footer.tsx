@@ -73,7 +73,7 @@ export default function CartFooter({ item }: { item: CartItem }) {
           disabled={quantityCount <= 1 || isPending}
           className="minus w-9 h-full sm:w-12.25 cursor-pointer"
         >
-          <Minus className="size-3.5 sm:size-5" />
+          <Minus className="size-4 sm:size-5" />
         </Button>
 
         {/* Quantity Input */}
@@ -92,7 +92,7 @@ export default function CartFooter({ item }: { item: CartItem }) {
           disabled={isMaxStock || isPending}
           className="plus w-9 h-full sm:w-12.25 cursor-pointer"
         >
-          <Plus className="size-3.5 sm:size-5" />
+          <Plus className="size-4 sm:size-5" />
         </Button>
       </div>
     </div>

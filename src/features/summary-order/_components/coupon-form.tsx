@@ -46,7 +46,7 @@ export function CouponForm({ onApply, isPending = false }: CouponFormProps) {
 
       <Button
         type="button"
-        disabled={isPending}
+        disabled={isPending || !couponCode.trim()}
         onClick={handleApplyCoupon}
         className="flex h-full items-center justify-center gap-2"
       >

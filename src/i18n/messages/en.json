@@ -233,6 +233,49 @@
     "cart-empty": "Your cart is empty, wanna try shopping?",
     "cart-button": "Containue Shopping"
   },
+  "checkout": {
+    "steps": {
+      "shipping": "Shipping",
+      "payment": "Payment"
+    },
+    "shipping": {
+      "title": "Shipping Address",
+      "addNewAddress": "Add New Address",
+      "noAddresses": "No saved addresses. Add one to continue.",
+      "next": "Continue to Payment",
+      "loading": "Loading addresses..."
+    },
+    "paymentMethod": {
+      "title": "Payment Method",
+      "back": "Back",
+      "cashOnDelivery": "Cash on Delivery",
+      "cashOnDeliveryDescription": "Pay when your order arrives",
+      "creditCard": "Credit Card",
+      "creditCardDescription": "Pay securely with your card",
+      "checkout": "Place Order"
+    }
+  },
+  "address": {
+    "list": {
+      "noAddresses": "No saved addresses. Add one to continue.",
+      "or": "or"
+    },
+    "form": {
+      "title": "Add New Address",
+      "labelField": "Label",
+      "labelPlaceholder": "e.g. Home, Work",
+      "city": "City",
+      "cityPlaceholder": "e.g. Cairo",
+      "street": "Street",
+      "streetPlaceholder": "e.g. 12 Tahrir Square",
+      "phone": "Phone",
+      "phonePlaceholder": "e.g. 01012345678",
+      "submit": "Save Address",
+      "cancel": "Cancel",
+      "success": "Address saved successfully",
+      "error": "Failed to save address"
+    }
+  },
   "order-summary": {
     "title": "Order Summary",
     "sub-total": "Subtotal",

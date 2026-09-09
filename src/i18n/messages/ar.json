@@ -233,6 +233,49 @@
     "cart-empty": "عربة التسوق فاضية، تحب تبدأ التسوق؟",
     "cart-button": "متابعة التسوق"
   },
+  "checkout": {
+    "steps": {
+      "shipping": "الشحن",
+      "payment": "الدفع"
+    },
+    "shipping": {
+      "title": "عنوان الشحن",
+      "addNewAddress": "إضافة عنوان جديد",
+      "noAddresses": "لا توجد عناوين محفوظة. أضف عنواناً للمتابعة.",
+      "next": "المتابعة للدفع",
+      "loading": "جارِ تحميل العناوين..."
+    },
+    "paymentMethod": {
+      "title": "طريقة الدفع",
+      "back": "رجوع",
+      "cashOnDelivery": "الدفع عند الاستلام",
+      "cashOnDeliveryDescription": "ادفع عند وصول طلبك",
+      "creditCard": "بطاقة ائتمان",
+      "creditCardDescription": "ادفع بأمان ببطاقتك",
+      "checkout": "تأكيد الطلب"
+    }
+  },
+  "address": {
+    "list": {
+      "noAddresses": "لا توجد عناوين محفوظة. أضف عنواناً للمتابعة.",
+      "or": "أو"
+    },
+    "form": {
+      "title": "إضافة عنوان جديد",
+      "labelField": "الاسم",
+      "labelPlaceholder": "مثال: المنزل، العمل",
+      "city": "المدينة",
+      "cityPlaceholder": "مثال: القاهرة",
+      "street": "الشارع",
+      "streetPlaceholder": "مثال: 12 ميدان التحرير",
+      "phone": "رقم الهاتف",
+      "phonePlaceholder": "مثال: 01012345678",
+      "submit": "حفظ العنوان",
+      "cancel": "إلغاء",
+      "success": "تم حفظ العنوان بنجاح",
+      "error": "فشل حفظ العنوان"
+    }
+  },
   "order-summary": {
     "title": "ملخص الطلب",
     "sub-total": "المجموع الفرعي",
