@@ -72,6 +72,7 @@ export default function CartFooter({ item }: { item: CartItem }) {
           variant={'secondary'}
           disabled={quantityCount <= 1 || isPending}
           className="minus w-9 h-full sm:w-12.25 cursor-pointer"
+          size={"icon"}
         >
           <Minus className="size-4 sm:size-5" />
         </Button>
@@ -90,9 +91,10 @@ export default function CartFooter({ item }: { item: CartItem }) {
           onClick={() => quantityChange(1)}
           variant={'secondary'}
           disabled={isMaxStock || isPending}
+          size={"icon"}
           className="plus w-9 h-full sm:w-12.25 cursor-pointer"
         >
-          <Plus className="size-4 sm:size-5" />
+          <Plus className="size-5 sm:size-5" />
         </Button>
       </div>
     </div>

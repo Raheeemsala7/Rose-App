@@ -1,12 +1,10 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useTransition } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod/v4';
-import { toast } from 'sonner';
 import { Loader2, MapPin } from 'lucide-react';
 import {
     Dialog,
@@ -17,9 +15,9 @@ import {
 } from '@/src/shared/components/ui/dialog';
 import { Button } from '@/src/shared/components/ui/button';
 import { Input } from '@/src/shared/components/ui/input';
-import { createAddressAction } from '../actions/address.action';
+import { useCreateAddress } from '../hooks/address.hook';
 
-// Lazy-load the map — Leaflet uses browser APIs unavailable during SSR
+// Lazy-load Leaflet — uses browser APIs unavailable during SSR
 const MapPicker = dynamic(() => import('./map-picker'), {
     ssr: false,
     loading: () => (
@@ -35,6 +33,7 @@ const schema = z.object({
     city:      z.string().min(2),
     street:    z.string().min(5),
     phone:     z.string().min(7),
+    isPrimary: z.boolean().default(false),
     latitude:  z.number(),
     longitude: z.number(),
 });
@@ -43,6 +42,10 @@ type FormValues = z.infer<typeof schema>;
 
 const DEFAULT_LAT = 30.0444; // Cairo
 const DEFAULT_LNG = 31.2357;
+const DEFAULT_VALUES: FormValues = {
+    title: '', city: '', street: '', phone: '',
+    isPrimary: false, latitude: DEFAULT_LAT, longitude: DEFAULT_LNG,
+};
 
 interface AddressFormModalProps {
     open: boolean;
@@ -54,45 +57,31 @@ export function AddressFormModal({ open, onOpenChange, onCreated }: AddressFormM
     const t = useTranslations('address.form');
     const locale = useLocale();
     const dir = locale === 'ar' ? 'rtl' : 'ltr';
-    const [isPending, startTransition] = useTransition();
 
-    const {
-        register,
-        handleSubmit,
-        reset,
-        control,
-        setValue,
-        watch,
-        formState: { errors },
-    } = useForm<FormValues>({
-        resolver: zodResolver(schema),
-        defaultValues: {
-            latitude:  DEFAULT_LAT,
-            longitude: DEFAULT_LNG,
-        },
-    });
+    const { mutate: createAddress, isPending } = useCreateAddress();
+
+    const { register, handleSubmit, reset, control, setValue, watch, formState: { errors } } =
+        useForm<FormValues>({ resolver: zodResolver(schema), defaultValues: DEFAULT_VALUES });
 
     const lat = watch('latitude');
     const lng = watch('longitude');
 
     function onSubmit(values: FormValues) {
-        startTransition(async () => {
-            try {
-                await createAddressAction(values);
-                toast.success(t('success'));
-                reset({ latitude: DEFAULT_LAT, longitude: DEFAULT_LNG });
+        createAddress(values, {
+            onSuccess: () => {
+                reset(DEFAULT_VALUES);
                 onOpenChange(false);
                 onCreated();
-            } catch (err) {
-                toast.error(err instanceof Error ? err.message : t('error'));
-            }
+            },
         });
     }
 
     function handleClose() {
-        reset({ latitude: DEFAULT_LAT, longitude: DEFAULT_LNG });
+        reset(DEFAULT_VALUES);
         onOpenChange(false);
     }
+
+    const submitHandler = handleSubmit(onSubmit);
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
@@ -107,31 +96,27 @@ export function AddressFormModal({ open, onOpenChange, onCreated }: AddressFormM
                 </DialogHeader>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-                    {/* Label / Title */}
                     <Field label={t('labelField')} error={errors.title?.message}>
                         <Input {...register('title')} placeholder={t('labelPlaceholder')} aria-invalid={!!errors.title} />
                     </Field>
 
-                    {/* City */}
                     <Field label={t('city')} error={errors.city?.message}>
                         <Input {...register('city')} placeholder={t('cityPlaceholder')} aria-invalid={!!errors.city} />
                     </Field>
 
-                    {/* Street */}
                     <Field label={t('street')} error={errors.street?.message}>
                         <Input {...register('street')} placeholder={t('streetPlaceholder')} aria-invalid={!!errors.street} />
                     </Field>
 
-                    {/* Phone */}
                     <Field label={t('phone')} error={errors.phone?.message}>
-                        <Input
-                            {...register('phone')}
-                            placeholder={t('phonePlaceholder')}
-                            inputMode="tel"
-                            dir="ltr"
-                            aria-invalid={!!errors.phone}
-                        />
+                        <Input {...register('phone')} placeholder={t('phonePlaceholder')} inputMode="tel" dir="ltr" aria-invalid={!!errors.phone} />
                     </Field>
+
+                    {/* isPrimary checkbox */}
+                    <label className="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" {...register('isPrimary')} className="size-4 accent-ds-primary" />
+                        <span className="text-sm text-ds-text-default">{t('setPrimary')}</span>
+                    </label>
 
                     {/* Map picker */}
                     <div className="flex flex-col gap-2">
@@ -155,8 +140,6 @@ export function AddressFormModal({ open, onOpenChange, onCreated }: AddressFormM
                                 />
                             )}
                         />
-
-                        {/* Show selected coords */}
                         <p className="text-xs text-ds-text-muted" dir="ltr">
                             {lat.toFixed(5)}, {lng.toFixed(5)}
                         </p>
@@ -177,7 +160,6 @@ export function AddressFormModal({ open, onOpenChange, onCreated }: AddressFormM
     );
 }
 
-// ─── Tiny helper to keep form fields DRY ────────────────────────────────────
 function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
     return (
         <div className="flex flex-col gap-1">

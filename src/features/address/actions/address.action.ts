@@ -12,6 +12,7 @@ const createAddressSchema = z.object({
     city:      z.string().min(2),
     street:    z.string().min(5),
     phone:     z.string().min(7),
+    isPrimary: z.boolean().default(false),
     latitude:  z.number(),
     longitude: z.number(),
 });
@@ -34,9 +35,13 @@ export async function createAddressAction(input: CreateAddressInput) {
             ...HEADERS.authorize(token.token),
         },
         body: JSON.stringify({
-            ...parsed.data,
-            latitude:  String(parsed.data.latitude),
-            longitude: String(parsed.data.longitude),
+            title:     parsed.data.title,
+            city:      parsed.data.city,
+            street:    parsed.data.street,
+            phone:     parsed.data.phone,
+            isPrimary: parsed.data.isPrimary,
+            latitude:  parsed.data.latitude,
+            longitude: parsed.data.longitude,
         }),
     });
 

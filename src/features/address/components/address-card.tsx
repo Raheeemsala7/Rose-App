@@ -1,63 +1,75 @@
 'use client';
+
 import { IAddress } from '../types/address';
 import { cn } from '@/src/shared/lib/utils';
-import { Phone } from 'lucide-react';
+import { Check, Phone } from 'lucide-react';
 
 interface AddressCardProps {
-  address: IAddress;
-  isSelected?: boolean;
-  onSelect?: (address: IAddress) => void;
+    address: IAddress;
+    isSelected?: boolean;
+    onSelect?: (address: IAddress) => void;
 }
 
 export function AddressCard({ address, isSelected = false, onSelect }: AddressCardProps) {
-  return (
-    <div
-      onClick={() => onSelect?.(address)}
-      className={cn(
-        'relative py-3.5 px-4 rounded-2xl cursor-pointer border-2 border-ds-border-soft',
-        isSelected ? 'bg-ds-bg-primary' : 'border-ds-border-subtle bg-ds-bg-plain'
-      )}
-    >
-      {/* Display address information */}
-      <div className="flex items-center justify-between">
-        {/* Address title */}
-        <h3
-          className={cn(
-            'font-semibold text-2xl text-ds-text-plain',
-            isSelected && 'text-ds-text-inverse'
-          )}
-        >
-          {address.city}
-        </h3>
-
-        {/* Phone number */}
-        <p
-          className={cn(
-            'flex items-center gap-2',
-            isSelected ? 'text-zinc-50' : 'text-ds-text-muted'
-          )}
-        >
-          <span
+    return (
+        <button
+            type="button"
+            onClick={() => onSelect?.(address)}
             className={cn(
-              'w-8 h-8 rounded-full flex items-center justify-center',
-              isSelected ? 'bg-white text-ds-text-primary' : 'bg-ds-bg-primary text-ds-text-inverse'
+                'relative w-full text-start rounded-2xl border-2 px-4 py-3.5 transition-all cursor-pointer',
+                isSelected
+                    ? 'border-ds-border-primary bg-ds-primary shadow-ds-soft-lg ring-2 ring-ds-border-primary-faint'
+                    : 'border-ds-border-muted bg-ds-subtle hover:border-ds-border-primary hover:bg-ds-primary-fade'
             )}
-          >
-            <Phone className="w-5 h-5" />
-          </span>
-          <span dir="ltr">{address.phone}</span>
-        </p>
-      </div>
+        >
+            {/* Selected checkmark badge */}
+            {isSelected && (
+                <span className="absolute top-3 end-3 flex size-6 items-center justify-center rounded-full bg-white">
+                    <Check className="size-4 text-ds-text-primary" strokeWidth={3} />
+                </span>
+            )}
 
-      {/* Address details */}
-      <p
-        className={cn(
-          'text-ds-text-plain font-medium text-base bg-ds-bg-muted w-fit px-4 py-1 rounded-full mt-3',
-          isSelected && 'bg-ds-bg-inverse text-ds-text-inverse'
-        )}
-      >
-        {address.street}, {address.city}
-      </p>
-    </div>
-  );
+            <div className="flex items-start justify-between gap-3 pe-8">
+                {/* Title + street */}
+                <div className="flex flex-col gap-1 min-w-0">
+                    <h3 className={cn(
+                        'font-bold text-lg leading-tight truncate',
+                        isSelected ? 'text-white' : 'text-ds-text-plain'
+                    )}>
+                        {address.title || address.city}
+                    </h3>
+                    <p className={cn(
+                        'text-sm truncate',
+                        isSelected ? 'text-white/80' : 'text-ds-text-muted'
+                    )}>
+                        {address.street}, {address.city}
+                    </p>
+                </div>
+
+                {/* Phone */}
+                <div className={cn(
+                    'flex items-center gap-1.5 shrink-0 text-sm',
+                    isSelected ? 'text-white/90' : 'text-ds-text-default'
+                )}>
+                    <span className={cn(
+                        'flex size-7 items-center justify-center rounded-full',
+                        isSelected ? 'bg-white/20' : 'bg-ds-primary-faint'
+                    )}>
+                        <Phone className={cn('size-4', isSelected ? 'text-white' : 'text-ds-text-primary')} />
+                    </span>
+                    <span dir="ltr">{address.phone}</span>
+                </div>
+            </div>
+
+            {/* Primary badge */}
+            {address.isPrimary && (
+                <span className={cn(
+                    'mt-2 inline-block text-xs font-semibold px-3 py-0.5 rounded-full',
+                    isSelected ? 'bg-white/20 text-white' : 'bg-ds-primary-faint text-ds-text-primary'
+                )}>
+                    ★ Primary
+                </span>
+            )}
+        </button>
+    );
 }
